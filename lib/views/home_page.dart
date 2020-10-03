@@ -50,23 +50,23 @@ class _HomePageState extends State<HomePage> {
     var listWidgets = posts.map((post) => Text(post)).toList();
 
     return CupertinoPageScaffold(
-      child: _isLoading
-          ? CircularProgressIndicator()
-          : Column(
-              children: [
-                Flexible(
-                  child: ListView(children: listWidgets),
-                ),
-                FlatButton(
-                  child: Text('Refresh'),
-                  onPressed: btnHandler,
-                ),
-                FlatButton(
-                  child: Text('Log Out'),
-                  onPressed: btnLogoutHandler,
-                ),
-              ],
-            ),
+      child: Column(
+        children: [
+          Flexible(
+            child: _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : ListView(children: listWidgets),
+          ),
+          FlatButton(
+            child: Text('Refresh'),
+            onPressed: btnHandler,
+          ),
+          FlatButton(
+            child: Text('Log Out'),
+            onPressed: btnLogoutHandler,
+          ),
+        ],
+      ),
     );
   }
 }

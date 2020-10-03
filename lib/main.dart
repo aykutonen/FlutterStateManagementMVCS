@@ -45,17 +45,11 @@ class CupertinoHome extends StatelessWidget {
         context.select<AppModel, String>((value) => value.currentUser);
 
     return CupertinoPageScaffold(
-        // backgroundColor: CupertinoColors.destructiveRed,
-        navigationBar: CupertinoNavigationBar(
-          // backgroundColor: CupertinoColors.activeGreen,
-          leading: Text('Leading'),
-          middle: Text('Middle'),
-          trailing: Text('Trailing'),
+      child: SafeArea(
+        child: Center(
+          child: currentUser != null ? HomePage() : LoginPage(),
         ),
-        child: SafeArea(
-          child: Center(
-            child: currentUser != null ? HomePage() : LoginPage(),
-          ),
-        ));
+      ),
+    );
   }
 }
