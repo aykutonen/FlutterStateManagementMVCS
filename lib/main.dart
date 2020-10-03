@@ -1,7 +1,6 @@
 import 'package:StateManagementMVCS/views/home_page.dart';
 import 'package:StateManagementMVCS/views/login_page.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './commands/base_command.dart' as Commands;
@@ -29,9 +28,9 @@ class MyApp extends StatelessWidget {
         builder: (context) {
           Commands.init(context);
           return CupertinoApp(
-            home: SafeArea(
-              child: CupertinoHome(),
-            ),
+            debugShowCheckedModeBanner: false,
+            title: 'Helo',
+            home: CupertinoHome(),
           );
         },
       ),
@@ -46,9 +45,17 @@ class CupertinoHome extends StatelessWidget {
         context.select<AppModel, String>((value) => value.currentUser);
 
     return CupertinoPageScaffold(
-      child: Center(
-        child: currentUser != null ? HomePage() : LoginPage(),
-      ),
-    );
+        // backgroundColor: CupertinoColors.destructiveRed,
+        navigationBar: CupertinoNavigationBar(
+          // backgroundColor: CupertinoColors.activeGreen,
+          leading: Text('Leading'),
+          middle: Text('Middle'),
+          trailing: Text('Trailing'),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: currentUser != null ? HomePage() : LoginPage(),
+          ),
+        ));
   }
 }
