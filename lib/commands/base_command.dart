@@ -1,6 +1,8 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
+import 'package:StateManagementMVCS/services/app_service.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -17,4 +19,5 @@ class BaseCommand {
 
   // Services
   UserService userService = _mainContext.read();
+  AppService appService = _mainContext.read();
 }
