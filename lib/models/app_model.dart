@@ -1,3 +1,5 @@
+import 'package:StateManagementMVCS/models/language_model.dart';
+import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +90,3 @@ class AppModel extends ChangeNotifier {
 
   // Eventually other stuff would go here, appSettings, premiumUser flags, currentTheme, etc...
 }
-
-enum Language { English }
-
-enum Unit { ml, oz }
