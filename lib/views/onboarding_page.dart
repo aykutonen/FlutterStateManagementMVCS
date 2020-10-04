@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/routing_constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class Onboarding extends StatelessWidget {
@@ -9,7 +10,10 @@ class Onboarding extends StatelessWidget {
         children: [
           Text('Onboarding'),
           CupertinoButton(
-              child: Text('Go to Onboarding Setting'), onPressed: null),
+              child: Text('Go to Onboarding Setting'),
+              onPressed: () {
+                Navigator.pushNamed(context, OnboardingSettingPageRoute);
+              }),
         ],
       ),
     ));

@@ -1,3 +1,6 @@
+import 'package:StateManagementMVCS/router.dart';
+import 'package:StateManagementMVCS/routing_constants.dart';
+import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/views/home_page.dart';
 import 'package:StateManagementMVCS/views/login_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,15 +25,22 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (c) => UserModel()),
 
         // Services
-        Provider(create: (context) => UserService())
+        Provider(create: (c) => UserService()),
+        Provider(create: (c) => AppService())
       ],
       child: Builder(
         builder: (context) {
           Commands.init(context);
+          bool isFirstTime =
+              context.select<AppModel, bool>((v) => v.isFirstTime);
+
           return CupertinoApp(
             debugShowCheckedModeBanner: false,
             title: 'Helo',
-            home: CupertinoHome(),
+            onGenerateRoute:
+                isFirstTime ? generateRouteOnboarding : generateRoute,
+            initialRoute: isFirstTime ? OnboardingPageRoute : HomePageRoute,
+            // home: CupertinoHome(),
           );
         },
       ),
