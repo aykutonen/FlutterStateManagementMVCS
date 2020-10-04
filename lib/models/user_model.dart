@@ -7,5 +7,5 @@ class UserModel extends ChangeNotifier {
     _userPosts = userPosts;
     notifyListeners();
   }
-    // In the future, this would contain other data about Users, maybe active friend lists, or notifications, etc
+  // In the future, this would contain other data about Users, maybe active friend lists, or notifications, etc
 }
