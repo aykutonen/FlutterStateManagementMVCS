@@ -5,17 +5,21 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      child: SafeArea(
         child: Center(
-      child: Column(
-        children: [
-          Text('Onboarding'),
-          CupertinoButton(
-              child: Text('Go to Onboarding Setting'),
-              onPressed: () {
-                Navigator.pushNamed(context, OnboardingSettingPageRoute);
-              }),
-        ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Onboarding'),
+              CupertinoButton(
+                  child: Text('Go to Onboarding Setting'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, OnboardingSettingPageRoute);
+                  }),
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 }

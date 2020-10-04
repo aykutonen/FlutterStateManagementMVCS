@@ -9,20 +9,24 @@ class OnboardingSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      child: SafeArea(
         child: Center(
-      child: Column(
-        children: [
-          Text('Onboarding Setting'),
-          CupertinoButton(
-              child: Text('Go to Home Page'),
-              onPressed: () async {
-                await AppCommand().saveIsFirstTime(false);
-                await RefreshPostsCommand()
-                    .run(context.read<AppModel>().currentUser);
-                Navigator.pushNamed(context, HomePageRoute);
-              }),
-        ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Onboarding Setting'),
+              CupertinoButton(
+                  child: Text('Go to Home Page'),
+                  onPressed: () async {
+                    await AppCommand().saveIsFirstTime(false);
+                    await RefreshPostsCommand()
+                        .run(context.read<AppModel>().currentUser);
+                    Navigator.pushNamed(context, HomePageRoute);
+                  }),
+            ],
+          ),
+        ),
       ),
-    ));
+    );
   }
 }

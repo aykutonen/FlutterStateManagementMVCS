@@ -8,12 +8,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case HomePageRoute:
       return CupertinoPageRoute(builder: (context) => HomePage());
-    // case LoginPageRoute:
-    //   return CupertinoPageRoute(builder: (context) => LoginPage());
-    case OnboardingPageRoute:
-      return CupertinoPageRoute(builder: (context) => Onboarding());
-    case OnboardingSettingPageRoute:
-      return CupertinoPageRoute(builder: (context) => OnboardingSetting());
+    case SettingPageRoute:
+      return CupertinoPageRoute(
+          builder: (context) => HomePage()); // TODO: Setting sayfasını tanımla
+    case ReportPageRoute:
+      return CupertinoPageRoute(
+          builder: (context) => HomePage()); // TODO: Report sayfasını tanımla
     default:
       return CupertinoPageRoute(builder: (context) => HomePage());
   }
