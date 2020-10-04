@@ -1,4 +1,4 @@
-# StateManagementMVCS
+# Flutter State Management With MVCS Pattern
 
 This Flutter project about practicing for state management based [gskinner's article; "Flutter: State Management using an MVC+S Architecture"](https://blog.gskinner.com/archives/2020/09/flutter-state-management-with-mvcs.html) with Cupertino Widgets.
 
