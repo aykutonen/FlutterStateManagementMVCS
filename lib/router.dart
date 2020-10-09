@@ -2,6 +2,8 @@ import 'package:StateManagementMVCS/routing_constants.dart';
 import 'package:StateManagementMVCS/views/home_page.dart';
 import 'package:StateManagementMVCS/views/onboarding_page.dart';
 import 'package:StateManagementMVCS/views/onboarding_settings_page.dart';
+import 'package:StateManagementMVCS/views/report_page.dart';
+import 'package:StateManagementMVCS/views/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,25 +11,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case HomePageRoute:
       return CupertinoPageRoute(builder: (context) => HomePage());
     case SettingPageRoute:
-      return CupertinoPageRoute(
-          builder: (context) => HomePage()); // TODO: Setting sayfasını tanımla
+      return CupertinoPageRoute(builder: (context) => SettingsPage());
     case ReportPageRoute:
-      return CupertinoPageRoute(
-          builder: (context) => HomePage()); // TODO: Report sayfasını tanımla
-    default:
-      return CupertinoPageRoute(builder: (context) => HomePage());
-  }
-}
-
-Route<dynamic> generateRouteOnboarding(RouteSettings settings) {
-  switch (settings.name) {
-    case HomePageRoute:
-      return CupertinoPageRoute(builder: (context) => HomePage());
+      return CupertinoPageRoute(builder: (context) => ReportPage());
     case OnboardingPageRoute:
-      return CupertinoPageRoute(builder: (context) => Onboarding());
+      return CupertinoPageRoute(builder: (context) => OnboardingPage());
     case OnboardingSettingPageRoute:
-      return CupertinoPageRoute(builder: (context) => OnboardingSetting());
+      return CupertinoPageRoute(builder: (context) => OnboardingSettingPage());
     default:
-      return CupertinoPageRoute(builder: (context) => Onboarding());
+      return CupertinoPageRoute(builder: (context) => HomePage());
   }
 }

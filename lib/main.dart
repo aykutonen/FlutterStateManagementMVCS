@@ -37,8 +37,7 @@ class MyApp extends StatelessWidget {
           return CupertinoApp(
             debugShowCheckedModeBanner: false,
             title: 'Helo',
-            onGenerateRoute:
-                isFirstTime ? generateRouteOnboarding : generateRoute,
+            onGenerateRoute: generateRoute,
             initialRoute: isFirstTime ? OnboardingPageRoute : HomePageRoute,
             // home: CupertinoHome(),
           );
