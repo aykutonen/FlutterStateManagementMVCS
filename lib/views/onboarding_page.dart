@@ -1,7 +1,7 @@
 import 'package:StateManagementMVCS/routing_constants.dart';
 import 'package:flutter/cupertino.dart';
 
-class Onboarding extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
