@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class AppModel extends ChangeNotifier {
   // Kullanıcının adı. Hitap etmek için kullanacağız.
-  String _currentUser = "Aykut";
+  String _currentUser;
   String get currentUser => _currentUser;
 
   set currentUser(String currentUser) {
