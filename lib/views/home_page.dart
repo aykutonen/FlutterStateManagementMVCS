@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // Bind to UserModel.userPosts
-    var posts =
+    final posts =
         context.select<UserModel, List<String>>((value) => value.userPosts);
 
     // Disable btn by removing listener when we're loading.
@@ -47,7 +47,8 @@ class _HomePageState extends State<HomePage> {
     VoidCallback btnLogoutHandler = _isLoading ? null : _handleLogoutPressed;
 
     // Render list of widgets
-    var listWidgets = posts.map((post) => Text(post)).toList();
+    final listWidgets =
+        posts != null ? posts.map((post) => Text(post)).toList() : List<Text>();
 
     return CupertinoPageScaffold(
       child: Column(
