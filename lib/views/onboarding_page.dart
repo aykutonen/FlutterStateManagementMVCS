@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void _handleGoToPressed() {
+      Navigator.pushNamed(context, OnboardingSettingPageRoute);
+    }
+
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Center(
@@ -13,9 +17,7 @@ class OnboardingPage extends StatelessWidget {
               Text('Onboarding'),
               CupertinoButton(
                   child: Text('Go to Onboarding Setting'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, OnboardingSettingPageRoute);
-                  }),
+                  onPressed: _handleGoToPressed),
             ],
           ),
         ),

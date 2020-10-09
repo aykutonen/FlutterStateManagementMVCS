@@ -20,13 +20,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Center(
-        child: _isLoading
-        ? CircularProgressIndicator()
-        : FlatButton(
-          child: Text('Login'),
-          onPressed: _handleLoginPressed,
-        )
-      ),
+          child: _isLoading
+              ? CircularProgressIndicator()
+              : FlatButton(
+                  child: Text('Login'),
+                  onPressed: _handleLoginPressed,
+                )),
     );
   }
 }
