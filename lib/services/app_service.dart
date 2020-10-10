@@ -13,7 +13,6 @@ class AppService {
   }
 
   Future<bool> saveIsFirstTime(bool isFirstTime) async {
-    // await Future.delayed(Duration(seconds: 1));
     return await Preferences.setBool("IsFirstTime", isFirstTime);
   }
 

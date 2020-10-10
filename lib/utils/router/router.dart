@@ -1,4 +1,4 @@
-import 'package:StateManagementMVCS/routing_constants.dart';
+import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/views/home_page.dart';
 import 'package:StateManagementMVCS/views/onboarding_page.dart';
 import 'package:StateManagementMVCS/views/onboarding_settings_page.dart';

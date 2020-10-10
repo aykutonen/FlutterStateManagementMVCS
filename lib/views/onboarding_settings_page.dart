@@ -1,7 +1,7 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/commands/refresh_posts_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/routing_constants.dart';
+import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
