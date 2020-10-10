@@ -1,7 +1,6 @@
 import 'dart:math';
 
 class UserService {
-
   Future<bool> login(String user, String pass) async {
     // Fake a network service call, and return true
     await Future.delayed(Duration(seconds: 1));

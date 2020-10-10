@@ -2,12 +2,13 @@ import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/commands/refresh_posts_command.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
-import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
+import 'package:StateManagementMVCS/views/home_page.dart';
+import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -37,26 +38,22 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  String _initialRoute;
-  // bool _isFrist;
+  bool _isFrist = true;
 
   @override
   void initState() {
-    super.initState();
     appInit();
+    super.initState();
   }
 
   void appInit() async {
     Commands.init(context);
     await Preferences.init();
     AppCommand().load().then((_) async {
-      bool _isFrist = context.read<AppModel>().isFirstTime;
+      setState(() => _isFrist = context.read<AppModel>().isFirstTime);
 
       if (!_isFrist) {
         RefreshPostsCommand().run(context.read<AppModel>().currentUser);
-        setState(() => _initialRoute = HomePageRoute);
-      } else {
-        setState(() => _initialRoute = OnboardingPageRoute);
       }
     });
   }
@@ -67,7 +64,8 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       title: 'Helo',
       onGenerateRoute: generateRoute,
-      initialRoute: _initialRoute,
+      // initialRoute: _initialRoute,
+      home: _isFrist ? Onboarding() : HomePage(),
     );
   }
 }
