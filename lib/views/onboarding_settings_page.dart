@@ -11,6 +11,7 @@ class OnboardingSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     void _handleGoToPressed() async {
       await AppCommand().saveIsFirstTime(false);
+      await AppCommand().saveUsername("Aykut");
       await RefreshPostsCommand().run(context.read<AppModel>().currentUser);
       Navigator.pushNamed(context, HomePageRoute);
     }

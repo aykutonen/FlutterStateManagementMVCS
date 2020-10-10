@@ -1,18 +1,24 @@
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/material.dart';
+import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 
 class AppService {
-  Future<bool> saveUsername(String name) async {
-    // TODO: isim bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+  Future<bool> saveCurrentUser(String name) async {
+    return await Preferences.setString("currentUser", name);
+  }
+
+  Future<String> getCurrentUser() async {
+    return Preferences.getString("currentUser");
   }
 
   Future<bool> saveIsFirstTime(bool isFirstTime) async {
-    // TODO: isFirsttime bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+    // await Future.delayed(Duration(seconds: 1));
+    return await Preferences.setBool("IsFirstTime", isFirstTime);
+  }
+
+  Future<bool> getIsFirstTime() async {
+    return Preferences.getBool("IsFirstTime");
   }
 
   Future<bool> saveLangugage(Language lang) async {

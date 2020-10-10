@@ -1,64 +1,73 @@
+import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
+import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/commands/refresh_posts_command.dart';
 import 'package:StateManagementMVCS/router.dart';
 import 'package:StateManagementMVCS/routing_constants.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
-import 'package:StateManagementMVCS/views/home_page.dart';
-import 'package:StateManagementMVCS/views/login_page.dart';
+import 'package:StateManagementMVCS/services/user_service.dart';
+import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
+import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/models/user_model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import './commands/base_command.dart' as Commands;
-import './models/app_model.dart';
-import './models/user_model.dart';
-import './services/user_service.dart';
-
 void main() {
-  runApp(MyApp());
+  // runApp(MyApp());
+
+  runApp(MultiProvider(
+    providers: [
+      // Models
+      ChangeNotifierProvider(create: (c) => AppModel()),
+      ChangeNotifierProvider(create: (c) => UserModel()),
+
+      // Services
+      Provider(create: (c) => UserService()),
+      Provider(create: (c) => AppService()),
+
+      Provider<BuildContext>(create: (c) => c),
+    ],
+    child: MainApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        // Models
-        ChangeNotifierProvider(create: (c) => AppModel()),
-        ChangeNotifierProvider(create: (c) => UserModel()),
+  _MainAppState createState() => _MainAppState();
+}
 
-        // Services
-        Provider(create: (c) => UserService()),
-        Provider(create: (c) => AppService())
-      ],
-      child: Builder(
-        builder: (context) {
-          Commands.init(context);
-          bool isFirstTime =
-              context.select<AppModel, bool>((v) => v.isFirstTime);
+class _MainAppState extends State<MainApp> {
+  String _initialRoute;
+  // bool _isFrist;
 
-          return CupertinoApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Helo',
-            onGenerateRoute: generateRoute,
-            initialRoute: isFirstTime ? OnboardingPageRoute : HomePageRoute,
-            // home: CupertinoHome(),
-          );
-        },
-      ),
-    );
+  @override
+  void initState() {
+    super.initState();
+    appInit();
   }
-}
 
-class CupertinoHome extends StatelessWidget {
+  void appInit() async {
+    Commands.init(context);
+    await Preferences.init();
+    AppCommand().load().then((_) async {
+      bool _isFrist = context.read<AppModel>().isFirstTime;
+
+      if (!_isFrist) {
+        RefreshPostsCommand().run(context.read<AppModel>().currentUser);
+        setState(() => _initialRoute = HomePageRoute);
+      } else {
+        setState(() => _initialRoute = OnboardingPageRoute);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    String currentUser =
-        context.select<AppModel, String>((value) => value.currentUser);
-
-    return CupertinoPageScaffold(
-      child: SafeArea(
-        child: Center(
-          child: currentUser != null ? HomePage() : LoginPage(),
-        ),
-      ),
+    return CupertinoApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Helo',
+      onGenerateRoute: generateRoute,
+      initialRoute: _initialRoute,
     );
   }
 }

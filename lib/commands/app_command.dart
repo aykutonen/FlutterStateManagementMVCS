@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'base_command.dart';
 
 class AppCommand extends BaseCommand {
+  Future<void> load() async {
+    appModel.currentUser = await appService.getCurrentUser();
+    appModel.isFirstTime = await appService.getIsFirstTime();
+  }
+
   Future<bool> saveUsername(String name) async {
     // Service üzerinden local storage'de currentUser güncelle.
-    bool result = await appService.saveUsername(name);
+    bool result = await appService.saveCurrentUser(name);
 
     // Service işlemi başarılıysa model'i güncelle
     if (result) appModel.currentUser = name;
