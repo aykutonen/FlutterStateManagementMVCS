@@ -39,9 +39,15 @@ class AppService {
   }
 
   Future<bool> saveWakingUp(TimeOfDay wakinkUp) async {
-    // TODO: WakinkUp bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
+    await Preferences.setInt("wakinkup_hour", wakinkUp.hour);
+    await Preferences.setInt("wakinkup_minute", wakinkUp.minute);
     return true;
+  }
+
+  TimeOfDay getWakingUp() {
+    return TimeOfDay(
+        hour: Preferences.getInt("wakinkup_hour"),
+        minute: Preferences.getInt("wakinkup_minute"));
   }
 
   Future<bool> saveSleeping(TimeOfDay sleeping) async {

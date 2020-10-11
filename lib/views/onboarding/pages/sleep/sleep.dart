@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class OnboardingSleepPage extends StatefulWidget {
   final VoidCallback onPressed;
 
-  const OnboardingSleepPage({this.onPressed});
+  const OnboardingSleepPage({@required this.onPressed});
 
   @override
   _OnboardingSleepPageState createState() => _OnboardingSleepPageState();

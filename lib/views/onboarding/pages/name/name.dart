@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class OnboardingNamePage extends StatefulWidget {
   final VoidCallback onPressed;
 
-  const OnboardingNamePage({this.onPressed});
+  const OnboardingNamePage({@required this.onPressed});
 
   @override
   _OnboardingNamePageState createState() => _OnboardingNamePageState();
