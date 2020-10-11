@@ -24,4 +24,12 @@ class Preferences {
   static Future<bool> setBool(String key, bool value) async {
     return await instance.setBool(key, value) ?? Future.value(false);
   }
+
+  static Future<bool> setInt(String key, int value) async {
+    return await instance.setInt(key, value) ?? Future.value(false);
+  }
+
+  static int getInt(String key) {
+    return instance.getInt(key) ?? Future.value(null);
+  }
 }

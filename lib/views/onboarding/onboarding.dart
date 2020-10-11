@@ -21,7 +21,7 @@ class _OnboardingState extends State<Onboarding> {
       case 0:
         return OnboardingNamePage(onPressed: _setNextPage);
       case 1:
-        return OnboardingSleepPage();
+        return OnboardingSleepPage(onPressed: _setNextPage);
       case 2:
         return OnboardingWakeUpPage();
       case 3:
@@ -68,8 +68,13 @@ class _OnboardingState extends State<Onboarding> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CupertinoButton(
-                    child: Text('Previous'), onPressed: _setPreviousPage),
-                CupertinoButton(child: Text('Next'), onPressed: _setNextPage),
+                  child: Text('Previous'),
+                  onPressed: _setPreviousPage,
+                ),
+                CupertinoButton(
+                  child: Text('Next'),
+                  onPressed: _setNextPage,
+                ),
               ],
             )
           ],
