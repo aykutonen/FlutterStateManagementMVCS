@@ -27,9 +27,13 @@ class AppService {
   }
 
   Future<bool> saveUnit(Unit unit) async {
-    // TODO: Unit bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+    return await Preferences.setInt("unit", unit.index);
+  }
+
+  Unit getUnit() {
+    var _index = Preferences.getInt("unit");
+    if (_index != null) return Unit.values[_index];
+    return null;
   }
 
   Future<bool> saveTimeZone(String timeZone) async {
@@ -45,9 +49,12 @@ class AppService {
   }
 
   TimeOfDay getWakingUp() {
-    return TimeOfDay(
-        hour: Preferences.getInt("wakinkup_hour"),
-        minute: Preferences.getInt("wakinkup_minute"));
+    final _hour = Preferences.getInt("wakinkup_hour");
+    final _minute = Preferences.getInt("wakinkup_minute");
+    if (_hour != null && _minute != null) {
+      return TimeOfDay(hour: _hour, minute: _minute);
+    }
+    return null;
   }
 
   Future<bool> saveSleeping(TimeOfDay sleeping) async {
@@ -57,9 +64,12 @@ class AppService {
   }
 
   TimeOfDay getSleeping() {
-    return TimeOfDay(
-        hour: Preferences.getInt("sleeping_hour"),
-        minute: Preferences.getInt("sleeping_minute"));
+    final _hour = Preferences.getInt("sleeping_hour");
+    final _minute = Preferences.getInt("sleeping_minute");
+    if (_hour != null && _minute != null) {
+      return TimeOfDay(hour: _hour, minute: _minute);
+    }
+    return null;
   }
 
   Future<bool> saveTargetAmount(int amount) async {

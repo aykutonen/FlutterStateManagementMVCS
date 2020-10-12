@@ -19,11 +19,14 @@ class _OnboardingSleepPageState extends State<OnboardingSleepPage> {
 
   @override
   void initState() {
-    setState(() {
-      sleepTime = AppService().getSleeping();
-      _duration =
-          Duration(hours: sleepTime.hour, minutes: sleepTime.minute % 60);
-    });
+    var _sleepTimeFromStorage = AppService().getSleeping();
+    if (_sleepTimeFromStorage != null) {
+      setState(() {
+        sleepTime = _sleepTimeFromStorage;
+        _duration =
+            Duration(hours: sleepTime.hour, minutes: sleepTime.minute % 60);
+      });
+    }
     super.initState();
   }
 

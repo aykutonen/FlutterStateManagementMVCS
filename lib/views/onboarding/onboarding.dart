@@ -25,7 +25,7 @@ class _OnboardingState extends State<Onboarding> {
       case 2:
         return OnboardingWakeUpPage(onPressed: _setNextPage);
       case 3:
-        return OnboardingUnitPage();
+        return OnboardingUnitPage(onPressed: _setNextPage);
       case 4:
         return OnboardingTargetAmountPage();
       default:

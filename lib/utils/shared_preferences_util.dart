@@ -30,6 +30,6 @@ class Preferences {
   }
 
   static int getInt(String key) {
-    return instance.getInt(key) ?? Future.value(null);
+    return instance.getInt(key);
   }
 }

@@ -19,11 +19,14 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
 
   @override
   void initState() {
-    setState(() {
-      wakeupTime = AppService().getWakingUp();
-      _duration =
-          Duration(hours: wakeupTime.hour, minutes: wakeupTime.minute % 60);
-    });
+    var _wakeupTimeFromStorage = AppService().getWakingUp();
+    if (_wakeupTimeFromStorage != null) {
+      setState(() {
+        wakeupTime = _wakeupTimeFromStorage;
+        _duration =
+            Duration(hours: wakeupTime.hour, minutes: wakeupTime.minute % 60);
+      });
+    }
     super.initState();
   }
 
@@ -31,9 +34,6 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
     setState(() {
       wakeupTime =
           TimeOfDay(hour: duration.inHours, minute: duration.inMinutes);
-
-      _error =
-          duration.inHours.toString() + " " + duration.inMinutes.toString();
     });
   }
 
