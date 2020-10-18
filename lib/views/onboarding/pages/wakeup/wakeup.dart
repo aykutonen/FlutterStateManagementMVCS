@@ -1,5 +1,5 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
-import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';

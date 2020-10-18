@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/foundation.dart';
@@ -79,20 +80,4 @@ class AppModel extends ChangeNotifier {
   }
 
   // Eventually other stuff would go here, appSettings, premiumUser flags, currentTheme, etc...
-}
-
-class HourMinute {
-  final int hour;
-  final int minute;
-
-  const HourMinute(this.hour, this.minute);
-
-  factory HourMinute.fromJson(Map<String, dynamic> json) {
-    return HourMinute(json['hour'], json['minute']);
-  }
-
-  Map<String, dynamic> toJson() => {
-        'hour': hour,
-        'minute': minute,
-      };
 }
