@@ -19,7 +19,6 @@ class OnboardingSleepPage extends StatefulWidget {
 }
 
 class _OnboardingSleepPageState extends State<OnboardingSleepPage> {
-  String _error = "";
   TimeOfDay sleepTime = TimeOfDay(hour: 23, minute: 1380);
   Duration _duration = Duration(hours: 23, minutes: 0); // Default
 
@@ -59,15 +58,6 @@ class _OnboardingSleepPageState extends State<OnboardingSleepPage> {
           onTimerDurationChanged: (e) => _handleTimePicker(e),
           mode: CupertinoTimerPickerMode.hm,
           initialTimerDuration: _duration, //Duration(hours: 23, minutes: 0),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10, top: 20),
-          child: Text(
-            _error,
-            style: TextStyle(
-              color: CupertinoColors.destructiveRed,
-            ),
-          ),
         ),
       ],
       footer: NextPreviousButton(

@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/showErrorWidget.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -74,15 +75,7 @@ class _OnboardingTargetAmountPageState
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10, top: 20),
-          child: Text(
-            _error,
-            style: TextStyle(
-              color: CupertinoColors.destructiveRed,
-            ),
-          ),
-        ),
+        ShowErrorWidget(errorText: _error),
       ],
       footer: NextPreviousButton(
         onNextPressed: _handleSaveButton,

@@ -3,6 +3,7 @@ import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/showErrorWidget.dart';
 import 'package:flutter/cupertino.dart';
 
 class OnboardingUnitPage extends StatefulWidget {
@@ -85,15 +86,7 @@ class _OnboardingUnitPageState extends State<OnboardingUnitPage> {
                 onPressed: _handleOzButton)
           ],
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10, top: 20),
-          child: Text(
-            _error,
-            style: TextStyle(
-              color: CupertinoColors.destructiveRed,
-            ),
-          ),
-        ),
+        ShowErrorWidget(errorText: _error),
       ],
       footer: NextPreviousButton(
         onNextPressed: _handleNextOnPressed,

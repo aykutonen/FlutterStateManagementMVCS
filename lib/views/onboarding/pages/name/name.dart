@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/nextPreviousButton.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/showErrorWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -56,15 +57,7 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10, top: 20),
-          child: Text(
-            _error,
-            style: TextStyle(
-              color: CupertinoColors.destructiveRed,
-            ),
-          ),
-        ),
+        ShowErrorWidget(errorText: _error),
       ],
       footer: NextPreviousButton(
         showPreviousButton: false,
