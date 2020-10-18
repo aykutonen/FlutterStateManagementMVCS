@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
@@ -8,7 +6,7 @@ import 'package:StateManagementMVCS/services/user_service.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
-import 'package:StateManagementMVCS/views/home_page.dart';
+import 'package:StateManagementMVCS/views/home/home.dart';
 import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -51,7 +49,6 @@ class _MainAppState extends State<MainApp> {
   void appInit() async {
     Commands.init(context);
     await Preferences.init();
-    log("Before Appcommand().load()");
     AppCommand().load().then((e) {
       setState(() => _isLoadData = true);
     });
@@ -65,10 +62,6 @@ class _MainAppState extends State<MainApp> {
       );
 
     bool _isFirst = context.select<AppModel, bool>((e) => e.isFirstTime);
-    // if (!_isFirst) {
-    //   RefreshPostsCommand()
-    //       .run(context.select<AppModel, String>((e) => e.currentUser));
-    // }
 
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
