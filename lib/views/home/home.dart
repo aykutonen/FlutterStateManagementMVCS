@@ -1,5 +1,5 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
-
+import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     String content =
         "Hi, ${model.currentUser}. isFirsttime: ${model.isFirstTime}. Your Language: ${model.language}. ";
     content +=
-        "Water Unit: ${model.unit}. Wake up time: ${model.wakingUp.hour}:${model.wakingUp.minute}. Sleeping time: ${model.sleeping.hour}:${model.sleeping.minute}. ";
+        "Water Unit: ${model.unit}. Wake up time: ${model.wakingUp.toDisplayString}. Sleeping time: ${model.sleeping.toDisplayString}. ";
     content +=
         "Your target amount: ${model.targetAmount}. Your notification settings: ${model.notification}.";
 

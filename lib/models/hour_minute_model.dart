@@ -13,3 +13,7 @@ class HourMinute {
         'minute': minute,
       };
 }
+
+extension HourMinuteExtension on HourMinute {
+  String get toDisplayString => '${this.hour}:${this.minute}';
+}
