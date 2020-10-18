@@ -25,15 +25,21 @@ class _HomePageState extends State<HomePage> {
 
     return CupertinoPageScaffold(
       child: SafeArea(
-        child: Flexible(
-            child: Center(
+        child: Center(
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
-              : Text(
-                  content,
-                  maxLines: 10,
+              : Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    content,
+                    maxLines: 10,
+                    style: TextStyle(
+                      height: 1.7,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-        )),
+        ),
       ),
     );
   }
