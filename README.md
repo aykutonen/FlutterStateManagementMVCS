@@ -8,7 +8,7 @@ This Flutter project about practicing for state management based [gskinner's art
 - [x] Local storage'de kullanıcı verilerinin tutulması.
 - [x] Onboarding ekranını daha önce gören kullanıcıya bu ekranın tekrar gösterilmemesi.
 - [x] Ortak kullanıma uygun Onaboarding yapısının kurgulanması.
-- [ ] Su takibi uygulaması için, kullanıcıdan bilgilerin de alınacağı onboarding ekranlarının hazırlanması.
+- [x] Su takibi uygulaması için, kullanıcıdan bilgilerin de alınacağı onboarding ekranlarının hazırlanması.
 - [ ] Onboarding'de alınan bilgilerin düzenlenebileceği Ayarlar sayfasının hazırlanması.
 - [ ] Ana sayfanın hazırlanamsı (Günlük içilen su miktarının girildi vs).
 - [ ] Rapor sayfasının hazırlanması.
