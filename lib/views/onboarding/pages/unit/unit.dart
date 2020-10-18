@@ -1,12 +1,17 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:flutter/cupertino.dart';
 
 class OnboardingUnitPage extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback onNextPressed;
+  final VoidCallback onPreviousPressed;
 
-  const OnboardingUnitPage({@required this.onPressed});
+  const OnboardingUnitPage({
+    @required this.onNextPressed,
+    @required this.onPreviousPressed,
+  });
 
   @override
   _OnboardingUnitPageState createState() => _OnboardingUnitPageState();
@@ -28,21 +33,32 @@ class _OnboardingUnitPageState extends State<OnboardingUnitPage> {
   void _handleMlButton() async {
     await AppCommand().setUnit(Unit.ml);
     setState(() => _selected = Unit.ml.name);
-    widget.onPressed();
+    // widget.onNextPressed();
   }
 
   void _handleOzButton() async {
     await AppCommand().setUnit(Unit.oz);
     setState(() => _selected = Unit.oz.name);
-    widget.onPressed();
+    // widget.onNextPressed();
+  }
+
+  void _handleNextOnPressed() {
+    if (_selected.isEmpty) {
+      setState(() => _error = "Please select a water unit");
+    } else {
+      setState(() => _error = "");
+      widget.onNextPressed();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Padding(
-            padding: EdgeInsets.all(20),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -85,10 +101,16 @@ class _OnboardingUnitPageState extends State<OnboardingUnitPage> {
                       color: CupertinoColors.destructiveRed,
                     ),
                   ),
-                )
+                ),
               ],
-            )),
-      ),
+            ),
+          ),
+        ),
+        NextPreviousButton(
+          onNextPressed: _handleNextOnPressed,
+          onPrevioustPressed: widget.onPreviousPressed,
+        )
+      ],
     );
   }
 }

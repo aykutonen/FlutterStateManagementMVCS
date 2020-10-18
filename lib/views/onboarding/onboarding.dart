@@ -23,13 +23,25 @@ class _OnboardingState extends State<Onboarding> {
           onNextPressed: _setNextPage,
         );
       case 1:
-        return OnboardingSleepPage(onPressed: _setNextPage);
+        return OnboardingSleepPage(
+          onNextPressed: _setNextPage,
+          onPreviousPressed: _setPreviousPage,
+        );
       case 2:
-        return OnboardingWakeUpPage(onPressed: _setNextPage);
+        return OnboardingWakeUpPage(
+          onNextPressed: _setNextPage,
+          onPreviousPressed: _setPreviousPage,
+        );
       case 3:
-        return OnboardingUnitPage(onPressed: _setNextPage);
+        return OnboardingUnitPage(
+          onNextPressed: _setNextPage,
+          onPreviousPressed: _setPreviousPage,
+        );
       case 4:
-        return OnboardingTargetAmountPage(onPressed: _setNextPage);
+        return OnboardingTargetAmountPage(
+          onNextPressed: _setNextPage,
+          onPreviousPressed: _setPreviousPage,
+        );
       default:
         return null;
     }

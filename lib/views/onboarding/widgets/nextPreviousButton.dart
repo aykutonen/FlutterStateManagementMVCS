@@ -23,7 +23,7 @@ class NextPreviousButton extends StatelessWidget {
         showPreviousButton
             ? CupertinoButton(
                 child: Text(previousButtonText),
-                onPressed: () => onPrevioustPressed,
+                onPressed: () => onPrevioustPressed(),
               )
             : Container(),
         CupertinoButton(

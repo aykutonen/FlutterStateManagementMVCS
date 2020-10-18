@@ -1,12 +1,17 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingWakeUpPage extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback onNextPressed;
+  final VoidCallback onPreviousPressed;
 
-  const OnboardingWakeUpPage({@required this.onPressed});
+  const OnboardingWakeUpPage({
+    @required this.onNextPressed,
+    @required this.onPreviousPressed,
+  });
 
   @override
   _OnboardingWakeUpPageState createState() => _OnboardingWakeUpPageState();
@@ -39,15 +44,17 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
 
   void _handleSaveButton() async {
     await AppCommand().setWakingUp(wakeupTime);
-    widget.onPressed();
+    widget.onNextPressed();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Padding(
-            padding: EdgeInsets.all(20),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -70,13 +77,15 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
                     ),
                   ),
                 ),
-                CupertinoButton(
-                  child: Text('Save'),
-                  onPressed: _handleSaveButton,
-                )
               ],
-            )),
-      ),
+            ),
+          ),
+        ),
+        NextPreviousButton(
+          onNextPressed: _handleSaveButton,
+          onPrevioustPressed: widget.onPreviousPressed,
+        ),
+      ],
     );
   }
 }
