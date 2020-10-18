@@ -13,8 +13,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  // runApp(MyApp());
-
   runApp(MultiProvider(
     providers: [
       // Models
@@ -37,7 +35,6 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  // bool _isFirst = false;
   bool _isLoadData = false;
 
   @override
