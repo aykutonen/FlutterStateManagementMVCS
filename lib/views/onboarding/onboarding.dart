@@ -55,7 +55,6 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-    // String name = context.read<AppModel>().currentUser;
     String name = context.select<AppModel, String>((e) => e.currentUser);
 
     return CupertinoPageScaffold(
