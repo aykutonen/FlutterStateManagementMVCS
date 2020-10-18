@@ -42,16 +42,6 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Kullanıcının cihazındaki timezone bilgisi açılışta alınacak.
-  // Cihaz ayarları değiştirilirse, uygulama her açıldığında bu bilgiyi kontrol ederek güncelleyecek.
-  String _timeZone;
-  String get timeZone => _timeZone;
-
-  set timeZone(String tz) {
-    _timeZone = tz;
-    notifyListeners();
-  }
-
   // Kullanıcının uyandığı saat
   TimeOfDay _wakingUp;
   TimeOfDay get wakingUp => _wakingUp;

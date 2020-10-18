@@ -40,14 +40,6 @@ class AppService {
     return null;
   }
 
-  Future<bool> saveTimeZone(String timeZone) async {
-    return await Preferences.setString("time_zone", timeZone);
-  }
-
-  String getTimeZone() {
-    return Preferences.getString("time_zone");
-  }
-
   Future<bool> saveWakingUp(TimeOfDay wakinkUp) async {
     await Preferences.setInt("wakinkup_hour", wakinkUp.hour);
     await Preferences.setInt("wakinkup_minute", wakinkUp.minute);

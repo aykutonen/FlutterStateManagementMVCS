@@ -13,7 +13,6 @@ class AppCommand extends BaseCommand {
     appModel.unit = appService.getUnit();
     appModel.targetAmount = appService.getTargetAmount();
     appModel.language = appService.getLanguage();
-    appModel.timeZone = appService.getTimeZone();
     appModel.notification = appService.getNotification();
   }
 
@@ -53,16 +52,6 @@ class AppCommand extends BaseCommand {
 
     // Service işlemi başarılıysa model'i güncelle
     if (result) appModel.unit = unit;
-
-    return result;
-  }
-
-  Future<bool> setTimeZone(String timeZone) async {
-    // Service üzerinden local storage'de TimeZone değerini güncelle.
-    bool result = await appService.saveTimeZone(timeZone);
-
-    // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.timeZone = timeZone;
 
     return result;
   }
