@@ -19,7 +19,9 @@ class _OnboardingState extends State<Onboarding> {
   Widget _getPage() {
     switch (_currentPage) {
       case 0:
-        return OnboardingNamePage(onPressed: _setNextPage);
+        return OnboardingNamePage(
+          onNextPressed: _setNextPage,
+        );
       case 1:
         return OnboardingSleepPage(onPressed: _setNextPage);
       case 2:
@@ -34,23 +36,11 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   void _setNextPage() {
-    setState(() {
-      if (_currentPage == _lastPage) {
-        _currentPage = 0;
-      } else {
-        _currentPage++;
-      }
-    });
+    if (_currentPage != _lastPage) setState(() => _currentPage++);
   }
 
   void _setPreviousPage() {
-    setState(() {
-      if (_currentPage == 0) {
-        _currentPage = _lastPage;
-      } else {
-        _currentPage--;
-      }
-    });
+    if (_currentPage != 0) setState(() => _currentPage--);
   }
 
   @override
@@ -63,20 +53,20 @@ class _OnboardingState extends State<Onboarding> {
           children: [
             name == null ? Text('') : Text('Hi $name'),
             Expanded(child: _getPage()),
-            Text('current page: $_currentPage'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CupertinoButton(
-                  child: Text('Previous'),
-                  onPressed: _setPreviousPage,
-                ),
-                CupertinoButton(
-                  child: Text('Next'),
-                  onPressed: _setNextPage,
-                ),
-              ],
-            )
+            // Text('current page: $_currentPage'),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     CupertinoButton(
+            //       child: Text('Previous'),
+            //       onPressed: _setPreviousPage,
+            //     ),
+            //     CupertinoButton(
+            //       child: Text('Next'),
+            //       onPressed: _setNextPage,
+            //     ),
+            //   ],
+            // )
           ],
         ),
       ),

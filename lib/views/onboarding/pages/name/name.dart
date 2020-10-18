@@ -1,12 +1,13 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingNamePage extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback onNextPressed;
 
-  const OnboardingNamePage({@required this.onPressed});
+  const OnboardingNamePage({@required this.onNextPressed});
 
   @override
   _OnboardingNamePageState createState() => _OnboardingNamePageState();
@@ -22,7 +23,7 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
     } else {
       setState(() => _error = "");
       await AppCommand().saveUsername(_inputController.value.text);
-      widget.onPressed();
+      widget.onNextPressed();
     }
   }
 
@@ -31,9 +32,11 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
     _inputController.text =
         context.select<AppModel, String>((e) => e.currentUser);
 
-    return Container(
-      child: Center(
-        child: Padding(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -68,13 +71,15 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
                     ),
                   ),
                 ),
-                CupertinoButton(
-                  child: Text('Save'),
-                  onPressed: _handleSaveButton,
-                )
               ],
-            )),
-      ),
+            ),
+          ),
+        ),
+        NextPreviousButton(
+          showPreviousButton: false,
+          onNextPressed: _handleSaveButton,
+        ),
+      ],
     );
   }
 }
