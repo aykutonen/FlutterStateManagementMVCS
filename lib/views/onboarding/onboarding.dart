@@ -1,4 +1,6 @@
+import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/name/name.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/sleep/sleep.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/targetamount/targetamount.dart';
@@ -15,6 +17,13 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   int _currentPage = 0;
   final int _lastPage = 4;
+
+  @override
+  void initState() {
+    AppCommand().setLanguage(Language.English);
+
+    super.initState();
+  }
 
   Widget _getPage() {
     switch (_currentPage) {

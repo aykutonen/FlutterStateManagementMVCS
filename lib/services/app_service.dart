@@ -21,9 +21,13 @@ class AppService {
   }
 
   Future<bool> saveLangugage(Language lang) async {
-    // TODO: Language bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+    return await Preferences.setInt("lang", lang.index);
+  }
+
+  Language getLanguage() {
+    var _index = Preferences.getInt("lang");
+    if (_index != null) return Language.values[_index];
+    return null;
   }
 
   Future<bool> saveUnit(Unit unit) async {
@@ -37,9 +41,11 @@ class AppService {
   }
 
   Future<bool> saveTimeZone(String timeZone) async {
-    // TODO: TimeZone bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+    return await Preferences.setString("time_zone", timeZone);
+  }
+
+  String getTimeZone() {
+    return Preferences.getString("time_zone");
   }
 
   Future<bool> saveWakingUp(TimeOfDay wakinkUp) async {
@@ -80,9 +86,11 @@ class AppService {
   }
 
   Future<bool> saveNotification(bool notify) async {
-    // TODO: Notification bilgisini local storage'e kaydet
+    return await Preferences.setBool("notify", notify);
     // TODO: Notification servisine kayıt yap ya da kaydı iptal et.
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+  }
+
+  bool getNotification() {
+    return Preferences.getBool("notify");
   }
 }
