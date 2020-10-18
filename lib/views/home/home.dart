@@ -1,11 +1,8 @@
-import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/main.dart';
 import 'package:StateManagementMVCS/views/home/pages/report/report.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
