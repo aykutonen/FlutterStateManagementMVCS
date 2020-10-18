@@ -18,7 +18,7 @@ class Preferences {
   }
 
   static bool getBool(String key, [bool defValue]) {
-    return instance.getBool(key) ?? defValue ?? false;
+    return instance.getBool(key) ?? defValue;
   }
 
   static Future<bool> setBool(String key, bool value) async {

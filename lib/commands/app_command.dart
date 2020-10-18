@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,14 @@ import 'base_command.dart';
 
 class AppCommand extends BaseCommand {
   Future<void> load() async {
-    appModel.currentUser = await appService.getCurrentUser();
-    appModel.isFirstTime = await appService.getIsFirstTime();
+    log("start AppCommand().load()");
+    appModel.currentUser = appService.getCurrentUser();
+    appModel.isFirstTime = appService.getIsFirstTime();
+    appModel.sleeping = appService.getSleeping();
+    appModel.wakingUp = appService.getWakingUp();
+    appModel.unit = appService.getUnit();
+    appModel.targetAmount = appService.getTargetAmount();
+    log("end AppCommand().load()");
   }
 
   Future<bool> saveUsername(String name) async {

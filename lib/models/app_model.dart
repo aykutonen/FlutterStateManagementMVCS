@@ -16,7 +16,7 @@ class AppModel extends ChangeNotifier {
   // Kullanıcı ilk kez uygulamayı açtığında True değeri atanır.
   // Onboarding ekranı gösterildikten sonra "False" değeri atanır.
   bool _isFirstTime = true;
-  bool get isFirstTime => true; //_isFirstTime;
+  bool get isFirstTime => _isFirstTime;
 
   set isFirstTime(bool isFirstTime) {
     _isFirstTime = isFirstTime;

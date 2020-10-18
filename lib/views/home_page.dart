@@ -51,8 +51,10 @@ class _HomePageState extends State<HomePage> {
         posts != null ? posts.map((post) => Text(post)).toList() : List<Text>();
 
     return CupertinoPageScaffold(
+        child: SafeArea(
       child: Column(
         children: [
+          // Text(context.read<AppModel>().currentUser),
           Flexible(
             child: _isLoading
                 ? Center(child: CircularProgressIndicator())
@@ -68,6 +70,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    );
+    ));
   }
 }

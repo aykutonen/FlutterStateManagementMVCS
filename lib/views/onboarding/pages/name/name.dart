@@ -13,7 +13,7 @@ class OnboardingNamePage extends StatefulWidget {
 }
 
 class _OnboardingNamePageState extends State<OnboardingNamePage> {
-  final _inputController = TextEditingController();
+  final TextEditingController _inputController = TextEditingController();
   String _error = "";
 
   void _handleSaveButton() async {

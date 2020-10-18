@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
-import 'package:StateManagementMVCS/commands/refresh_posts_command.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
@@ -38,7 +39,8 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  bool _isFrist = true;
+  // bool _isFirst = false;
+  bool _isLoadData = false;
 
   @override
   void initState() {
@@ -49,23 +51,30 @@ class _MainAppState extends State<MainApp> {
   void appInit() async {
     Commands.init(context);
     await Preferences.init();
-    AppCommand().load().then((_) async {
-      setState(() => _isFrist = context.read<AppModel>().isFirstTime);
-
-      if (!_isFrist) {
-        RefreshPostsCommand().run(context.read<AppModel>().currentUser);
-      }
+    log("Before Appcommand().load()");
+    AppCommand().load().then((e) {
+      setState(() => _isLoadData = true);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_isLoadData)
+      return Container(
+        color: CupertinoColors.white,
+      );
+
+    bool _isFirst = context.select<AppModel, bool>((e) => e.isFirstTime);
+    // if (!_isFirst) {
+    //   RefreshPostsCommand()
+    //       .run(context.select<AppModel, String>((e) => e.currentUser));
+    // }
+
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
       title: 'Helo',
       onGenerateRoute: generateRoute,
-      // initialRoute: _initialRoute,
-      home: _isFrist ? Onboarding() : HomePage(),
+      home: _isFirst ? Onboarding() : HomePage(),
     );
   }
 }

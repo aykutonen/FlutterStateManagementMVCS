@@ -27,7 +27,7 @@ class _OnboardingState extends State<Onboarding> {
       case 3:
         return OnboardingUnitPage(onPressed: _setNextPage);
       case 4:
-        return OnboardingTargetAmountPage();
+        return OnboardingTargetAmountPage(onPressed: _setNextPage);
       default:
         return null;
     }
@@ -55,7 +55,8 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
-    String name = context.watch<AppModel>().currentUser;
+    // String name = context.read<AppModel>().currentUser;
+    String name = context.select<AppModel, String>((e) => e.currentUser);
 
     return CupertinoPageScaffold(
       child: SafeArea(

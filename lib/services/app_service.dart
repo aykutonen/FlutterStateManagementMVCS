@@ -8,7 +8,7 @@ class AppService {
     return await Preferences.setString("currentUser", name);
   }
 
-  Future<String> getCurrentUser() async {
+  String getCurrentUser() {
     return Preferences.getString("currentUser");
   }
 
@@ -16,8 +16,8 @@ class AppService {
     return await Preferences.setBool("IsFirstTime", isFirstTime);
   }
 
-  Future<bool> getIsFirstTime() async {
-    return Preferences.getBool("IsFirstTime");
+  bool getIsFirstTime() {
+    return Preferences.getBool("IsFirstTime") ?? true;
   }
 
   Future<bool> saveLangugage(Language lang) async {
@@ -58,9 +58,8 @@ class AppService {
   }
 
   Future<bool> saveSleeping(TimeOfDay sleeping) async {
-    await Preferences.setInt("sleeping_hour", sleeping.hour);
-    await Preferences.setInt("sleeping_minute", sleeping.minute);
-    return true;
+    return await Preferences.setInt("sleeping_hour", sleeping.hour) &&
+        await Preferences.setInt("sleeping_minute", sleeping.minute);
   }
 
   TimeOfDay getSleeping() {
@@ -73,9 +72,11 @@ class AppService {
   }
 
   Future<bool> saveTargetAmount(int amount) async {
-    // TODO: TargetAmount bilgisini local storage'e kaydet
-    await Future.delayed(Duration(seconds: 1));
-    return true;
+    return await Preferences.setInt("target_amount", amount);
+  }
+
+  int getTargetAmount() {
+    return Preferences.getInt("target_amount");
   }
 
   Future<bool> saveNotification(bool notify) async {
