@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
-import 'package:flutter/material.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 
 class AppService {
@@ -40,32 +42,30 @@ class AppService {
     return null;
   }
 
-  Future<bool> saveWakingUp(TimeOfDay wakinkUp) async {
-    await Preferences.setInt("wakinkup_hour", wakinkUp.hour);
-    await Preferences.setInt("wakinkup_minute", wakinkUp.minute);
-    return true;
+  Future<bool> saveWakingUp(HourMinute hourMinute) async {
+    return await Preferences.setString("wakingup", json.encode(hourMinute));
   }
 
-  TimeOfDay getWakingUp() {
-    final _hour = Preferences.getInt("wakinkup_hour");
-    final _minute = Preferences.getInt("wakinkup_minute");
-    if (_hour != null && _minute != null) {
-      return TimeOfDay(hour: _hour, minute: _minute);
+  HourMinute getWakingUp() {
+    var hmString = Preferences.getString("wakingup");
+    if (hmString.isNotEmpty) {
+      var parsed = json.decode(hmString);
+      if (parsed != null) return HourMinute.fromJson(parsed);
     }
     return null;
   }
 
-  Future<bool> saveSleeping(TimeOfDay sleeping) async {
-    return await Preferences.setInt("sleeping_hour", sleeping.hour) &&
-        await Preferences.setInt("sleeping_minute", sleeping.minute);
+  Future<bool> saveSleeping(HourMinute hm) async {
+    return await Preferences.setString("sleeping", json.encode(hm));
   }
 
-  TimeOfDay getSleeping() {
-    final _hour = Preferences.getInt("sleeping_hour");
-    final _minute = Preferences.getInt("sleeping_minute");
-    if (_hour != null && _minute != null) {
-      return TimeOfDay(hour: _hour, minute: _minute);
+  HourMinute getSleeping() {
+    var hmString = Preferences.getString("sleeping");
+    if (hmString.isNotEmpty) {
+      var hmParsed = json.decode(hmString);
+      if (hmParsed != null) return HourMinute.fromJson(hmParsed);
     }
+
     return null;
   }
 

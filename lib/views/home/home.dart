@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     String content =
         "Hi, ${model.currentUser}. isFirsttime: ${model.isFirstTime}. Your Language: ${model.language}. ";
     content +=
-        "Water Unit: ${model.unit}. Wake up time: ${model.wakingUp.toString()}. Sleeping time: ${model.sleeping.toString()}. ";
+        "Water Unit: ${model.unit}. Wake up time: ${model.wakingUp.hour}:${model.wakingUp.minute}. Sleeping time: ${model.sleeping.hour}:${model.sleeping.minute}. ";
     content +=
         "Your target amount: ${model.targetAmount}. Your notification settings: ${model.notification}.";
 

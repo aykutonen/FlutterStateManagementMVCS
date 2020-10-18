@@ -43,20 +43,20 @@ class AppModel extends ChangeNotifier {
   }
 
   // Kullanıcının uyandığı saat
-  TimeOfDay _wakingUp;
-  TimeOfDay get wakingUp => _wakingUp;
+  HourMinute _wakingUp;
+  HourMinute get wakingUp => _wakingUp;
 
-  set wakingUp(TimeOfDay dt) {
-    _wakingUp = dt;
+  set wakingUp(HourMinute hm) {
+    _wakingUp = hm;
     notifyListeners();
   }
 
   // Kullanıcının uyuduğu saat
-  TimeOfDay _sleeping;
-  TimeOfDay get sleeping => _sleeping;
+  HourMinute _sleeping;
+  HourMinute get sleeping => _sleeping;
 
-  set sleeping(TimeOfDay dt) {
-    _sleeping = dt;
+  set sleeping(HourMinute hm) {
+    _sleeping = hm;
     notifyListeners();
   }
 
@@ -79,4 +79,20 @@ class AppModel extends ChangeNotifier {
   }
 
   // Eventually other stuff would go here, appSettings, premiumUser flags, currentTheme, etc...
+}
+
+class HourMinute {
+  final int hour;
+  final int minute;
+
+  const HourMinute(this.hour, this.minute);
+
+  factory HourMinute.fromJson(Map<String, dynamic> json) {
+    return HourMinute(json['hour'], json['minute']);
+  }
+
+  Map<String, dynamic> toJson() => {
+        'hour': hour,
+        'minute': minute,
+      };
 }

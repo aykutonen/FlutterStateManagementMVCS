@@ -1,9 +1,9 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class OnboardingWakeUpPage extends StatefulWidget {
   final VoidCallback onNextPressed;
@@ -19,7 +19,7 @@ class OnboardingWakeUpPage extends StatefulWidget {
 }
 
 class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
-  TimeOfDay wakeupTime = TimeOfDay(hour: 8, minute: 480);
+  HourMinute wakeupTime = HourMinute(8, 0);
   Duration _duration = Duration(hours: 8, minutes: 0); // Default
 
   @override
@@ -29,7 +29,7 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
       setState(() {
         wakeupTime = _wakeupTimeFromStorage;
         _duration =
-            Duration(hours: wakeupTime.hour, minutes: wakeupTime.minute % 60);
+            Duration(hours: wakeupTime.hour, minutes: wakeupTime.minute);
       });
     }
     super.initState();
@@ -37,8 +37,7 @@ class _OnboardingWakeUpPageState extends State<OnboardingWakeUpPage> {
 
   void _handleTimePicker(Duration duration) {
     setState(() {
-      wakeupTime =
-          TimeOfDay(hour: duration.inHours, minute: duration.inMinutes);
+      wakeupTime = HourMinute(duration.inHours, duration.inMinutes % 60);
     });
   }
 

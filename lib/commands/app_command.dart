@@ -1,6 +1,6 @@
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
-import 'package:flutter/material.dart';
 
 import 'base_command.dart';
 
@@ -56,22 +56,22 @@ class AppCommand extends BaseCommand {
     return result;
   }
 
-  Future<bool> setWakingUp(TimeOfDay wakingUp) async {
+  Future<bool> setWakingUp(HourMinute hm) async {
     // Service üzerinden local storage'de WakingUp değerini güncelle.
-    bool result = await appService.saveWakingUp(wakingUp);
+    bool result = await appService.saveWakingUp(hm);
 
     // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.wakingUp = wakingUp;
+    if (result) appModel.wakingUp = hm;
 
     return result;
   }
 
-  Future<bool> setSleeping(TimeOfDay sleeping) async {
+  Future<bool> setSleeping(HourMinute hm) async {
     // Service üzerinden local storage'de Sleeping değerini güncelle.
-    bool result = await appService.saveSleeping(sleeping);
+    bool result = await appService.saveSleeping(hm);
 
     // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.sleeping = sleeping;
+    if (result) appModel.sleeping = hm;
 
     return result;
   }
