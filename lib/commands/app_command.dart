@@ -12,6 +12,9 @@ class AppCommand extends BaseCommand {
     appModel.wakingUp = appService.getWakingUp();
     appModel.unit = appService.getUnit();
     appModel.targetAmount = appService.getTargetAmount();
+    appModel.language = appService.getLanguage();
+    appModel.timeZone = appService.getTimeZone();
+    appModel.notification = appService.getNotification();
   }
 
   Future<bool> saveUsername(String name) async {
