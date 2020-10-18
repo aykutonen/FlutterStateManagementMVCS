@@ -65,20 +65,6 @@ class _OnboardingState extends State<Onboarding> {
           children: [
             name == null ? Text('') : Text('Hi $name'),
             Expanded(child: _getPage()),
-            // Text('current page: $_currentPage'),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     CupertinoButton(
-            //       child: Text('Previous'),
-            //       onPressed: _setPreviousPage,
-            //     ),
-            //     CupertinoButton(
-            //       child: Text('Next'),
-            //       onPressed: _setNextPage,
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),

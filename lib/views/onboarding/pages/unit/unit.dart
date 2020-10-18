@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
 import 'package:flutter/cupertino.dart';
 
 class OnboardingUnitPage extends StatefulWidget {
@@ -53,64 +54,51 @@ class _OnboardingUnitPageState extends State<OnboardingUnitPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Select Water Unit',
-                  style: TextStyle(fontSize: 30),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CupertinoButton(
-                        child: Text(
-                          'ml',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: _selected == "ml"
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                          ),
-                        ),
-                        onPressed: _handleMlButton),
-                    CupertinoButton(
-                        child: Text(
-                          'oz',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: _selected == "oz"
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                          ),
-                        ),
-                        onPressed: _handleOzButton)
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10, top: 20),
-                  child: Text(
-                    _error,
-                    style: TextStyle(
-                      color: CupertinoColors.destructiveRed,
-                    ),
+    return OnboardingPageContainer(
+      body: [
+        Text(
+          'Select Water Unit',
+          style: TextStyle(fontSize: 30),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CupertinoButton(
+                child: Text(
+                  'ml',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight:
+                        _selected == "ml" ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
-              ],
+                onPressed: _handleMlButton),
+            CupertinoButton(
+                child: Text(
+                  'oz',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight:
+                        _selected == "oz" ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+                onPressed: _handleOzButton)
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 10, top: 20),
+          child: Text(
+            _error,
+            style: TextStyle(
+              color: CupertinoColors.destructiveRed,
             ),
           ),
         ),
-        NextPreviousButton(
-          onNextPressed: _handleNextOnPressed,
-          onPrevioustPressed: widget.onPreviousPressed,
-        )
       ],
+      footer: NextPreviousButton(
+        onNextPressed: _handleNextOnPressed,
+        onPrevioustPressed: widget.onPreviousPressed,
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/views/onboarding/widgets/NextPreviousButton.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/nextPreviousButton.dart';
+import 'package:StateManagementMVCS/views/onboarding/widgets/onboardingPageContainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -32,54 +33,43 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
     _inputController.text =
         context.select<AppModel, String>((e) => e.currentUser);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CupertinoTextField(
-                  controller: _inputController,
-                  textCapitalization: TextCapitalization.sentences,
-                  autofocus: true,
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                  placeholder: 'Your Name',
-                  placeholderStyle: TextStyle(
-                    fontSize: 30,
-                    color: CupertinoColors.lightBackgroundGray,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 1,
-                        color: CupertinoColors.lightBackgroundGray,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10, top: 20),
-                  child: Text(
-                    _error,
-                    style: TextStyle(
-                      color: CupertinoColors.destructiveRed,
-                    ),
-                  ),
-                ),
-              ],
+    return OnboardingPageContainer(
+      body: [
+        CupertinoTextField(
+          controller: _inputController,
+          textCapitalization: TextCapitalization.sentences,
+          autofocus: true,
+          style: TextStyle(
+            fontSize: 30,
+          ),
+          placeholder: 'Your Name',
+          placeholderStyle: TextStyle(
+            fontSize: 30,
+            color: CupertinoColors.lightBackgroundGray,
+          ),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                width: 1,
+                color: CupertinoColors.lightBackgroundGray,
+              ),
             ),
           ),
         ),
-        NextPreviousButton(
-          showPreviousButton: false,
-          onNextPressed: _handleSaveButton,
+        Padding(
+          padding: EdgeInsets.only(bottom: 10, top: 20),
+          child: Text(
+            _error,
+            style: TextStyle(
+              color: CupertinoColors.destructiveRed,
+            ),
+          ),
         ),
       ],
+      footer: NextPreviousButton(
+        showPreviousButton: false,
+        onNextPressed: _handleSaveButton,
+      ),
     );
   }
 }
