@@ -20,12 +20,8 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   void initState() {
-    getDeviceInfo();
     super.initState();
-  }
-
-  void getDeviceInfo() async {
-    await AppCommand().setLanguage(Language.English);
+    AppCommand().setLanguage(Language.English);
   }
 
   Widget _getPage() {
