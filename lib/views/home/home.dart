@@ -14,6 +14,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AppModel model = context.select<AppModel, AppModel>((e) => e);
+
+    String content =
+        "Hi, ${model.currentUser}. isFirsttime: ${model.isFirstTime}. Your Language: ${model.language}. ";
+    content +=
+        "Water Unit: ${model.unit}. Wake up time: ${model.wakingUp.toString()}. Sleeping time: ${model.sleeping.toString()}. ";
+    content +=
+        "Your target amount: ${model.targetAmount}. Your notification settings: ${model.notification}.";
+
     return CupertinoPageScaffold(
       child: SafeArea(
         child: Flexible(
@@ -21,7 +30,9 @@ class _HomePageState extends State<HomePage> {
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
               : Text(
-                  'Hi, ${context.select<AppModel, String>((e) => e.currentUser)}'),
+                  content,
+                  maxLines: 10,
+                ),
         )),
       ),
     );
