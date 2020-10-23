@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
@@ -22,7 +21,18 @@ class UserService {
     var result = List<DrunkModel>();
     if (data.isNotEmpty) {
       var list = json.decode(data) as List;
-      result = list.map((e) => DrunkModel.fromJson(e)).toList();
+      var dt = DateTime.now();
+      var today = DateTime(
+        dt.year,
+        dt.month,
+        dt.day,
+      );
+      result = list
+          .map((e) => DrunkModel.fromJson(e))
+          .where((e) =>
+              today.isBefore(e.createDate) ||
+              today.isAtSameMomentAs(e.createDate))
+          .toList();
     }
     return result;
   }
@@ -33,8 +43,6 @@ class UserService {
     if (data.isNotEmpty) {
       var list = json.decode(data) as List;
       result = list.map((e) => DrunkModel.fromJson(e)).toList();
-      // result = List<DrunkModel>.fromJson(data);
-      // jsonDecode(data);
     }
     result.add(model);
     String parsed = json.encode(result);

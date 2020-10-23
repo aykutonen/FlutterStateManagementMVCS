@@ -1,5 +1,7 @@
 import 'package:StateManagementMVCS/commands/user_command.dart';
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
+import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,13 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     List<DrunkModel> drunks =
         context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
+    var totalAmount = context.select<UserModel, int>((e) => e.dailyTotalDrunk);
+    var leastAmount =
+        context.select<AppModel, int>((e) => e.targetAmount) - totalAmount;
+    var leastAmountText =
+        leastAmount < 0 ? "+${leastAmount * -1}" : "$leastAmount";
+
+    var unit = context.select<AppModel, Unit>((e) => e.unit);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -96,8 +105,8 @@ class _MainPageState extends State<MainPage> {
               height: 50.0,
               color: Colors.transparent,
             ),
-            Text('Tüketilen su miktarı ${drunks.length}'),
-            Text('Kalan su miktarı'),
+            Text('Tüketilen su miktarı $totalAmount ${unit.name}'),
+            Text('Kalan su miktarı: $leastAmountText ${unit.name}'),
           ],
         ),
       ),

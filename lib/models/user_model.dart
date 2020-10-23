@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 import 'package:flutter/foundation.dart';
 
@@ -9,6 +10,10 @@ class UserModel extends ChangeNotifier {
     _dailyDrunks = drunks;
     notifyListeners();
   }
+
+  int get dailyTotalDrunk => _dailyDrunks
+      .map<int>((e) => e.amount)
+      .reduce((value, element) => value + element);
 
   // In the future, this would contain other data about Users, maybe active friend lists, or notifications, etc
 }
