@@ -35,13 +35,13 @@ class _OnboardingUnitPageState extends State<OnboardingUnitPage> {
   void _handleMlButton() async {
     await AppCommand().setUnit(Unit.ml);
     setState(() => _selected = Unit.ml.name);
-    // widget.onNextPressed();
+    widget.onNextPressed();
   }
 
   void _handleOzButton() async {
     await AppCommand().setUnit(Unit.oz);
     setState(() => _selected = Unit.oz.name);
-    // widget.onNextPressed();
+    widget.onNextPressed();
   }
 
   void _handleNextOnPressed() {
