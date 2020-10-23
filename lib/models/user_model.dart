@@ -1,4 +1,3 @@
-import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 import 'package:flutter/foundation.dart';
 

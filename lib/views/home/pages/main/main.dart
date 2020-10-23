@@ -114,7 +114,4 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-// içilen su miktarının girileceği / seçileceği alan
-// Kaydet butonu
-// İçilmiş kayıtların gösterileceği liste.
-// Günlük hedefe ne kadar kaldı bilgisi.
+// TODO: İçilmiş kayıtların gösterileceği liste.
