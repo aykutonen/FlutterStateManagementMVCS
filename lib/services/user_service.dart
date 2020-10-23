@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
+
+import 'package:StateManagementMVCS/models/drunk_model.dart';
+import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 
 class UserService {
   Future<bool> login(String user, String pass) async {
@@ -13,9 +17,27 @@ class UserService {
     return true;
   }
 
-  Future<List<String>> getPosts(String user) async {
-    // Fake a service call, and return some posts
-    await Future.delayed(Duration(seconds: 1));
-    return List.generate(50, (index) => "Item ${Random().nextInt(999)}");
+  List<DrunkModel> getDailyDrunks() {
+    var data = Preferences.getString("drunks");
+    var result = List<DrunkModel>();
+    if (data.isNotEmpty) {
+      var list = json.decode(data) as List;
+      result = list.map((e) => DrunkModel.fromJson(e)).toList();
+    }
+    return result;
+  }
+
+  Future<bool> addDrunk(DrunkModel model) async {
+    var data = Preferences.getString("drunks");
+    List<DrunkModel> result = List<DrunkModel>();
+    if (data.isNotEmpty) {
+      var list = json.decode(data) as List;
+      result = list.map((e) => DrunkModel.fromJson(e)).toList();
+      // result = List<DrunkModel>.fromJson(data);
+      // jsonDecode(data);
+    }
+    result.add(model);
+    String parsed = json.encode(result);
+    return await Preferences.setString("drunks", parsed);
   }
 }
