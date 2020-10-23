@@ -1,5 +1,6 @@
 import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
@@ -46,9 +47,13 @@ class _MainAppState extends State<MainApp> {
   void appInit() async {
     Commands.init(context);
     await Preferences.init();
-    AppCommand().load().then((e) {
-      setState(() => _isLoadData = true);
-    });
+    await AppCommand().load();
+    await UserCommand().load();
+    setState(() => _isLoadData = true);
+
+    // AppCommand().load().then((e) {
+    //   setState(() => _isLoadData = true);
+    // });
   }
 
   @override
