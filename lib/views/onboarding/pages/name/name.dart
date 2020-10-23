@@ -38,6 +38,8 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
       body: [
         CupertinoTextField(
           controller: _inputController,
+          // textInputAction: TextInputAction.,
+          onSubmitted: (_) => _handleSaveButton(),
           textCapitalization: TextCapitalization.sentences,
           autofocus: true,
           style: TextStyle(
