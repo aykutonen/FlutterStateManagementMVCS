@@ -18,6 +18,8 @@ class _MainPageState extends State<MainPage> {
   String _error = "";
   bool _isLoading = false;
 
+// TODO: İçilmiş kayıtların gösterileceği liste.
+
   void _handleSaveButton() async {
     setState(() => _isLoading = true);
     if (_inputController.value.text.isEmpty) {
@@ -113,5 +115,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
-// TODO: İçilmiş kayıtların gösterileceği liste.
