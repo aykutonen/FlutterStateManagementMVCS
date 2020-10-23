@@ -52,7 +52,6 @@ class _OnboardingTargetAmountPageState
             'How much "${_selectedUnit.name.toUpperCase()}" drink water in a day?'),
         CupertinoTextField(
           controller: _inputController,
-          textCapitalization: TextCapitalization.sentences,
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
