@@ -12,8 +12,8 @@ class TodayLeastWater extends StatelessWidget {
     var totalAmount = context.select<UserModel, int>((e) => e.dailyTotalDrunk);
     var targetAmount = context.select<AppModel, int>((e) => e.targetAmount);
     var leastAmount = targetAmount - totalAmount;
-    // var leastAmountText =
-    //     leastAmount < 0 ? "+${leastAmount * -1}" : "$leastAmount";
+    var leastAmountText =
+        leastAmount < 0 ? "+${leastAmount * -1}" : "$leastAmount";
 
     var unit = context.select<AppModel, Unit>((e) => e.unit);
 
@@ -43,7 +43,7 @@ class TodayLeastWater extends StatelessWidget {
           ),
           Seperator(height: 20.0),
           Text(
-            "${leastAmount.toString()} ${unit.name}",
+            "$leastAmountText ${unit.name}",
             style: TextStyle(fontSize: 36.0),
           ),
           Text(
