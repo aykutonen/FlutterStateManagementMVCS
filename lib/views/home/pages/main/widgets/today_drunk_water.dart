@@ -35,9 +35,12 @@ class TodayDrunkWater extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            "${totalAmount.toString()} ${unit.name}",
-            style: TextStyle(fontSize: 36.0),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              "${totalAmount.toString()} ${unit.name}",
+              style: TextStyle(fontSize: 36.0),
+            ),
           ),
         ],
       ),

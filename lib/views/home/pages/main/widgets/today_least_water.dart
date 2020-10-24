@@ -42,9 +42,12 @@ class TodayLeastWater extends StatelessWidget {
             ),
           ),
           Seperator(height: 20.0),
-          Text(
-            "$leastAmountText ${unit.name}",
-            style: TextStyle(fontSize: 36.0),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              "$leastAmountText ${unit.name}",
+              style: TextStyle(fontSize: 36.0),
+            ),
           ),
           Text(
             "of $targetAmount ${unit.name}",
