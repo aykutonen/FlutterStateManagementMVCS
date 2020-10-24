@@ -40,8 +40,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<DrunkModel> drunks =
-        context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
+    // List<DrunkModel> drunks =
+    //     context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
     var totalAmount = context.select<UserModel, int>((e) => e.dailyTotalDrunk);
     var leastAmount =
         context.select<AppModel, int>((e) => e.targetAmount) - totalAmount;

@@ -27,12 +27,15 @@ class UserService {
         dt.month,
         dt.day,
       );
-      result = list
+
+      var filtered = list
           .map((e) => DrunkModel.fromJson(e))
           .where((e) =>
               today.isBefore(e.createDate) ||
               today.isAtSameMomentAs(e.createDate))
           .toList();
+
+      if (filtered.isNotEmpty) result = filtered;
     }
     return result;
   }

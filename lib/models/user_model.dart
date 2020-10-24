@@ -7,12 +7,30 @@ class UserModel extends ChangeNotifier {
   List<DrunkModel> get dailyDrunks => _dailyDrunks;
   set dailyDrunks(List<DrunkModel> drunks) {
     _dailyDrunks = drunks;
+    _calculateDailyTotal();
     notifyListeners();
   }
 
-  int get dailyTotalDrunk => _dailyDrunks
-      .map<int>((e) => e.amount)
-      .reduce((value, element) => value + element);
+  void addDailyDrunk(DrunkModel model) {
+    _dailyDrunks.add(model);
+    _calculateDailyTotal();
+    notifyListeners();
+  }
+
+  int _dailyTotalDrunk = 0;
+  int get dailyTotalDrunk => _dailyTotalDrunk;
+  set dailyTotalDrunk(int total) {
+    _dailyTotalDrunk = total;
+    notifyListeners();
+  }
+
+  void _calculateDailyTotal() {
+    if (_dailyDrunks.isNotEmpty) {
+      dailyTotalDrunk = _dailyDrunks
+          .map<int>((e) => e.amount)
+          .reduce((value, element) => value + element);
+    }
+  }
 
   // In the future, this would contain other data about Users, maybe active friend lists, or notifications, etc
 }
