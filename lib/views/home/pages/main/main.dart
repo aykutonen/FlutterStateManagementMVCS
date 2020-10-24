@@ -15,14 +15,14 @@ class MainPage extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => FocusScope.of(context).unfocus(),
       child: Padding(
-        padding: EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
             Greeting(),
-            Seperator(),
+            const Seperator(),
             IntrinsicHeight(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,16 +33,13 @@ class MainPage extends StatelessWidget {
                 ],
               ),
             ),
-            Seperator(),
+            const Seperator(),
             const SubTitle(title: 'Daily Logs'),
-            Seperator(height: 20.0),
-            Container(
-              height: 150.0,
-              child: DailyDrunkList(),
-            ),
-            Seperator(),
+            const Seperator(height: 20.0),
+            DailyDrunkList(),
+            const Seperator(),
             const SubTitle(title: 'Add Drunk Water'),
-            Seperator(height: 20.0),
+            const Seperator(height: 20.0),
             AddDrunkWater(),
           ],
         ),
