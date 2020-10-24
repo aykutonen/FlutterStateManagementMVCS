@@ -25,12 +25,12 @@ class _MainPageState extends State<MainPage> {
     if (_inputController.value.text.isEmpty) {
       setState(() => _error = "Tüketim miktarı girmedin.");
     } else {
-      FocusScope.of(context).unfocus();
       setState(() => _error = "");
       var amount = int.tryParse(_inputController.value.text);
-      if (amount == null) {
+      if (amount == null || amount == 0) {
         setState(() => _error = "Geçersiz bir miktar girildi.");
       } else {
+        FocusScope.of(context).unfocus();
         await UserCommand().addDrunk(amount);
         _inputController.text = "";
       }
