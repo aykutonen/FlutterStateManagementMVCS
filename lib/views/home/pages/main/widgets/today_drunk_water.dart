@@ -1,7 +1,6 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
-import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

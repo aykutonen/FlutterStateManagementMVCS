@@ -35,7 +35,10 @@ class UserService {
               today.isAtSameMomentAs(e.createDate))
           .toList();
 
-      if (filtered.isNotEmpty) result = filtered;
+      if (filtered.isNotEmpty) {
+        filtered.sort((a, b) => b.createDate.compareTo(a.createDate));
+        result = filtered;
+      }
     }
     return result;
   }
@@ -46,6 +49,7 @@ class UserService {
     if (data.isNotEmpty) {
       var list = json.decode(data) as List;
       result = list.map((e) => DrunkModel.fromJson(e)).toList();
+      result.sort((a, b) => b.createDate.compareTo(a.createDate));
     }
     result.add(model);
     String parsed = json.encode(result);

@@ -2,16 +2,12 @@ import 'package:StateManagementMVCS/views/home/pages/main/main.dart';
 import 'package:StateManagementMVCS/views/home/pages/report/report.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // AppModel model = context.select<AppModel, AppModel>((e) => e);
-
     return CupertinoTabScaffold(
-      // resizeToAvoidBottomInset: false,
       tabBar: CupertinoTabBar(
         activeColor: CupertinoColors.activeBlue,
         currentIndex: 1,
