@@ -23,6 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final _targetInputController = TextEditingController();
   final _targetFocusNode = FocusNode();
   final _nameFocusNode = FocusNode();
+  final double _rowHeight = 50.0;
 
   String _error = "";
   Duration _wakeup;
@@ -63,6 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
       _targetFocusNode.requestFocus();
     } else {
       setState(() => _error = "");
+
       var amount = int.tryParse(_targetInputController.text);
       if (amount == null || amount == 0) {
         setState(() => _error = "Geçerisz bir miktar girildi.");
@@ -93,6 +95,11 @@ class _SettingsPageState extends State<SettingsPage> {
     Navigator.of(context, rootNavigator: true).pop("save");
   }
 
+  void _handleUnitSet(Unit unit) async {
+    await AppCommand().setUnit(unit);
+    setState(() => _error = "");
+  }
+
   @override
   Widget build(BuildContext context) {
     var model = context.select<AppModel, AppModel>((e) => e);
@@ -114,132 +121,166 @@ class _SettingsPageState extends State<SettingsPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BigTitle(title: 'Settings'),
-            Greeting(),
-            const Seperator(),
+            const BigTitle(title: 'Settings'),
+            const Seperator(height: 25.0),
             Text(_error),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Name'),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 100),
-                    child: CupertinoTextField(
-                      maxLines: 1,
-                      textCapitalization: TextCapitalization.sentences,
-                      controller: _nameInputController,
-                      textAlign: TextAlign.right,
-                      textInputAction: TextInputAction.done,
-                      focusNode: _nameFocusNode,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Wakeup'),
-                CupertinoButton(
-                  child: Text(
-                    model.wakingUp.toDisplayString,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  onPressed: () {
-                    ShowTimePickerDialog(
-                      cancel: () => Navigator.of(context, rootNavigator: true)
-                          .pop("Discard"),
-                      context: context,
-                      initialDuration: _wakeup,
-                      pickerChangeHandle: _handleWakeupPicker,
-                      save: _handleWakeupSave,
-                      title: 'Select Wakeup Time',
-                    ).showDialog();
-                  },
-                ),
-              ],
-            ),
-            Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Sleep'),
-                CupertinoButton(
-                    child: Text(
-                      model.sleeping.toDisplayString,
-                      style: TextStyle(
-                        color: Colors.black,
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _nameFocusNode.requestFocus(),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Name'),
+                    Expanded(
+                      child: CupertinoTextField(
+                        maxLines: 1,
+                        decoration: BoxDecoration(
+                            border: Border.all(style: BorderStyle.none)),
+                        textCapitalization: TextCapitalization.sentences,
+                        controller: _nameInputController,
+                        textAlign: TextAlign.right,
+                        textInputAction: TextInputAction.done,
+                        focusNode: _nameFocusNode,
                       ),
                     ),
-                    onPressed: () {
-                      ShowTimePickerDialog(
-                        cancel: () => Navigator.of(context, rootNavigator: true)
-                            .pop("Discard"),
-                        context: context,
-                        initialDuration: _sleep,
-                        pickerChangeHandle: _handleSleepPicker,
-                        save: _handleSleepSave,
-                        title: 'Select Sleeping Time',
-                      ).showDialog();
-                    }),
-              ],
+                  ],
+                ),
+              ),
             ),
             Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Target'),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 100),
-                    child: CupertinoTextField(
-                      maxLines: 1,
-                      controller: _targetInputController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      textAlign: TextAlign.right,
-                      onEditingComplete: _handleTargetSaveButton,
-                      textInputAction: TextInputAction.done,
-                      focusNode: _targetFocusNode,
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => ShowTimePickerDialog(
+                cancel: () =>
+                    Navigator.of(context, rootNavigator: true).pop("Discard"),
+                context: context,
+                initialDuration: _wakeup,
+                pickerChangeHandle: _handleWakeupPicker,
+                save: _handleWakeupSave,
+                title: 'Select Wakeup Time',
+              ).showDialog(),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Wakeup'),
+                    Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Text(model.wakingUp.toDisplayString),
                     ),
-                  ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text(model.unit.name),
+              ),
+            ),
+            Divider(),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => ShowTimePickerDialog(
+                cancel: () =>
+                    Navigator.of(context, rootNavigator: true).pop("Discard"),
+                context: context,
+                initialDuration: _sleep,
+                pickerChangeHandle: _handleSleepPicker,
+                save: _handleSleepSave,
+                title: 'Select Sleeping Time',
+              ).showDialog(),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Sleep'),
+                    Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Text(model.sleeping.toDisplayString),
+                    ),
+                  ],
                 ),
-              ],
+              ),
+            ),
+            Divider(),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _targetFocusNode.requestFocus(),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Target'),
+                    Expanded(
+                      child: CupertinoTextField(
+                        maxLines: 1,
+                        decoration: BoxDecoration(
+                            border: Border.all(style: BorderStyle.none)),
+                        controller: _targetInputController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        textAlign: TextAlign.right,
+                        onEditingComplete: _handleTargetSaveButton,
+                        textInputAction: TextInputAction.done,
+                        focusNode: _targetFocusNode,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Text(model.unit.name),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Divider(),
             Seperator(),
             SubTitle(title: 'Unit'),
             Seperator(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('ML'),
-                CupertinoButton(
-                  child: Text('Değer 3'),
-                  onPressed: null,
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _handleUnitSet(Unit.ml),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(Unit.ml.name.toUpperCase()),
+                    if (model.unit == Unit.ml)
+                      Icon(
+                        CupertinoIcons.check_mark,
+                        size: 45.0,
+                      )
+                  ],
                 ),
-              ],
+              ),
             ),
             Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('OZ'),
-                CupertinoButton(
-                  child: Text('Değer 3'),
-                  onPressed: null,
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _handleUnitSet(Unit.oz),
+              child: Container(
+                height: _rowHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(Unit.oz.name.toUpperCase()),
+                    if (model.unit == Unit.oz)
+                      Icon(
+                        CupertinoIcons.check_mark,
+                        size: 45.0,
+                      ),
+                  ],
                 ),
-              ],
+              ),
             ),
             Divider(),
           ],
