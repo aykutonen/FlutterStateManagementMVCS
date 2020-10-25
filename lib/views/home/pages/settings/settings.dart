@@ -1,4 +1,6 @@
+import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/views/home/pages/main/widgets/greeting.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
@@ -6,8 +8,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   final _nameInputController = TextEditingController();
+  String _error = "";
+
+  void _handleSaveButton() async {
+    if (_nameInputController.text.isEmpty) {
+      setState(() => _error = "İsim zorunlu");
+    } else {
+      setState(() => _error = "");
+      await AppCommand().saveUsername(_nameInputController.text);
+      FocusScope.of(context).unfocus();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +44,9 @@ class SettingsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BigTitle(title: 'Settings'),
+            Greeting(),
             const Seperator(),
+            Text(_error),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
@@ -38,8 +58,11 @@ class SettingsPage extends StatelessWidget {
                     padding: EdgeInsets.only(left: 100),
                     child: CupertinoTextField(
                       maxLines: 1,
+                      textCapitalization: TextCapitalization.sentences,
                       controller: _nameInputController,
                       textAlign: TextAlign.right,
+                      onEditingComplete: _handleSaveButton,
+                      textInputAction: TextInputAction.done,
                     ),
                   ),
                 ),
