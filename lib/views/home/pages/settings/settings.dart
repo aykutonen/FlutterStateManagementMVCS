@@ -1,6 +1,5 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/views/home/pages/main/widgets/greeting.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/show_time_pickert_dialog.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
