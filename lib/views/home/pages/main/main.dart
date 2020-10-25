@@ -22,15 +22,13 @@ class MainPage extends StatelessWidget {
           children: [
             Greeting(),
             const Seperator(),
-            IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TodayDrunkWater(),
-                  TodayLeastWater(),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TodayDrunkWater(),
+                TodayLeastWater(),
+              ],
             ),
             const Seperator(),
             const SubTitle(title: 'Daily Logs'),
