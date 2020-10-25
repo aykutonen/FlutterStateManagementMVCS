@@ -33,6 +33,8 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
   Widget build(BuildContext context) {
     _inputController.text =
         context.select<AppModel, String>((e) => e.currentUser);
+    _inputController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _inputController.text.length));
 
     return OnboardingPageContainer(
       body: [

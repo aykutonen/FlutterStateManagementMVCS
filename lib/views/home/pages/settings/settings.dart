@@ -13,6 +13,8 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var model = context.select<AppModel, AppModel>((e) => e);
     _nameInputController.text = model.currentUser;
+    _nameInputController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _nameInputController.text.length));
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
