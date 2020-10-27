@@ -11,6 +11,6 @@ This Flutter project about practicing for state management based [gskinner's art
 - [x] Su takibi uygulaması için, kullanıcıdan bilgilerin de alınacağı onboarding ekranlarının hazırlanması.
 - [x] Onboarding sayfalarında ileri geri butonlarının son ve ilk sayfadaki çalışmalarının sınırlandırılması.
 - [x] Onboarding sayfalarında tüm bilgiler girilmeden geçişin yapılmamasının sağlanması.
-- [ ] Onboarding'de alınan bilgilerin düzenlenebileceği Ayarlar sayfasının hazırlanması.
-- [ ] Ana sayfanın hazırlanamsı (Günlük içilen su miktarının girildi vs).
+- [x] Onboarding'de alınan bilgilerin düzenlenebileceği Ayarlar sayfasının hazırlanması.
+- [x] Ana sayfanın hazırlanamsı (Günlük içilen su miktarının girildiği vs).
 - [ ] Rapor sayfasının hazırlanması.
