@@ -4,23 +4,39 @@ class DrunkModel {
   DrunkModel({
     this.amount,
     this.unitIndex,
-    this.createDate,
+    DateTime createDate,
+  }) {
+    this.createDateUnix = createDate.toUtc().millisecondsSinceEpoch;
+  }
+
+  DrunkModel.withId({
+    this.id,
+    this.amount,
+    this.unitIndex,
+    this.createDateUnix,
   });
 
+  int id;
   int amount;
   int unitIndex;
-  DateTime createDate;
-  Unit get unit => Unit.values[unitIndex];
+  int createDateUnix;
 
-  factory DrunkModel.fromJson(Map<String, dynamic> json) => DrunkModel(
+  Unit get unit => Unit.values[unitIndex];
+  DateTime get createDate =>
+      DateTime.fromMillisecondsSinceEpoch(createDateUnix, isUtc: true)
+          .toLocal();
+
+  factory DrunkModel.fromJson(Map<String, dynamic> json) => DrunkModel.withId(
+        id: json["id"],
         amount: json["amount"],
         unitIndex: json["unitIndex"],
-        createDate: DateTime.parse(json["createDate"]),
+        createDateUnix: json["createDateUnix"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
+        "id": id,
         "amount": amount,
         "unitIndex": unitIndex,
-        "createDate": createDate.toIso8601String(),
+        "createDateUnix": createDateUnix,
       };
 }
