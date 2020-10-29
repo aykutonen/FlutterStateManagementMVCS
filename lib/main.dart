@@ -54,10 +54,6 @@ class _MainAppState extends State<MainApp> {
     await AppCommand().load();
     await UserCommand().load();
     setState(() => _isLoadData = true);
-
-    // AppCommand().load().then((e) {
-    //   setState(() => _isLoadData = true);
-    // });
   }
 
   @override
