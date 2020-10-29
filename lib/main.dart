@@ -14,6 +14,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  // Avoid errors caused by flutter upgrade.
+  // Importing 'package:flutter/widgets.dart' is required.
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MultiProvider(
     providers: [
       // Models
