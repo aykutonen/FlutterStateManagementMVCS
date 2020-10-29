@@ -1,25 +1,26 @@
 import 'package:StateManagementMVCS/models/unit_model.dart';
 
 class DrunkModel {
-  final int amount;
-  final int unitIndex;
-  final DateTime createDate;
+  DrunkModel({
+    this.amount,
+    this.unitIndex,
+    this.createDate,
+  });
 
+  int amount;
+  int unitIndex;
+  DateTime createDate;
   Unit get unit => Unit.values[unitIndex];
 
-  const DrunkModel(this.amount, this.unitIndex, this.createDate);
-
-  factory DrunkModel.fromJson(Map<String, dynamic> json) {
-    return DrunkModel(
-      json['amount'] as int,
-      json['unitIndex'] as int,
-      DateTime.parse(json['createDate'] as String),
-    );
-  }
+  factory DrunkModel.fromJson(Map<String, dynamic> json) => DrunkModel(
+        amount: json["amount"],
+        unitIndex: json["unitIndex"],
+        createDate: DateTime.parse(json["createDate"]),
+      );
 
   Map<String, dynamic> toJson() => {
-        'amount': amount,
-        'unitIndex': unitIndex,
-        'createDate': createDate.toIso8601String(),
+        "amount": amount,
+        "unitIndex": unitIndex,
+        "createDate": createDate.toIso8601String(),
       };
 }

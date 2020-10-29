@@ -7,7 +7,10 @@ class UserCommand extends BaseCommand {
   }
 
   Future<bool> addDrunk(int amount) async {
-    var model = DrunkModel(amount, appModel.unit.index, DateTime.now());
+    var model = DrunkModel(
+        amount: amount,
+        unitIndex: appModel.unit.index,
+        createDate: DateTime.now());
     var result = await userService.addDrunk(model);
     if (result) userModel.addDailyDrunk(model);
     return result;
