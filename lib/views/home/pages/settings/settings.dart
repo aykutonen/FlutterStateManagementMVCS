@@ -133,7 +133,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Name'),
+                    Text(
+                      'Name',
+                      style: TextStyle(color: CupertinoColors.systemGrey),
+                    ),
                     Expanded(
                       child: CupertinoTextField(
                         maxLines: 1,
@@ -167,7 +170,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Wakeup'),
+                    Text(
+                      'Wakeup',
+                      style: TextStyle(color: CupertinoColors.systemGrey),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(right: 10.0),
                       child: Text(model.wakingUp.toDisplayString),
@@ -194,7 +200,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Sleep'),
+                    Text(
+                      'Sleep',
+                      style: TextStyle(color: CupertinoColors.systemGrey),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(right: 10.0),
                       child: Text(model.sleeping.toDisplayString),
@@ -213,7 +222,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Target'),
+                    Text(
+                      'Target',
+                      style: TextStyle(color: CupertinoColors.systemGrey),
+                    ),
                     Expanded(
                       child: CupertinoTextField(
                         maxLines: 1,
