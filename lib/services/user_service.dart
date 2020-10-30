@@ -1,18 +1,35 @@
 import 'package:StateManagementMVCS/models/drunk_model.dart';
+import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/utils/base_db_helper.dart';
 
 class UserService {
-  Future<List<DrunkModel>> getDailyDrunks() async {
+  Future<List<DrunkModel>> getDailyDrunks(HourMinute wakeup) async {
     var db = await BaseDbHelper().db;
     var dt = DateTime.now();
-    var today = DateTime(dt.year, dt.month, dt.day).toUtc();
+    var dayStart = DateTime(dt.year, dt.month, dt.day);
+
+    var todayWakeup =
+        DateTime(dt.year, dt.month, dt.day, wakeup.hour, wakeup.minute);
+
+    if ((dt.isAtSameMomentAs(dayStart) || dt.isAfter(dayStart)) &&
+        dt.isBefore(todayWakeup)) {
+      dt = dt.add(Duration(days: -1));
+    }
+
+    var today = DateTime(
+      dt.year,
+      dt.month,
+      dt.day,
+      wakeup.hour,
+      wakeup.minute,
+    ).toUtc();
     var nextday = today.add(Duration(days: 1));
 
     var result = List<DrunkModel>();
     var fromDB = await db.query('drunk',
-        where: '(createDateUnix >= ?) OR (createDateUnix < ?)',
+        where: 'createDateUnix >= ? AND createDateUnix < ?',
         whereArgs: [
-          today.microsecondsSinceEpoch,
+          today.millisecondsSinceEpoch,
           nextday.millisecondsSinceEpoch
         ],
         orderBy: 'createDateUnix DESC');

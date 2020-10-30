@@ -16,7 +16,7 @@ class DailyDrunkList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DrunkModel> drunks =
         context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
-    final DateFormat dtformat = DateFormat('HH:mm');
+    final DateFormat dtformat = DateFormat('dd.MM.yyyy HH:mm');
 
     return Container(
       height: height,

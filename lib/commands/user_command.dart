@@ -3,7 +3,7 @@ import 'package:StateManagementMVCS/models/drunk_model.dart';
 
 class UserCommand extends BaseCommand {
   Future<void> load() async {
-    userModel.dailyDrunks = await userService.getDailyDrunks();
+    userModel.dailyDrunks = await userService.getDailyDrunks(appModel.wakingUp);
   }
 
   Future<bool> addDrunk(int amount) async {

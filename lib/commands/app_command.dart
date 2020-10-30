@@ -61,7 +61,11 @@ class AppCommand extends BaseCommand {
     bool result = await appService.saveWakingUp(hm);
 
     // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.wakingUp = hm;
+    if (result) {
+      appModel.wakingUp = hm;
+      userModel.dailyDrunks =
+          await userService.getDailyDrunks(appModel.wakingUp);
+    }
 
     return result;
   }
