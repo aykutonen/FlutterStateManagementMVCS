@@ -11,12 +11,6 @@ class UserModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addDailyDrunk(DrunkModel model) {
-    _dailyDrunks = [model, ..._dailyDrunks];
-    _calculateDailyTotal();
-    notifyListeners();
-  }
-
   int _dailyTotalDrunk = 0;
   int get dailyTotalDrunk => _dailyTotalDrunk;
   set dailyTotalDrunk(int total) {

@@ -13,7 +13,7 @@ class UserCommand extends BaseCommand {
         createDate: DateTime.now());
 
     var result = await userService.addDrunk(model);
-    if (result) userModel.addDailyDrunk(model);
+    if (result) userModel.dailyDrunks = [model, ...userModel.dailyDrunks];
 
     return result;
   }
