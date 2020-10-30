@@ -14,6 +14,7 @@ class UserCommand extends BaseCommand {
 
     var result = await userService.addDrunk(model);
     if (result) userModel.addDailyDrunk(model);
+
     return result;
   }
 }

@@ -12,7 +12,7 @@ class UserModel extends ChangeNotifier {
   }
 
   void addDailyDrunk(DrunkModel model) {
-    _dailyDrunks.insert(0, model);
+    _dailyDrunks = [model, ..._dailyDrunks];
     _calculateDailyTotal();
     notifyListeners();
   }

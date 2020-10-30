@@ -9,14 +9,13 @@ import 'package:provider/provider.dart';
 
 class DailyDrunkList extends StatelessWidget {
   final double height;
-
   const DailyDrunkList({this.height = 150.0});
 
   @override
   Widget build(BuildContext context) {
+    final DateFormat dtformat = DateFormat('dd.MM.yyyy HH:mm');
     List<DrunkModel> drunks =
         context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
-    final DateFormat dtformat = DateFormat('dd.MM.yyyy HH:mm');
 
     return Container(
       height: height,
