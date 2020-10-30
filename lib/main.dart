@@ -52,7 +52,9 @@ class _MainAppState extends State<MainApp> {
     Commands.init(context);
     await Preferences.init();
     await AppCommand().load();
-    await UserCommand().load();
+    if (!context.read<AppModel>().isFirstTime) {
+      await UserCommand().load();
+    }
     setState(() => _isLoadData = true);
   }
 
