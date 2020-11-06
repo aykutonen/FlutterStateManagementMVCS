@@ -13,5 +13,6 @@ This Flutter project about practicing for state management based [gskinner's art
 - [x] Onboarding sayfalarında tüm bilgiler girilmeden geçişin yapılmamasının sağlanması.
 - [x] Onboarding'de alınan bilgilerin düzenlenebileceği Ayarlar sayfasının hazırlanması.
 - [x] Ana sayfanın hazırlanamsı (Günlük içilen su miktarının girildiği vs).
+- [x] Günlük su takibinin gece 00:00'dan itibaren ertesi güne geçmesi yerine, kullanıcının belirlediği uyanma saatine göre hesaplanması.
 - [x] Rapor sayfasının hazırlanması.
-- [x] Su içme kayıtlarının veri tabanında saklanması (SqLite)
+- [x] Su içme kayıtlarının veri tabanında saklanması (SqLite).
