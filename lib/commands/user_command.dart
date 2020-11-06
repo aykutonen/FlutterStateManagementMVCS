@@ -1,4 +1,5 @@
 import 'package:StateManagementMVCS/commands/base_command.dart';
+import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 
 class UserCommand extends BaseCommand {
@@ -42,7 +43,7 @@ class UserCommand extends BaseCommand {
 
     var result = await userService.addDrunk(model);
     if (result) userModel.dailyDrunks = [model, ...userModel.dailyDrunks];
-
+    ReportCommand().load();
     return result;
   }
 }
