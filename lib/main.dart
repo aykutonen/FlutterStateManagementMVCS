@@ -54,7 +54,7 @@ class _MainAppState extends State<MainApp> {
   void appInit() async {
     Commands.init(context);
     await Preferences.init();
-    await AppCommand().load();
+    await AppCommand().init();
     await ReportCommand().init();
     if (!context.read<AppModel>().isFirstTime) {
       await UserCommand().load();

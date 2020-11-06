@@ -6,7 +6,7 @@ import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'base_command.dart';
 
 class AppCommand extends BaseCommand {
-  Future<void> load() async {
+  Future<void> init() async {
     appModel.currentUser = appService.getCurrentUser();
     appModel.isFirstTime = appService.getIsFirstTime();
     appModel.sleeping = appService.getSleeping();
