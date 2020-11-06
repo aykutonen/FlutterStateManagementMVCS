@@ -6,7 +6,6 @@ class ReportCommand extends BaseCommand {
       var dt = DateTime.now();
       reportModel.currentDate = DateTime(dt.year, dt.month, dt.day);
     }
-    await load();
   }
 
   Future<void> load() async {

@@ -55,9 +55,10 @@ class _MainAppState extends State<MainApp> {
     Commands.init(context);
     await Preferences.init();
     await AppCommand().load();
+    await ReportCommand().init();
     if (!context.read<AppModel>().isFirstTime) {
       await UserCommand().load();
-      await ReportCommand().init();
+      await ReportCommand().load();
     }
     setState(() => _isLoadData = true);
   }
@@ -67,6 +68,7 @@ class _MainAppState extends State<MainApp> {
     if (!_isLoadData)
       return Container(
         color: CupertinoColors.white,
+        child: CupertinoActivityIndicator(),
       );
 
     bool _isFirst = context.select<AppModel, bool>((e) => e.isFirstTime);
