@@ -7,21 +7,21 @@ class UserCommand extends BaseCommand {
   }
 
   DateTime _calculateTrackDate() {
-    var now = DateTime.now();
-    var todayStart = DateTime(now.year, now.month, now.day);
+    var date = DateTime.now();
+    var todayStart = DateTime(date.year, date.month, date.day);
     var wakeUp = appModel.wakingUp;
     var todayWakeup =
-        DateTime(now.year, now.month, now.day, wakeUp.hour, wakeUp.minute);
+        DateTime(date.year, date.month, date.day, wakeUp.hour, wakeUp.minute);
 
     // Şuan, gece 00:00'ı geçmiş ve kullanıcının uyanma saatinden önce ise,
     // kaydı bir önceki güne ait olarak kaydet.
-    if ((now.isAtSameMomentAs(todayStart) || now.isAfter(todayStart)) &&
-        now.isBefore(todayWakeup)) {
-      now = now.add(Duration(days: -1));
+    if ((date.isAtSameMomentAs(todayStart) || date.isAfter(todayStart)) &&
+        date.isBefore(todayWakeup)) {
+      date = date.add(Duration(days: -1));
     }
 
     // Kaydın ait olduğu tarihi ayarla
-    var trackDate = DateTime(now.year, now.month, now.day);
+    var trackDate = DateTime(date.year, date.month, date.day);
     return trackDate;
   }
 

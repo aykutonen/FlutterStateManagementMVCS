@@ -1,10 +1,10 @@
+import 'package:StateManagementMVCS/constants.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DailyDrunkList extends StatelessWidget {
@@ -13,11 +13,11 @@ class DailyDrunkList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateFormat dtformat = DateFormat('dd.MM.yyyy HH:mm');
+    // final DateFormat dtformat = DateFormat('dd.MM.yyyy HH:mm');
     List<DrunkModel> drunks =
         context.select<UserModel, List<DrunkModel>>((e) => e.dailyDrunks);
 
-    return Container(
+    return SizedBox(
       height: height,
       child: Material(
         color: Colors.transparent,

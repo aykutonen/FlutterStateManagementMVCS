@@ -1,4 +1,5 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
@@ -16,6 +17,7 @@ class BaseCommand {
   // Models
   UserModel userModel = _mainContext.read();
   AppModel appModel = _mainContext.read();
+  ReportModel reportModel = _mainContext.read();
 
   // Services
   UserService userService = _mainContext.read();

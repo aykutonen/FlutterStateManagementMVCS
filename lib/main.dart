@@ -1,6 +1,8 @@
 import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
+import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
@@ -23,6 +25,7 @@ void main() {
       // Models
       ChangeNotifierProvider(create: (c) => AppModel()),
       ChangeNotifierProvider(create: (c) => UserModel()),
+      ChangeNotifierProvider(create: (c) => ReportModel()),
 
       // Services
       Provider(create: (c) => UserService()),
@@ -54,6 +57,7 @@ class _MainAppState extends State<MainApp> {
     await AppCommand().load();
     if (!context.read<AppModel>().isFirstTime) {
       await UserCommand().load();
+      await ReportCommand().init();
     }
     setState(() => _isLoadData = true);
   }

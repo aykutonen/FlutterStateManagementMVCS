@@ -1,6 +1,7 @@
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 import 'package:flutter/foundation.dart';
 
+/// Uygulama genelinde geçerli User Model
 class UserModel extends ChangeNotifier {
   // Günlük tüketim verisi...
   List<DrunkModel> _dailyDrunks = List<DrunkModel>();
@@ -19,7 +20,7 @@ class UserModel extends ChangeNotifier {
   }
 
   void _calculateDailyTotal() {
-    if (_dailyDrunks.isNotEmpty) {
+    if (dailyDrunks.isNotEmpty) {
       dailyTotalDrunk = dailyDrunks
           .map<int>((e) => e.amount)
           .reduce((value, element) => value + element);
