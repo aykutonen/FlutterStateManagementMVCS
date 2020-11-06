@@ -13,4 +13,4 @@ This Flutter project about practicing for state management based [gskinner's art
 - [x] Onboarding sayfalarında tüm bilgiler girilmeden geçişin yapılmamasının sağlanması.
 - [x] Onboarding'de alınan bilgilerin düzenlenebileceği Ayarlar sayfasının hazırlanması.
 - [x] Ana sayfanın hazırlanamsı (Günlük içilen su miktarının girildiği vs).
-- [ ] Rapor sayfasının hazırlanması.
+- [x] Rapor sayfasının hazırlanması.
