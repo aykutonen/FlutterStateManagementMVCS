@@ -31,8 +31,7 @@ class DrunkModel {
           .toLocal();
 
   DateTime get trackDate =>
-      DateTime.fromMillisecondsSinceEpoch(createDateUnix, isUtc: true)
-          .toLocal();
+      DateTime.fromMillisecondsSinceEpoch(trackDateUnix, isUtc: true).toLocal();
 
   factory DrunkModel.fromJson(Map<String, dynamic> json) => DrunkModel.withId(
         id: json["id"],

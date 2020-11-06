@@ -31,7 +31,9 @@ class DailyDrunkList extends StatelessWidget {
               title:
                   Text('${drunks[i].amount.toString()} ${drunks[i].unit.name}'),
               subtitle: Text(
-                dtformat.format(drunks[i].createDate),
+                dtformat.format(drunks[i].createDate) +
+                    " | " +
+                    dtformat.format(drunks[i].trackDate),
               ),
             );
           },
