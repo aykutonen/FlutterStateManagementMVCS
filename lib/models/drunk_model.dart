@@ -5,8 +5,10 @@ class DrunkModel {
     this.amount,
     this.unitIndex,
     DateTime createDate,
+    DateTime trackDate,
   }) {
     this.createDateUnix = createDate.toUtc().millisecondsSinceEpoch;
+    this.trackDateUnix = trackDate.toUtc().millisecondsSinceEpoch;
   }
 
   DrunkModel.withId({
@@ -14,15 +16,21 @@ class DrunkModel {
     this.amount,
     this.unitIndex,
     this.createDateUnix,
+    this.trackDateUnix,
   });
 
   int id;
   int amount;
   int unitIndex;
   int createDateUnix;
+  int trackDateUnix;
 
   Unit get unit => Unit.values[unitIndex];
   DateTime get createDate =>
+      DateTime.fromMillisecondsSinceEpoch(createDateUnix, isUtc: true)
+          .toLocal();
+
+  DateTime get trackDate =>
       DateTime.fromMillisecondsSinceEpoch(createDateUnix, isUtc: true)
           .toLocal();
 
@@ -31,6 +39,7 @@ class DrunkModel {
         amount: json["amount"],
         unitIndex: json["unitIndex"],
         createDateUnix: json["createDateUnix"],
+        trackDateUnix: json["trackDateUnix"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -38,5 +47,6 @@ class DrunkModel {
         "amount": amount,
         "unitIndex": unitIndex,
         "createDateUnix": createDateUnix,
+        "trackDateUnix": trackDateUnix,
       };
 }

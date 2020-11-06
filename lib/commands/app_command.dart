@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
@@ -63,8 +64,7 @@ class AppCommand extends BaseCommand {
     // Service işlemi başarılıysa model'i güncelle
     if (result) {
       appModel.wakingUp = hm;
-      userModel.dailyDrunks =
-          await userService.getDailyDrunks(appModel.wakingUp);
+      userModel.dailyDrunks = await UserCommand().getDailyDrunks();
     }
 
     return result;

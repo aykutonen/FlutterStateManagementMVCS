@@ -20,9 +20,11 @@ class UserModel extends ChangeNotifier {
 
   void _calculateDailyTotal() {
     if (_dailyDrunks.isNotEmpty) {
-      dailyTotalDrunk = _dailyDrunks
+      dailyTotalDrunk = dailyDrunks
           .map<int>((e) => e.amount)
           .reduce((value, element) => value + element);
+    } else {
+      dailyTotalDrunk = 0;
     }
   }
 

@@ -28,8 +28,9 @@ class BaseDbHelper {
 
   void _createDb(Database db, int version) async {
     await db.execute('CREATE TABLE ' +
-        'drunk(id INTEGER PRIMARY KEY, ' +
+        'drunk(id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
         'amount INTEGER  NOT NULL, unitIndex INTEGER  NOT NULL, ' +
-        'createDateUnix INTEGER NOT NULL)');
+        'createDateUnix INTEGER NOT NULL, ' +
+        'trackDateUnix INTEGER NOT NULL)');
   }
 }
