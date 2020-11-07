@@ -71,7 +71,7 @@ class _OnboardingState extends State<Onboarding> {
       child: SafeArea(
         child: Column(
           children: [
-            name == null ? Text('') : Text('Hi $name'),
+            if (name != null) Text('Hi $name'),
             Expanded(child: _getPage()),
           ],
         ),

@@ -11,8 +11,10 @@ import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:StateManagementMVCS/views/home/home.dart';
 import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
+import 'package:StateManagementMVCS/views/register/register.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -75,9 +77,9 @@ class _MainAppState extends State<MainApp> {
 
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
-      title: 'Helo',
+      title: 'Water Reminder',
       onGenerateRoute: generateRoute,
-      home: _isFirst ? Onboarding() : HomePage(),
+      home: !_isFirst ? Register() : HomePage(),
     );
   }
 }
