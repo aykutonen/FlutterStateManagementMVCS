@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class RegisterName extends StatelessWidget {
+class RegisterWeight extends StatelessWidget {
   final FocusNode inputFocus;
 
-  const RegisterName({this.inputFocus});
+  const RegisterWeight({@required this.inputFocus});
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +19,28 @@ class RegisterName extends StatelessWidget {
         children: [
           Flexible(
             flex: 2,
-            child: const Text('Name'),
+            child: const Text('Weight (kg)'),
           ),
           Flexible(
             flex: 5,
             child: FormBuilderCustomField(
-              attribute: 'name',
+              attribute: 'weight',
               formField: FormField(
                 builder: (field) {
                   return CupertinoTextField(
+                    // controller: _inputController,
                     focusNode: inputFocus,
-                    placeholder: 'Your Name',
+                    placeholder: 'Your kilos',
                     textAlign: TextAlign.end,
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.done,
-                    onChanged: (value) {
-                      if (value.isEmpty)
+                    keyboardType: TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: true,
+                    ),
+                    onChanged: (v) {
+                      if (v.isEmpty)
                         field.didChange(null);
                       else {
-                        field.didChange(value);
+                        field.didChange(v);
                       }
                     },
                   );

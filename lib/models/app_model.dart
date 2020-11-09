@@ -70,6 +70,13 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _weight;
+  int get weight => _weight;
+  set weight(int w) {
+    _weight = w;
+    notifyListeners();
+  }
+
   // Mobil bildirim alıp almak istemediği bilgisi
   bool _notification = false;
   bool get notification => _notification;
