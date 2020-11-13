@@ -1,4 +1,4 @@
-import 'package:StateManagementMVCS/models/view_model/register_model.dart';
+import 'package:StateManagementMVCS/models/view_model/register_form_model.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/gender_select.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/name.dart';
@@ -12,9 +12,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// TODO: app start'da varsayılan değerleri önceden kaydet. Form kısmen dolu gelsin.
-// Cinsiyet; Kadın, Unit ML, Wakeup 8:00, Sleep: 23:00
-
 class RegisterMain extends StatefulWidget {
   @override
   _RegisterMainState createState() => _RegisterMainState();
@@ -23,7 +20,7 @@ class RegisterMain extends StatefulWidget {
 class _RegisterMainState extends State<RegisterMain> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
-  RegisterModel model = RegisterModel();
+  RegisterFormModel model = RegisterFormModel();
 
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _weightFocusNode = FocusNode();

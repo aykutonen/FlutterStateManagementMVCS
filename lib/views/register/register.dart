@@ -1,7 +1,6 @@
 import 'package:StateManagementMVCS/views/register/pages/main/register_main.dart';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
   @override
