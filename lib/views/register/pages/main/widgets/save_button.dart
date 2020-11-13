@@ -13,13 +13,15 @@ class RegisterSaveButton extends StatelessWidget {
       child: CupertinoButton(
         child: Text('Save'),
         onPressed: () {
-          formKey.currentState.save();
+          if (formKey.currentState.validate()) {
+            formKey.currentState.save();
+            Navigator.pushNamed(context, RegisterResultPageRoute);
+          }
 
           // TODO: Validation yap.
           // TODO: Hedef tüketim miktarını hesapla
           // TODO: Sonuç sayfasına yönlendir.
 
-          Navigator.pushNamed(context, RegisterResultPageRoute);
           debugPrint(formKey.currentState.value.toString());
         },
         color: CupertinoColors.activeGreen,

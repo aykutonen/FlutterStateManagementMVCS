@@ -24,6 +24,7 @@ class _RegisterMainState extends State<RegisterMain> {
 
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _weightFocusNode = FocusNode();
+  static const double spaceSize = 35.0;
 
   @override
   void initState() {
@@ -43,15 +44,15 @@ class _RegisterMainState extends State<RegisterMain> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             RegisterName(inputFocus: _nameFocusNode),
-            const Divider(height: 50),
+            const Divider(height: spaceSize),
             RegisterGenderSelect(),
-            const Divider(height: 50),
+            const Divider(height: spaceSize),
             RegisterWeight(inputFocus: _weightFocusNode),
-            const Divider(height: 50),
+            const Divider(height: spaceSize),
             RegisterUnitSelect(),
-            const Divider(height: 50),
+            const Divider(height: spaceSize),
             RegisterWakeupSelect(),
-            const Divider(height: 50),
+            const Divider(height: spaceSize),
             RegisterSleepSelect(),
             const Seperator(height: 50.0),
             RegisterSaveButton(_formKey),
