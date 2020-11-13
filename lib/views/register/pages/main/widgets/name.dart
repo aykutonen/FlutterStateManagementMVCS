@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/views/register/pages/main/widgets/error_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -15,7 +16,7 @@ class RegisterName extends StatelessWidget {
       child: FormBuilderCustomField(
         attribute: 'name',
         validators: [
-          FormBuilderValidators.required(),
+          FormBuilderValidators.required(errorText: 'İsim bilgisi gerekli.'),
         ],
         formField: FormField(builder: (field) {
           return Column(
@@ -37,31 +38,12 @@ class RegisterName extends StatelessWidget {
                       textAlign: TextAlign.end,
                       textCapitalization: TextCapitalization.sentences,
                       textInputAction: TextInputAction.done,
-                      onChanged: (value) {
-                        if (value.isEmpty)
-                          field.didChange(null);
-                        else {
-                          field.didChange(value);
-                        }
-                      },
+                      onChanged: (v) => field.didChange(v.isEmpty ? null : v),
                     ),
                   ),
                 ],
               ),
-              if (field.hasError)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      field.errorText,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: CupertinoColors.systemRed,
-                      ),
-                    ),
-                  ),
-                ),
+              if (field.hasError) ErrorText(text: field.errorText)
             ],
           );
         }),
