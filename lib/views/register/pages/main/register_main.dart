@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/models/view_model/register_model.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/gender_select.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/name.dart';
+import 'package:StateManagementMVCS/views/register/pages/main/widgets/unit_select.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/weight.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -47,36 +48,7 @@ class _RegisterMainState extends State<RegisterMain> {
             const Divider(height: 50),
             RegisterWeight(inputFocus: _weightFocusNode),
             const Divider(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text('Water Unit'),
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CupertinoButton(
-                        child: Text('ML'),
-                        onPressed: () {},
-                        color: CupertinoColors.activeBlue,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 25.0, vertical: 5.0),
-                      ),
-                      SizedBox(width: 10),
-                      CupertinoButton(
-                        child: Text('OZ'),
-                        onPressed: () {},
-                        color: CupertinoColors.activeBlue,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 25.0, vertical: 5.0),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            RegisterUnitSelect(),
             const Divider(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
