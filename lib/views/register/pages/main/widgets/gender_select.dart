@@ -25,7 +25,10 @@ class RegisterGenderSelect extends StatelessWidget {
                   children: [
                     CupertinoButton(
                       child: Text('Female'),
-                      onPressed: () => selectGenderHandler(Gender.f, field),
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        selectGenderHandler(Gender.f, field);
+                      },
                       color: field.value == Gender.f
                           ? CupertinoColors.activeBlue
                           : CupertinoColors.systemGrey4,
@@ -35,7 +38,10 @@ class RegisterGenderSelect extends StatelessWidget {
                     SizedBox(width: 10),
                     CupertinoButton(
                         child: Text('Male'),
-                        onPressed: () => selectGenderHandler(Gender.m, field),
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          selectGenderHandler(Gender.m, field);
+                        },
                         color: field.value == Gender.m
                             ? CupertinoColors.activeBlue
                             : CupertinoColors.systemGrey4,
