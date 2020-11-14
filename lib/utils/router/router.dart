@@ -1,7 +1,7 @@
 import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/views/home/home.dart';
 import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
-import 'package:StateManagementMVCS/views/register/pages/register_result.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/register_result.dart';
 import 'package:StateManagementMVCS/views/register/register.dart';
 import 'package:StateManagementMVCS/views/report_page.dart';
 import 'package:StateManagementMVCS/views/settings_page.dart';

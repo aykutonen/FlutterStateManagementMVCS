@@ -4,6 +4,11 @@ import 'package:StateManagementMVCS/models/view_model/register_form_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/widgets/back_button.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/widgets/calculated_target.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/widgets/caption.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/widgets/save_button.dart';
+import 'package:StateManagementMVCS/views/register/pages/result/widgets/title.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +27,7 @@ class RegisterResult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CupertinoButton(
-              child: Icon(CupertinoIcons.back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+            RegisterBackButton(),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -39,15 +39,9 @@ class RegisterResult extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       // mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          'Your Calculated Target Amount',
-                          style: Theme.of(context).textTheme.headline4,
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          "${model.target.toString()} ${model.waterUnit.name.toUpperCase()}",
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
+                        RegisterResultTitle('Your Calculated Target Amount'),
+                        RegisterResultCalculatedTarget(
+                            "${model.target.toString()} ${model.waterUnit.name.toUpperCase()}"),
                       ],
                     ),
                   ),
@@ -56,21 +50,10 @@ class RegisterResult extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CupertinoButton(
-                          child: Text('Looks Good'),
-                          color: CupertinoColors.activeGreen,
-                          onPressed: () async {
-                            await RegisterCommand().save();
-
-                            await Navigator.pushNamedAndRemoveUntil(
-                                context, HomePageRoute, (route) => false);
-                          },
-                        ),
-                        Seperator(height: 20.0),
-                        Text(
-                          'You can change target amount on settings page.',
-                          style: Theme.of(context).textTheme.caption,
-                        ),
+                        RegisterResultSaveButton('Looks Good'),
+                        const Seperator(height: 20.0),
+                        RegisterResultCaption(
+                            'You can change target amount on settings page.'),
                       ],
                     ),
                   )

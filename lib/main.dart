@@ -79,7 +79,8 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       title: 'Water Reminder',
       onGenerateRoute: generateRoute,
-      initialRoute: _isFirst ? RegisterPageRoute : HomePageRoute,
+      // initialRoute: _isFirst ? RegisterPageRoute : HomePageRoute,
+      initialRoute: RegisterPageRoute,
     );
   }
 }
