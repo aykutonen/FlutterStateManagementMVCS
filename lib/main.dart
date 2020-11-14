@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
+import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
@@ -60,7 +61,9 @@ class _MainAppState extends State<MainApp> {
     await AppCommand().init();
     await ReportCommand().init();
     setState(() => _isFirst = context.read<AppModel>().isFirstTime);
-    if (!_isFirst) {
+    if (_isFirst) {
+      AppCommand().setLanguage(Language.English);
+    } else {
       await UserCommand().load();
       await ReportCommand().load();
     }
