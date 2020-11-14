@@ -1,4 +1,6 @@
+import 'package:StateManagementMVCS/commands/register_command.dart';
 import 'package:StateManagementMVCS/utils/router/router_constants.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -15,14 +17,11 @@ class RegisterSaveButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
+            RegisterCommand()
+                .calculateTargetAndSaveToModel(formKey.currentState.value);
+
             Navigator.pushNamed(context, RegisterResultPageRoute);
           }
-
-          // TODO: Validation yap.
-          // TODO: Hedef tüketim miktarını hesapla
-          // TODO: Sonuç sayfasına yönlendir.
-
-          debugPrint(formKey.currentState.value.toString());
         },
         color: CupertinoColors.activeGreen,
       ),

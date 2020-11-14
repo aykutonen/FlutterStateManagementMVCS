@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
+import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
@@ -28,6 +29,7 @@ void main() {
       ChangeNotifierProvider(create: (c) => AppModel()),
       ChangeNotifierProvider(create: (c) => UserModel()),
       ChangeNotifierProvider(create: (c) => ReportModel()),
+      ChangeNotifierProvider(create: (c) => RegisterModel()),
 
       // Services
       Provider(create: (c) => UserService()),

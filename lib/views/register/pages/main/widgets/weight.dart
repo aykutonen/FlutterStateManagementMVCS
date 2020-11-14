@@ -41,7 +41,8 @@ class RegisterWeight extends StatelessWidget {
                           signed: false,
                           decimal: true,
                         ),
-                        onChanged: (v) => field.didChange(v.isEmpty ? null : v),
+                        onChanged: (v) =>
+                            field.didChange(v.isEmpty ? null : double.parse(v)),
                       ),
                     ),
                   ],
