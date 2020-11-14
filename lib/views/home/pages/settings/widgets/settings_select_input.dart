@@ -24,7 +24,12 @@ class SettingsSelectInput extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(label),
+            Text(
+              label,
+              style: !isSelected
+                  ? TextStyle(color: CupertinoColors.systemGrey)
+                  : null,
+            ),
             if (isSelected)
               Icon(
                 CupertinoIcons.check_mark,
