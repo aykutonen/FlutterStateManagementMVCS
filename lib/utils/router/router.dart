@@ -10,18 +10,22 @@ import 'package:flutter/cupertino.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case HomePageRoute:
-      return CupertinoPageRoute(builder: (c) => HomePage());
+      return CupertinoPageRoute(builder: (c) => HomePage(), settings: settings);
     case SettingPageRoute:
-      return CupertinoPageRoute(builder: (c) => SettingsPage());
+      return CupertinoPageRoute(
+          builder: (c) => SettingsPage(), settings: settings);
     case ReportPageRoute:
-      return CupertinoPageRoute(builder: (c) => ReportPage());
+      return CupertinoPageRoute(
+          builder: (c) => ReportPage(), settings: settings);
     case OnboardingPageRoute:
-      return CupertinoPageRoute(builder: (c) => Onboarding());
+      return CupertinoPageRoute(
+          builder: (c) => Onboarding(), settings: settings);
     case RegisterPageRoute:
-      return CupertinoPageRoute(builder: (c) => Register());
+      return CupertinoPageRoute(builder: (c) => Register(), settings: settings);
     case RegisterResultPageRoute:
-      return CupertinoPageRoute(builder: (c) => RegisterResult());
+      return CupertinoPageRoute(
+          builder: (c) => RegisterResult(), settings: settings);
     default:
-      return CupertinoPageRoute(builder: (c) => HomePage());
+      return CupertinoPageRoute(builder: (c) => HomePage(), settings: settings);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/view_model/register_form_model.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/register/pages/main/widgets/gender_select.dart';
@@ -28,6 +30,7 @@ class _RegisterMainState extends State<RegisterMain> {
 
   @override
   void initState() {
+    AppCommand().setLanguage(Language.English);
     super.initState();
   }
 

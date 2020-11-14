@@ -7,12 +7,10 @@ import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
+import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
-import 'package:StateManagementMVCS/views/home/home.dart';
-import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
-import 'package:StateManagementMVCS/views/register/register.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +46,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   bool _isLoadData = false;
+  bool _isFirst = true;
 
   @override
   void initState() {
@@ -60,7 +59,8 @@ class _MainAppState extends State<MainApp> {
     await Preferences.init();
     await AppCommand().init();
     await ReportCommand().init();
-    if (!context.read<AppModel>().isFirstTime) {
+    setState(() => _isFirst = context.read<AppModel>().isFirstTime);
+    if (!_isFirst) {
       await UserCommand().load();
       await ReportCommand().load();
     }
@@ -75,13 +75,11 @@ class _MainAppState extends State<MainApp> {
         child: CupertinoActivityIndicator(),
       );
 
-    bool _isFirst = context.select<AppModel, bool>((e) => e.isFirstTime);
-
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
       title: 'Water Reminder',
       onGenerateRoute: generateRoute,
-      home: _isFirst ? Register() : HomePage(),
+      initialRoute: _isFirst ? RegisterPageRoute : HomePageRoute,
     );
   }
 }
