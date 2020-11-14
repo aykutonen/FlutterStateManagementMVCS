@@ -77,6 +77,14 @@ class AppService {
     return Preferences.getInt("target_amount");
   }
 
+  Future<bool> saveWeight(int weight) async {
+    return Preferences.setInt("weight", weight);
+  }
+
+  int getWeight() {
+    return Preferences.getInt("weight");
+  }
+
   Future<bool> saveNotification(bool notify) async {
     return await Preferences.setBool("notify", notify);
     // TODO: Notification servisine kayıt yap ya da kaydı iptal et.

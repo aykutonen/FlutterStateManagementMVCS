@@ -1,5 +1,6 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_double_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_number_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_select_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_text_input.dart';
@@ -23,8 +24,11 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final _nameInputController = TextEditingController();
   final _targetInputController = TextEditingController();
+  final _weightInputController = TextEditingController();
   final _targetFocusNode = FocusNode();
   final _nameFocusNode = FocusNode();
+  final _weightFocusNode = FocusNode();
+
   final double _rowHeight = 50.0;
 
   String _error = "";
@@ -42,6 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
     });
     _targetFocusNode.addListener(_handleTargetSaveButton);
     _nameFocusNode.addListener(_handleNameFocusChange);
+    _weightFocusNode.addListener(_handleWeightSaveButton);
 
     super.initState();
   }
@@ -73,6 +78,24 @@ class _SettingsPageState extends State<SettingsPage> {
         _targetFocusNode.requestFocus();
       } else {
         await AppCommand().setTargetAmount(amount);
+      }
+    }
+  }
+
+  void _handleWeightSaveButton() async {
+    if (_weightFocusNode.hasFocus) return;
+
+    if (_weightInputController.text.isEmpty) {
+      setState(() => _error = "Ağırlık zorunlu");
+      _weightFocusNode.requestFocus();
+    } else {
+      setState(() => _error = "");
+      var weight = double.tryParse(_weightInputController.text);
+      if (weight == null || weight == 0) {
+        setState(() => _error = "Geçersiz bir mikrar girildi.");
+        _weightFocusNode.requestFocus();
+      } else {
+        await AppCommand().setWeight(weight);
       }
     }
   }
@@ -113,6 +136,9 @@ class _SettingsPageState extends State<SettingsPage> {
     _targetInputController.text = model.targetAmount.toString();
     _targetInputController.selection = TextSelection.fromPosition(
         TextPosition(offset: _targetInputController.text.length));
+    _weightInputController.text = model.weightDouble.toString();
+    _weightInputController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _weightInputController.text.length));
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -153,6 +179,15 @@ class _SettingsPageState extends State<SettingsPage> {
               saveHandle: _handleSleepSave,
               title: 'Select Sleeping Time',
             ),
+            Divider(),
+            SettingsDoubleInput(
+                label: 'Weight',
+                infoLabel: 'Kg',
+                onTapHandler: _weightFocusNode.requestFocus,
+                saveHandle: _handleWeightSaveButton,
+                height: _rowHeight,
+                inputController: _weightInputController,
+                focusNode: _weightFocusNode),
             Divider(),
             SettingsNumberInput(
               label: 'Target',

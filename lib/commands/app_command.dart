@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
+import 'package:international_system_of_units/international_system_of_units.dart';
 
 import 'base_command.dart';
 
@@ -13,6 +14,7 @@ class AppCommand extends BaseCommand {
     appModel.wakingUp = appService.getWakingUp();
     appModel.unit = appService.getUnit();
     appModel.targetAmount = appService.getTargetAmount();
+    appModel.weight = appService.getWeight();
     appModel.language = appService.getLanguage();
     appModel.notification = appService.getNotification();
   }
@@ -87,6 +89,14 @@ class AppCommand extends BaseCommand {
     // Service işlemi başarılıysa model'i güncelle
     if (result) appModel.targetAmount = amount;
 
+    return result;
+  }
+
+  Future<bool> setWeight(double weight) async {
+    // KG cinsindeki ve double tipindeki ağırlık önce gram'a sonra da int'e çevriliyor.
+    int _weight = weight.toGram.toInt();
+    bool result = await appService.saveWeight(_weight);
+    if (result) appModel.weight = _weight;
     return result;
   }
 

@@ -28,6 +28,7 @@ class RegisterCommand extends BaseCommand {
     await command.setSleeping(
         HourMinute(model.sleep.inHours, model.sleep.inMinutes.remainder(60)));
     await command.setTargetAmount(model.target);
+    await command.setWeight(model.weight);
     await command.saveIsFirstTime(false);
 
     // Home ekranı için gereken bilgileri yükle.

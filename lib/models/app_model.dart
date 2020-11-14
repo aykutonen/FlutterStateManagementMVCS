@@ -1,6 +1,8 @@
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
+import 'package:international_system_of_units/international_system_of_units.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +74,7 @@ class AppModel extends ChangeNotifier {
 
   int _weight;
   int get weight => _weight;
+  double get weightDouble => _weight.toKilogram(MassUnit.gram).toDouble();
   set weight(int w) {
     _weight = w;
     notifyListeners();
