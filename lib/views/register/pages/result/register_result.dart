@@ -1,8 +1,6 @@
-import 'package:StateManagementMVCS/commands/register_command.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/view_model/register_form_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
-import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/register/pages/result/widgets/back_button.dart';
 import 'package:StateManagementMVCS/views/register/pages/result/widgets/calculated_target.dart';
