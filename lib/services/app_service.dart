@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
@@ -83,6 +84,16 @@ class AppService {
 
   int getWeight() {
     return Preferences.getInt("weight");
+  }
+
+  Future<bool> saveGender(Gender gender) async {
+    return await Preferences.setInt("gender", gender.index);
+  }
+
+  Gender getGender() {
+    var _index = Preferences.getInt("gender");
+    if (_index != null) return Gender.values[_index];
+    return null;
   }
 
   Future<bool> saveNotification(bool notify) async {

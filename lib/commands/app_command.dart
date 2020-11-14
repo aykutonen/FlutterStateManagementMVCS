@@ -1,4 +1,5 @@
 import 'package:StateManagementMVCS/commands/user_command.dart';
+import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
@@ -16,6 +17,7 @@ class AppCommand extends BaseCommand {
     appModel.targetAmount = appService.getTargetAmount();
     appModel.weight = appService.getWeight();
     appModel.language = appService.getLanguage();
+    appModel.gender = appService.getGender();
     appModel.notification = appService.getNotification();
   }
 
@@ -97,6 +99,12 @@ class AppCommand extends BaseCommand {
     int _weight = weight.toGram.toInt();
     bool result = await appService.saveWeight(_weight);
     if (result) appModel.weight = _weight;
+    return result;
+  }
+
+  Future<bool> setGender(Gender gender) async {
+    bool result = await appService.saveGender(gender);
+    if (result) appModel.gender = gender;
     return result;
   }
 

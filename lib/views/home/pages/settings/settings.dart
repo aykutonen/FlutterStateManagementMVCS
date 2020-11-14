@@ -1,5 +1,6 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
+import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_double_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_number_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_select_input.dart';
@@ -125,6 +126,11 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() => _error = "");
   }
 
+  void _handleGenderSet(Gender gender) async {
+    await AppCommand().setGender(gender);
+    setState(() => _error = "");
+  }
+
   @override
   Widget build(BuildContext context) {
     var model = context.select<AppModel, AppModel>((e) => e);
@@ -216,6 +222,22 @@ class _SettingsPageState extends State<SettingsPage> {
               isSelected: model.unit == Unit.oz,
             ),
             Divider(),
+            Seperator(),
+            SubTitle(title: 'Gender'),
+            Seperator(height: 10.0),
+            SettingsSelectInput(
+              onTap: () => _handleGenderSet(Gender.f),
+              height: _rowHeight,
+              label: Gender.f.name,
+              isSelected: model.gender == Gender.f,
+            ),
+            Divider(),
+            SettingsSelectInput(
+              onTap: () => _handleGenderSet(Gender.m),
+              height: _rowHeight,
+              label: Gender.m.name,
+              isSelected: model.gender == Gender.m,
+            ),
           ],
         ),
       ),

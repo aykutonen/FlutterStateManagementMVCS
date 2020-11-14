@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
@@ -77,6 +78,13 @@ class AppModel extends ChangeNotifier {
   double get weightDouble => _weight.toKilogram(MassUnit.gram).toDouble();
   set weight(int w) {
     _weight = w;
+    notifyListeners();
+  }
+
+  Gender _gender;
+  Gender get gender => _gender;
+  set gender(Gender g) {
+    _gender = g;
     notifyListeners();
   }
 

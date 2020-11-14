@@ -30,6 +30,7 @@ class RegisterCommand extends BaseCommand {
     await command.setTargetAmount(model.target);
     await command.setWeight(model.weight);
     await command.saveIsFirstTime(false);
+    await command.setGender(model.gender);
 
     // Home ekranı için gereken bilgileri yükle.
     await UserCommand().load();
