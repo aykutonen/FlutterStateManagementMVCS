@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/add_drunk_water.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/daily_drunks_list.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/greeting.dart';
@@ -37,6 +38,24 @@ class MainPage extends StatelessWidget {
             const Seperator(),
             const SubTitle(title: 'Add Drunk Water'),
             const Seperator(height: 20.0),
+            CupertinoButton(
+              child: Text('Notify my'),
+              onPressed: () async {
+                // await NotificationHelper.showNotification();
+                // await NotificationHelper.repeatNotification();
+                // await NotificationHelper.cancelAllNotification();
+                await NotificationHelper.schedule(
+                    DateTime.now().add(Duration(seconds: 5)));
+                await NotificationHelper.schedule(
+                    DateTime.now().add(Duration(seconds: 7)));
+                await NotificationHelper.schedule(
+                    DateTime.now().add(Duration(seconds: 9)));
+
+                var count =
+                    await NotificationHelper.getPendingNotificationCount();
+                debugPrint(count.toString());
+              },
+            ),
             AddDrunkWater(),
           ],
         ),

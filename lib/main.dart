@@ -5,6 +5,7 @@ import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
+import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
@@ -17,7 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +57,10 @@ class _MainAppState extends State<MainApp> {
   }
 
   void appInit() async {
+    // Notification servisini ayağa kaldır.
+    await NotificationHelper.init();
+    NotificationHelper.assignOnClick(onNotificationClick);
+
     Commands.init(context);
     await Preferences.init();
     await AppCommand().init();
@@ -68,6 +73,10 @@ class _MainAppState extends State<MainApp> {
       await ReportCommand().load();
     }
     setState(() => _isLoadData = true);
+  }
+
+  onNotificationClick(String payload) {
+    debugPrint(payload);
   }
 
   @override
