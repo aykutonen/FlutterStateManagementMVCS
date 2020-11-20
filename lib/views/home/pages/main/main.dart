@@ -41,6 +41,10 @@ class MainPage extends StatelessWidget {
             CupertinoButton(
                 child: Text('Notify Permission Request'),
                 onPressed: () async {
+                  // Bu isten sadece bir kere kullanıcıya gösteriliyor :\
+                  // Bu sebeple uygulama ilk açıldığında ya da onboarding'de ilgili sayfada yetki istendiğinde ekstra bir işlem yapmaya gerek yok.
+                  // Sonradan Settings sayfasından açmak isterse yetkiyi kontrol edip,
+                  // uyarı vermemiz gerekli; Telefonun ayarlarından bildirim iznini açman gerekli diye.
                   var result = await NotificationHelper().requestPermission();
                   debugPrint(result.toString());
                 }),
