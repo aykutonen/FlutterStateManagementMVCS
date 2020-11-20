@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/add_drunk_water.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/daily_drunks_list.dart';
@@ -45,8 +46,13 @@ class MainPage extends StatelessWidget {
                   // Bu sebeple uygulama ilk açıldığında ya da onboarding'de ilgili sayfada yetki istendiğinde ekstra bir işlem yapmaya gerek yok.
                   // Sonradan Settings sayfasından açmak isterse yetkiyi kontrol edip,
                   // uyarı vermemiz gerekli; Telefonun ayarlarından bildirim iznini açman gerekli diye.
-                  var result = await NotificationHelper().requestPermission();
-                  debugPrint(result.toString());
+                  // var result = await NotificationHelper().requestPermission();
+                  await NotificationCommand().requestPermission();
+                }),
+            CupertinoButton(
+                child: Text('Get Notification Permission Status'),
+                onPressed: () async {
+                  await NotificationCommand().getAndSetPermission();
                 }),
             CupertinoButton(
               child: Text('Notify my'),

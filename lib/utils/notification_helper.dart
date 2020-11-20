@@ -92,9 +92,7 @@ class NotificationHelper {
     _iosNotificationDetails = IOSNotificationDetails(attachments: attachments);
     _notificationDetails = NotificationDetails(iOS: _iosNotificationDetails);
 
-    // var dt = tz.TZDateTime.utc(2020, 11, 16, 2, 55, 0, 0, 0);
     var tzDt = tz.TZDateTime.from(dateTime, tz.UTC);
-    // tz.TZDateTime.now(tz.local).add(Duration(seconds: 10)),
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       Random().nextInt(1000),
       'title $tzDt',

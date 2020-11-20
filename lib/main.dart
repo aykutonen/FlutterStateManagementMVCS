@@ -1,10 +1,12 @@
 import 'package:StateManagementMVCS/commands/base_command.dart' as Commands;
 import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
+import 'package:StateManagementMVCS/services/notification_service.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
@@ -34,6 +36,7 @@ Future<void> main() async {
       // Services
       Provider(create: (c) => UserService()),
       Provider(create: (c) => AppService()),
+      Provider(create: (c) => NotificationService()),
 
       Provider<BuildContext>(create: (c) => c),
     ],
@@ -46,14 +49,24 @@ class MainApp extends StatefulWidget {
   _MainAppState createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
   bool _isLoadData = false;
   bool _isFirst = true;
 
   @override
   void initState() {
     appInit();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    // Uygulama durumu devam olarak işaretlenmişse bildirim onayını kontrol et ve güncelle
+    if (state == AppLifecycleState.resumed) {
+      await NotificationCommand().getAndSetPermission();
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   void appInit() async {

@@ -2,6 +2,7 @@ import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/models/user_model.dart';
+import 'package:StateManagementMVCS/services/notification_service.dart';
 import 'package:StateManagementMVCS/services/user_service.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
 
@@ -24,4 +25,5 @@ class BaseCommand {
   // Services
   UserService userService = _mainContext.read();
   AppService appService = _mainContext.read();
+  NotificationService notifyService = _mainContext.read();
 }
