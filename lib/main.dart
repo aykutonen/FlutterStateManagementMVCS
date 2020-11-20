@@ -59,12 +59,14 @@ class _MainAppState extends State<MainApp> {
   void appInit() async {
     // Notification servisini ayağa kaldır.
     await NotificationHelper().init();
+    // Notification'a tıklandığında tetiklenecek fonksiyonu ata.
     await NotificationHelper().assignOnClick(onNotificationClick);
 
     Commands.init(context);
     await Preferences.init();
     await AppCommand().init();
     await ReportCommand().init();
+
     setState(() => _isFirst = context.read<AppModel>().isFirstTime);
     if (_isFirst) {
       AppCommand().setLanguage(Language.English);
