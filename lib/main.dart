@@ -58,8 +58,8 @@ class _MainAppState extends State<MainApp> {
 
   void appInit() async {
     // Notification servisini ayağa kaldır.
-    await NotificationHelper.init();
-    NotificationHelper.assignOnClick(onNotificationClick);
+    await NotificationHelper().init();
+    await NotificationHelper().assignOnClick(onNotificationClick);
 
     Commands.init(context);
     await Preferences.init();

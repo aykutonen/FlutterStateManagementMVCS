@@ -44,15 +44,15 @@ class MainPage extends StatelessWidget {
                 // await NotificationHelper.showNotification();
                 // await NotificationHelper.repeatNotification();
                 // await NotificationHelper.cancelAllNotification();
-                await NotificationHelper.schedule(
-                    DateTime.now().add(Duration(seconds: 5)));
-                await NotificationHelper.schedule(
-                    DateTime.now().add(Duration(seconds: 7)));
-                await NotificationHelper.schedule(
-                    DateTime.now().add(Duration(seconds: 9)));
+                await NotificationHelper()
+                    .schedule(DateTime.now().add(Duration(seconds: 5)));
+                // await NotificationHelper()
+                //     .schedule(DateTime.now().add(Duration(seconds: 7)));
+                // await NotificationHelper()
+                //     .schedule(DateTime.now().add(Duration(seconds: 9)));
 
                 var count =
-                    await NotificationHelper.getPendingNotificationCount();
+                    await NotificationHelper().getPendingNotificationCount();
                 debugPrint(count.toString());
               },
             ),
