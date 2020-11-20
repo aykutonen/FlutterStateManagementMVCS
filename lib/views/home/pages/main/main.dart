@@ -39,6 +39,12 @@ class MainPage extends StatelessWidget {
             const SubTitle(title: 'Add Drunk Water'),
             const Seperator(height: 20.0),
             CupertinoButton(
+                child: Text('Notify Permission Request'),
+                onPressed: () async {
+                  var result = await NotificationHelper().requestPermission();
+                  debugPrint(result.toString());
+                }),
+            CupertinoButton(
               child: Text('Notify my'),
               onPressed: () async {
                 // await NotificationHelper.showNotification();

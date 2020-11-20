@@ -18,6 +18,7 @@ class NotificationHelper {
   Future<void> init() async {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
+    // Manuel notification izin isteği
     // if (Platform.isIOS) {
     //   flutterLocalNotificationsPlugin
     //       .resolvePlatformSpecificImplementation<
@@ -29,10 +30,10 @@ class NotificationHelper {
     // initialize anında false olarak ayarlanacak yetki talepleri
     IOSInitializationSettings iosInitializationSettings =
         IOSInitializationSettings(
-            // requestAlertPermission: false,
-            // requestBadgePermission: false,
-            // requestSoundPermission: false,
-            );
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
 
     _initializationSettings =
         InitializationSettings(iOS: iosInitializationSettings);
@@ -131,5 +132,15 @@ class NotificationHelper {
     final File file = File(filePath);
     await file.writeAsBytes(response.bodyBytes);
     return filePath;
+  }
+
+  Future<bool> requestPermission() {
+    if (Platform.isIOS) {
+      return _flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          .requestPermissions(alert: true, badge: true, sound: true);
+    }
+    return false as Future<bool>;
   }
 }
