@@ -1,6 +1,7 @@
 import 'package:StateManagementMVCS/utils/router/router_constants.dart';
 import 'package:StateManagementMVCS/views/home/home.dart';
 import 'package:StateManagementMVCS/views/onboarding/onboarding.dart';
+import 'package:StateManagementMVCS/views/register/pages/notification/register_notification.dart';
 import 'package:StateManagementMVCS/views/register/pages/result/register_result.dart';
 import 'package:StateManagementMVCS/views/register/register.dart';
 import 'package:StateManagementMVCS/views/report_page.dart';
@@ -22,6 +23,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (c) => Onboarding(), settings: settings);
     case RegisterPageRoute:
       return CupertinoPageRoute(builder: (c) => Register(), settings: settings);
+    case RegisterNotificationPageRoute:
+      return CupertinoPageRoute(
+          builder: (c) => RegisterNotification(), settings: settings);
     case RegisterResultPageRoute:
       return CupertinoPageRoute(
           builder: (c) => RegisterResult(), settings: settings);

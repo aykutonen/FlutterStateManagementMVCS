@@ -18,7 +18,7 @@ class AppCommand extends BaseCommand {
     appModel.weight = appService.getWeight();
     appModel.language = appService.getLanguage();
     appModel.gender = appService.getGender();
-    appModel.notification = appService.getNotification();
+    appModel.notification = notifyService.getPermissionFromLocal();
   }
 
   Future<bool> saveUsername(String name) async {
@@ -105,16 +105,6 @@ class AppCommand extends BaseCommand {
   Future<bool> setGender(Gender gender) async {
     bool result = await appService.saveGender(gender);
     if (result) appModel.gender = gender;
-    return result;
-  }
-
-  Future<bool> setNotification(bool notify) async {
-    // Service üzerinden local storage'de Notification değerini güncelle.
-    bool result = await appService.saveNotification(notify);
-
-    // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.notification = notify;
-
     return result;
   }
 }

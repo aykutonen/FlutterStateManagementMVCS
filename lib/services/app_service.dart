@@ -95,13 +95,4 @@ class AppService {
     if (_index != null) return Gender.values[_index];
     return null;
   }
-
-  Future<bool> saveNotification(bool notify) async {
-    return await Preferences.setBool("notify", notify);
-    // TODO: Notification servisine kayıt yap ya da kaydı iptal et.
-  }
-
-  bool getNotification() {
-    return Preferences.getBool("notify");
-  }
 }

@@ -35,7 +35,6 @@ class RegisterResult extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      // mainAxisSize: MainAxisSize.min,
                       children: [
                         RegisterResultTitle('Your Calculated Target Amount'),
                         RegisterResultCalculatedTarget(

@@ -14,8 +14,7 @@ class RegisterResultSaveButton extends StatelessWidget {
       color: CupertinoColors.activeGreen,
       onPressed: () async {
         await RegisterCommand().save();
-        await Navigator.pushNamedAndRemoveUntil(
-            context, HomePageRoute, (route) => false);
+        Navigator.pushNamed(context, RegisterNotificationPageRoute);
       },
     );
   }

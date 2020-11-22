@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 
 class NotificationService {
-  // Yetki iste
-
+  /// Yetki iste
   Future<bool> requestPermission() async {
     await NotificationPermissions.requestNotificationPermissions(
         iosSettings: const NotificationSettingsIos(
@@ -14,7 +13,7 @@ class NotificationService {
     return await getPermissionStatus();
   }
 
-  // Yetki var mı yok mu kontrol et
+  /// Yetki var mı yok mu kontrol et
   Future<bool> getPermissionStatus() async {
     bool _status = false;
     PermissionStatus status =
@@ -31,8 +30,16 @@ class NotificationService {
         break;
     }
 
-    debugPrint(_status.toString());
     return _status;
   }
-  // Yetki durumunu local'de sakla.
+
+  /// Yetki durumunu local'de sakla.
+  Future<bool> savePermissionToLocal(bool notify) async {
+    return await Preferences.setBool("notify", notify);
+  }
+
+  /// Localdeki yetki durumunu geri döner
+  bool getPermissionFromLocal() {
+    return Preferences.getBool("notify", false);
+  }
 }
