@@ -1,32 +1,29 @@
+import 'package:StateManagementMVCS/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-class SettingsNumberInput extends StatelessWidget {
+class NumberInputWidget extends StatelessWidget {
   final String label;
-  final VoidCallback onTapHandler;
-  final double height;
   final TextEditingController inputController;
   final FocusNode focusNode;
   final VoidCallback saveHandle;
   final String infoLabel;
 
-  const SettingsNumberInput({
-    @required this.label,
-    @required this.infoLabel,
-    @required this.onTapHandler,
-    @required this.saveHandle,
-    @required this.height,
-    @required this.inputController,
-    @required this.focusNode,
+  const NumberInputWidget({
+    this.label,
+    this.inputController,
+    this.focusNode,
+    this.saveHandle,
+    this.infoLabel,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => onTapHandler,
+      onTap: focusNode.requestFocus,
       child: Container(
-        height: height,
+        height: settingsRowHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,

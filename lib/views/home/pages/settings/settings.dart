@@ -1,163 +1,22 @@
-import 'package:StateManagementMVCS/commands/app_command.dart';
-import 'package:StateManagementMVCS/commands/notification_command.dart';
-import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/models/gender_model.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_double_input.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_number_input.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_select_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_error.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_gender_select.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_weight_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_target_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_unit_select.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_sleep_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_switch.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_text_input.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_time_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_name_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_wakeup_input.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
-import 'package:StateManagementMVCS/models/hour_minute_model.dart';
-import 'package:StateManagementMVCS/models/unit_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  final _nameInputController = TextEditingController();
-  final _targetInputController = TextEditingController();
-  final _weightInputController = TextEditingController();
-  final _targetFocusNode = FocusNode();
-  final _nameFocusNode = FocusNode();
-  final _weightFocusNode = FocusNode();
-
-  final double _rowHeight = 50.0;
-
-  String _error = "";
-  Duration _wakeup;
-  Duration _sleep;
-
-  @override
-  void initState() {
-    var w = context.read<AppModel>().wakingUp;
-    var s = context.read<AppModel>().sleeping;
-
-    setState(() {
-      _wakeup = Duration(hours: w.hour, minutes: w.minute);
-      _sleep = Duration(hours: s.hour, minutes: s.minute);
-    });
-    _targetFocusNode.addListener(_handleTargetSaveButton);
-    _nameFocusNode.addListener(_handleNameFocusChange);
-    _weightFocusNode.addListener(_handleWeightSaveButton);
-
-    super.initState();
-  }
-
-  void _handleNameFocusChange() async {
-    if (_nameFocusNode.hasFocus) return;
-
-    if (_nameInputController.text.isEmpty) {
-      setState(() => _error = "İsim zorunlu");
-      _nameFocusNode.requestFocus();
-    } else {
-      setState(() => _error = "");
-      await AppCommand().saveUsername(_nameInputController.text);
-    }
-  }
-
-  void _handleTargetSaveButton() async {
-    if (_targetFocusNode.hasFocus) return;
-
-    if (_targetInputController.text.isEmpty) {
-      setState(() => _error = "Target zorunlu");
-      _targetFocusNode.requestFocus();
-    } else {
-      setState(() => _error = "");
-
-      var amount = int.tryParse(_targetInputController.text);
-      if (amount == null || amount == 0) {
-        setState(() => _error = "Geçersiz bir miktar girildi.");
-        _targetFocusNode.requestFocus();
-      } else {
-        await AppCommand().setTargetAmount(amount);
-      }
-    }
-  }
-
-  void _handleWeightSaveButton() async {
-    if (_weightFocusNode.hasFocus) return;
-
-    if (_weightInputController.text.isEmpty) {
-      setState(() => _error = "Ağırlık zorunlu");
-      _weightFocusNode.requestFocus();
-    } else {
-      setState(() => _error = "");
-      var weight = double.tryParse(_weightInputController.text);
-      if (weight == null || weight == 0) {
-        setState(() => _error = "Geçersiz bir mikrar girildi.");
-        _weightFocusNode.requestFocus();
-      } else {
-        await AppCommand().setWeight(weight);
-      }
-    }
-  }
-
-  void _handleSleepPicker(Duration duration) {
-    setState(() => _sleep = duration);
-  }
-
-  void _handleSleepSave() async {
-    await AppCommand()
-        .setSleeping(HourMinute(_sleep.inHours, _sleep.inMinutes % 60));
-    Navigator.of(context, rootNavigator: true).pop("save");
-  }
-
-  void _handleWakeupPicker(Duration duration) {
-    setState(() => _wakeup = duration);
-  }
-
-  void _handleWakeupSave() async {
-    await AppCommand()
-        .setWakingUp(HourMinute(_wakeup.inHours, _wakeup.inMinutes % 60));
-    Navigator.of(context, rootNavigator: true).pop("save");
-  }
-
-  void _handleUnitSet(Unit unit) async {
-    await AppCommand().setUnit(unit);
-    setState(() => _error = "");
-  }
-
-  void _handleGenderSet(Gender gender) async {
-    await AppCommand().setGender(gender);
-    setState(() => _error = "");
-  }
-
-  void _handleNotify(bool notify) async {
-    if (notify) {
-      await NotificationCommand().requestPermission();
-    } else {
-      await NotificationCommand().removePermission();
-    }
-
-    setState(() => _error = "");
-  }
-
+class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var model = context.select<AppModel, AppModel>((e) => e);
-
-    _nameInputController.text = model.currentUser;
-    _nameInputController.selection = TextSelection.fromPosition(
-        TextPosition(offset: _nameInputController.text.length));
-
-    _targetInputController.text = model.targetAmount.toString();
-    _targetInputController.selection = TextSelection.fromPosition(
-        TextPosition(offset: _targetInputController.text.length));
-    _weightInputController.text = model.weightDouble.toString();
-    _weightInputController.selection = TextSelection.fromPosition(
-        TextPosition(offset: _weightInputController.text.length));
-
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: FocusScope.of(context).unfocus,
@@ -169,94 +28,24 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             const BigTitle(title: 'Settings'),
             const Seperator(height: 25.0),
-            Text(_error),
-            SettingsTextInput(
-              label: 'Name',
-              height: _rowHeight,
-              inputController: _nameInputController,
-              focusNode: _nameFocusNode,
-              onTapHandler: _nameFocusNode.requestFocus,
-            ),
-            Divider(),
-            SettingsTimeInput(
-              changeHandle: _handleWakeupPicker,
-              date: model.wakingUp.toDisplayString,
-              height: _rowHeight,
-              initialDuration: _wakeup,
-              label: 'Wakeup',
-              saveHandle: _handleWakeupSave,
-              title: 'Select Wakeup Time',
-            ),
-            Divider(),
-            SettingsTimeInput(
-              changeHandle: _handleSleepPicker,
-              date: model.sleeping.toDisplayString,
-              height: _rowHeight,
-              initialDuration: _sleep,
-              label: 'Sleep',
-              saveHandle: _handleSleepSave,
-              title: 'Select Sleeping Time',
-            ),
-            Divider(),
-            SettingsDoubleInput(
-                label: 'Weight',
-                infoLabel: 'Kg',
-                onTapHandler: _weightFocusNode.requestFocus,
-                saveHandle: _handleWeightSaveButton,
-                height: _rowHeight,
-                inputController: _weightInputController,
-                focusNode: _weightFocusNode),
-            Divider(),
-            SettingsNumberInput(
-              label: 'Target',
-              infoLabel: model.unit.name,
-              onTapHandler: _targetFocusNode.requestFocus,
-              saveHandle: _handleTargetSaveButton,
-              height: _rowHeight,
-              inputController: _targetInputController,
-              focusNode: _targetFocusNode,
-            ),
-            Divider(),
-            SettingsSwitch(
-              data: model.notification,
-              height: _rowHeight,
-              label: 'Notification',
-              onChangeHandler: _handleNotify,
-            ),
-            Divider(),
-            Seperator(),
-            SubTitle(title: 'Unit'),
-            Seperator(height: 10.0),
-            SettingsSelectInput(
-              onTap: () => _handleUnitSet(Unit.ml),
-              height: _rowHeight,
-              label: Unit.ml.name.toUpperCase(),
-              isSelected: model.unit == Unit.ml,
-            ),
-            Divider(),
-            SettingsSelectInput(
-              onTap: () => _handleUnitSet(Unit.oz),
-              height: _rowHeight,
-              label: Unit.oz.name.toUpperCase(),
-              isSelected: model.unit == Unit.oz,
-            ),
-            Divider(),
-            Seperator(),
-            SubTitle(title: 'Gender'),
-            Seperator(height: 10.0),
-            SettingsSelectInput(
-              onTap: () => _handleGenderSet(Gender.f),
-              height: _rowHeight,
-              label: Gender.f.name,
-              isSelected: model.gender == Gender.f,
-            ),
-            Divider(),
-            SettingsSelectInput(
-              onTap: () => _handleGenderSet(Gender.m),
-              height: _rowHeight,
-              label: Gender.m.name,
-              isSelected: model.gender == Gender.m,
-            ),
+            SettingsError(),
+            SettingsNameInput(),
+            const Divider(),
+            SettingsWakeupInput(),
+            const Divider(),
+            SettingsSleepInput(),
+            const Divider(),
+            SettingsWeightInput(),
+            const Divider(),
+            SettingsTargetInput(),
+            const Divider(),
+            SettingsSwitch(),
+            const Divider(),
+            const Seperator(),
+            SettingsUnitSelect(),
+            const Divider(),
+            const Seperator(),
+            SettingsGenderSelect(),
           ],
         ),
       ),

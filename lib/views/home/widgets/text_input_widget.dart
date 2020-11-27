@@ -1,27 +1,24 @@
+import 'package:StateManagementMVCS/constants.dart';
 import 'package:flutter/cupertino.dart';
 
-class SettingsTextInput extends StatelessWidget {
+class TextInputWidget extends StatelessWidget {
   final String label;
-  final VoidCallback onTapHandler;
-  final double height;
   final TextEditingController inputController;
   final FocusNode focusNode;
 
-  const SettingsTextInput({
-    @required this.label,
-    @required this.onTapHandler,
-    @required this.height,
-    @required this.inputController,
-    @required this.focusNode,
+  const TextInputWidget({
+    this.label,
+    this.inputController,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => onTapHandler,
+      onTap: () => focusNode.requestFocus(),
       child: Container(
-        height: height,
+        height: settingsRowHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,

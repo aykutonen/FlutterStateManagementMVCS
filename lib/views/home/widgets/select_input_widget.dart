@@ -1,16 +1,15 @@
+import 'package:StateManagementMVCS/constants.dart';
 import 'package:flutter/cupertino.dart';
 
-class SettingsSelectInput extends StatelessWidget {
+class SelectInputWidget extends StatelessWidget {
   final VoidCallback onTap;
-  final double height;
   final String label;
   final bool isSelected;
 
-  const SettingsSelectInput({
-    @required this.onTap,
-    @required this.height,
-    @required this.label,
-    @required this.isSelected,
+  const SelectInputWidget({
+    this.onTap,
+    this.label,
+    this.isSelected,
   });
 
   @override
@@ -19,7 +18,7 @@ class SettingsSelectInput extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        height: height,
+        height: settingsRowHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,

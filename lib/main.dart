@@ -6,6 +6,7 @@ import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
+import 'package:StateManagementMVCS/models/settings_model.dart';
 import 'package:StateManagementMVCS/services/notification_service.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
@@ -32,6 +33,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (c) => UserModel()),
       ChangeNotifierProvider(create: (c) => ReportModel()),
       ChangeNotifierProvider(create: (c) => RegisterModel()),
+      ChangeNotifierProvider(create: (c) => SettingsModel()),
 
       // Services
       Provider(create: (c) => UserService()),

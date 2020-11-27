@@ -1,23 +1,22 @@
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/show_time_pickert_dialog.dart';
+import 'package:StateManagementMVCS/constants.dart';
+import 'package:StateManagementMVCS/views/home/widgets/show_time_pickert_dialog.dart';
 import 'package:flutter/cupertino.dart';
 
 typedef changeHandleCallBack = void Function(Duration duration);
 
-class SettingsTimeInput extends StatelessWidget {
+class TimeInputWidget extends StatelessWidget {
   final Duration initialDuration;
   final changeHandleCallBack changeHandle;
   final VoidCallback saveHandle;
   final String title;
-  final double height;
   final String label;
   final String date;
 
-  const SettingsTimeInput({
+  const TimeInputWidget({
     this.initialDuration,
     this.changeHandle,
     this.saveHandle,
     this.title,
-    this.height,
     this.label,
     this.date,
   });
@@ -35,7 +34,7 @@ class SettingsTimeInput extends StatelessWidget {
         title: title,
       ).showDialog(),
       child: Container(
-        height: height,
+        height: settingsRowHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
