@@ -60,16 +60,21 @@ class MainPage extends StatelessWidget {
                 // await NotificationHelper.showNotification();
                 // await NotificationHelper.repeatNotification();
                 // await NotificationHelper.cancelAllNotification();
-                await NotificationHelper()
-                    .schedule(DateTime.now().add(Duration(seconds: 5)));
-                // await NotificationHelper()
-                //     .schedule(DateTime.now().add(Duration(seconds: 7)));
-                // await NotificationHelper()
-                //     .schedule(DateTime.now().add(Duration(seconds: 9)));
+                var status = NotificationCommand().getPermissionFromLocal();
+                if (status) {
+                  await NotificationHelper()
+                      .schedule(DateTime.now().add(Duration(seconds: 5)));
+                  // await NotificationHelper()
+                  //     .schedule(DateTime.now().add(Duration(seconds: 7)));
+                  // await NotificationHelper()
+                  //     .schedule(DateTime.now().add(Duration(seconds: 9)));
 
-                var count =
-                    await NotificationHelper().getPendingNotificationCount();
-                debugPrint(count.toString());
+                  var count =
+                      await NotificationHelper().getPendingNotificationCount();
+                  debugPrint(count.toString());
+                } else {
+                  debugPrint('Bildirim ayarları kapalı.');
+                }
               },
             ),
             AddDrunkWater(),

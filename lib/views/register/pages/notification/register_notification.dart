@@ -14,8 +14,7 @@ class _RegisterNotificationState extends State<RegisterNotification> {
   String _info = "";
 
   void _requestHandle() async {
-    await NotificationCommand().requestPermission();
-    var status = await NotificationCommand().getAndSetPermission();
+    var status = await NotificationCommand().requestPermission();
     if (status) {
       setState(() => _info = "");
       await Navigator.pushNamedAndRemoveUntil(

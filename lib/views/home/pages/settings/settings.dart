@@ -1,9 +1,11 @@
 import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_double_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_number_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_select_input.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_switch.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_text_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_time_input.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
@@ -131,6 +133,16 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() => _error = "");
   }
 
+  void _handleNotify(bool notify) async {
+    if (notify) {
+      await NotificationCommand().requestPermission();
+    } else {
+      await NotificationCommand().removePermission();
+    }
+
+    setState(() => _error = "");
+  }
+
   @override
   Widget build(BuildContext context) {
     var model = context.select<AppModel, AppModel>((e) => e);
@@ -203,6 +215,13 @@ class _SettingsPageState extends State<SettingsPage> {
               height: _rowHeight,
               inputController: _targetInputController,
               focusNode: _targetFocusNode,
+            ),
+            Divider(),
+            SettingsSwitch(
+              data: model.notification,
+              height: _rowHeight,
+              label: 'Notification',
+              onChangeHandler: _handleNotify,
             ),
             Divider(),
             Seperator(),
