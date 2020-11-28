@@ -36,7 +36,8 @@ class RegisterResult extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        RegisterResultTitle('Your Calculated Target Amount'),
+                        const RegisterResultTitle(
+                            'Your Calculated Target Amount'),
                         RegisterResultCalculatedTarget(
                             "${model.target.toString()} ${model.waterUnit.name.toUpperCase()}"),
                       ],
@@ -47,9 +48,9 @@ class RegisterResult extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        RegisterResultSaveButton('Looks Good'),
+                        const RegisterResultSaveButton('Looks Good'),
                         const Seperator(height: 20.0),
-                        RegisterResultCaption(
+                        const RegisterResultCaption(
                             'You can change target amount on settings page.'),
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'package:StateManagementMVCS/commands/notification_command.dart';
+import 'package:StateManagementMVCS/services/notification_service.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/add_drunk_water.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/daily_drunks_list.dart';
@@ -39,44 +40,66 @@ class MainPage extends StatelessWidget {
             const Seperator(),
             const SubTitle(title: 'Add Drunk Water'),
             const Seperator(height: 20.0),
-            CupertinoButton(
-                child: Text('Notify Permission Request'),
-                onPressed: () async {
-                  // Bu isten sadece bir kere kullanıcıya gösteriliyor :\
-                  // Bu sebeple uygulama ilk açıldığında ya da onboarding'de ilgili sayfada yetki istendiğinde ekstra bir işlem yapmaya gerek yok.
-                  // Sonradan Settings sayfasından açmak isterse yetkiyi kontrol edip,
-                  // uyarı vermemiz gerekli; Telefonun ayarlarından bildirim iznini açman gerekli diye.
-                  // var result = await NotificationHelper().requestPermission();
-                  await NotificationCommand().requestPermission();
-                }),
-            CupertinoButton(
-                child: Text('Get Notification Permission Status'),
-                onPressed: () async {
-                  await NotificationCommand().getAndSetPermission();
-                }),
-            CupertinoButton(
-              child: Text('Notify my'),
-              onPressed: () async {
-                // await NotificationHelper.showNotification();
-                // await NotificationHelper.repeatNotification();
-                // await NotificationHelper.cancelAllNotification();
-                var status = NotificationCommand().getPermissionFromLocal();
-                if (status) {
-                  await NotificationHelper()
-                      .schedule(DateTime.now().add(Duration(seconds: 5)));
-                  // await NotificationHelper()
-                  //     .schedule(DateTime.now().add(Duration(seconds: 7)));
-                  // await NotificationHelper()
-                  //     .schedule(DateTime.now().add(Duration(seconds: 9)));
+            // CupertinoButton(
+            //     child: Text('Notify Permission Request'),
+            //     onPressed: () async {
+            //       // Bu isten sadece bir kere kullanıcıya gösteriliyor :\
+            //       // Bu sebeple uygulama ilk açıldığında ya da onboarding'de ilgili sayfada yetki istendiğinde ekstra bir işlem yapmaya gerek yok.
+            //       // Sonradan Settings sayfasından açmak isterse yetkiyi kontrol edip,
+            //       // uyarı vermemiz gerekli; Telefonun ayarlarından bildirim iznini açman gerekli diye.
+            //       // var result = await NotificationHelper().requestPermission();
+            //       await NotificationCommand().requestPermission();
+            //     }),
+            // CupertinoButton(
+            //     child: Text('Get Notification Permission Status'),
+            //     onPressed: () async {
+            //       await NotificationCommand().getAndSetPermission();
+            //     }),
+            // CupertinoButton(
+            //   child: Text('Notify my'),
+            //   onPressed: () async {
+            //     // await NotificationHelper.showNotification();
+            //     // await NotificationHelper.repeatNotification();
+            //     // await NotificationHelper.cancelAllNotification();
+            //     var status = NotificationCommand().getPermissionFromLocal();
+            //     if (status) {
+            //       await NotificationHelper()
+            //           .schedule(DateTime.now().add(Duration(seconds: 5)));
+            //       // await NotificationHelper()
+            //       //     .schedule(DateTime.now().add(Duration(seconds: 7)));
+            //       // await NotificationHelper()
+            //       //     .schedule(DateTime.now().add(Duration(seconds: 9)));
 
-                  var count =
-                      await NotificationHelper().getPendingNotificationCount();
-                  debugPrint(count.toString());
-                } else {
-                  debugPrint('Bildirim ayarları kapalı.');
-                }
-              },
-            ),
+            //       var count =
+            //           await NotificationHelper().getPendingNotificationCount();
+            //       debugPrint(count.toString());
+            //     } else {
+            //       debugPrint('Bildirim ayarları kapalı.');
+            //     }
+            //   },
+            // ),
+            CupertinoButton(
+                child: Text('Clear notifs'),
+                onPressed: () async {
+                  await NotificationHelper().cancelAllNotification();
+                  debugPrint('cleared.');
+                }),
+            CupertinoButton(
+                child: Text('Calculate notifs'),
+                onPressed: () async {
+                  await NotificationCommand().calculateNextNofications();
+                  debugPrint('calculated.');
+                }),
+            CupertinoButton(
+                child: Text('Bildirimleri kontrol et'),
+                onPressed: () async {
+                  var list =
+                      await NotificationService().getPendingNotifications();
+                  for (var item in list) {
+                    debugPrint(item.sendDate.toString());
+                  }
+                  debugPrint(list.length.toString());
+                }),
             AddDrunkWater(),
           ],
         ),

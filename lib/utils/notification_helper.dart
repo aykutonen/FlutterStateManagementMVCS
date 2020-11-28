@@ -1,7 +1,6 @@
 import 'dart:io';
-import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:StateManagementMVCS/models/notify_model.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path/path.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -72,7 +71,25 @@ class NotificationHelper {
     );
   }
 
-  Future<void> schedule(DateTime dateTime) async {
+  Future<void> schedule(NotifyModel notify) async {
+    _iosNotificationDetails = IOSNotificationDetails();
+    _notificationDetails = NotificationDetails(iOS: _iosNotificationDetails);
+
+    var tzDt = tz.TZDateTime.from(notify.sendDate, tz.UTC);
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      notify.id,
+      notify.title,
+      notify.body,
+      tzDt,
+      _notificationDetails,
+      payload: notify.payload,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: null,
+    );
+  }
+
+  Future<void> scheduleWithAttachment(NotifyModel notify) async {
     // NOT: iOS dışarıdan indirilen görselleri bildirim için farklı bir yere taşır ve sadece tek bir bildirim için kullanılabilir.
     // Görsel assets içerisinde uygulamaya dahil edilmişse iOS bildirim görselini taşımak yerine kopyalar.
     // Kaynak: https://developer.apple.com/documentation/usernotifications/unnotificationattachment?language=objc
@@ -92,31 +109,27 @@ class NotificationHelper {
     _iosNotificationDetails = IOSNotificationDetails(attachments: attachments);
     _notificationDetails = NotificationDetails(iOS: _iosNotificationDetails);
 
-    var tzDt = tz.TZDateTime.from(dateTime, tz.UTC);
+    var tzDt = tz.TZDateTime.from(notify.sendDate, tz.UTC);
     await _flutterLocalNotificationsPlugin.zonedSchedule(
-      Random().nextInt(1000),
-      'title $tzDt',
-      'body',
+      notify.id,
+      notify.title,
+      notify.body,
       tzDt,
       _notificationDetails,
+      payload: notify.payload,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: null,
-      payload: 'payload',
     );
   }
 
   Future<int> getPendingNotificationCount() async {
-    List<PendingNotificationRequest> list =
-        await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
-    for (var item in list) {
-      debugPrint('-----------');
-      debugPrint('body:' + item.body);
-      debugPrint('payload:' + item.payload);
-      debugPrint('title:' + item.title);
-      debugPrint('id:' + item.id.toString());
-    }
+    List<PendingNotificationRequest> list = await getPendingNotifications();
     return list.length;
+  }
+
+  Future<List<PendingNotificationRequest>> getPendingNotifications() async {
+    return await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
 
   Future<void> cancelAllNotification() async {

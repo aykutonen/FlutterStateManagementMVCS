@@ -12,11 +12,14 @@ class RegisterNotification extends StatefulWidget {
 
 class _RegisterNotificationState extends State<RegisterNotification> {
   String _info = "";
+  bool _isWorking = false;
 
   void _requestHandle() async {
+    setState(() => _isWorking = true);
     var status = await NotificationCommand().requestPermission();
     if (status) {
       setState(() => _info = "");
+      await NotificationCommand().calculateNextNofications();
       await Navigator.pushNamedAndRemoveUntil(
           context, HomePageRoute, (route) => false);
     } else {
@@ -25,6 +28,7 @@ class _RegisterNotificationState extends State<RegisterNotification> {
             "Bildirimlere onay vermedin. Bunu daha sonra Ayarlar menüsünden açabilirsin.";
       });
     }
+    setState(() => _isWorking = false);
   }
 
   void _skipHandle() async {
@@ -47,7 +51,8 @@ class _RegisterNotificationState extends State<RegisterNotification> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('Bildirim almak ister misin?'),
-                if (_info.isEmpty) const Seperator(),
+                if (_isWorking) CupertinoActivityIndicator(),
+                const Seperator(),
                 if (_info.isEmpty)
                   CupertinoButton(
                     child: Text(
@@ -59,7 +64,6 @@ class _RegisterNotificationState extends State<RegisterNotification> {
                     ),
                     onPressed: _requestHandle,
                   ),
-                if (_info.isNotEmpty) const Seperator(),
                 if (_info.isNotEmpty)
                   Center(
                       child: Text(

@@ -1,4 +1,4 @@
-import 'package:StateManagementMVCS/models/settings_model.dart';
+import 'package:StateManagementMVCS/models/view_model/settings_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

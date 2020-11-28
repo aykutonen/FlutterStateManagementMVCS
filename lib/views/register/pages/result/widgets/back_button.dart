@@ -4,7 +4,7 @@ class RegisterBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      child: Icon(CupertinoIcons.back),
+      child: const Icon(CupertinoIcons.back),
       onPressed: () {
         Navigator.pop(context);
       },
