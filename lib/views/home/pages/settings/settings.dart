@@ -9,7 +9,6 @@ import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_n
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_wakeup_input.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
 import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
-import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
