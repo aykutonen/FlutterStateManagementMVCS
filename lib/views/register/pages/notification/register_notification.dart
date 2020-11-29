@@ -19,7 +19,7 @@ class _RegisterNotificationState extends State<RegisterNotification> {
     var status = await NotificationCommand().requestPermission();
     if (status) {
       setState(() => _info = "");
-      await NotificationCommand().calculateNextNofications();
+      NotificationCommand().calculateNextNofications();
       await Navigator.pushNamedAndRemoveUntil(
           context, HomePageRoute, (route) => false);
     } else {
