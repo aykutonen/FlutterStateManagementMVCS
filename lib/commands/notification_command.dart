@@ -5,10 +5,15 @@ import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:supercharged/supercharged.dart';
 
 class NotificationCommand extends BaseCommand {
-  Future<bool> getAndSetPermission() async {
+  Future<bool> getAndSetPermissionAndCalculateOrCleanNotifcation() async {
     var status = await notifyService.getPermissionStatus();
     await notifyService.savePermissionToLocal(status);
     appModel.notification = status;
+    if (status)
+      calculateNextNofications();
+    else
+      NotificationHelper().cancelAllNotification();
+
     return status;
   }
 
@@ -21,7 +26,7 @@ class NotificationCommand extends BaseCommand {
 
   Future<void> removePermission() async {
     await notifyService.savePermissionToLocal(false);
-    await NotificationHelper().cancelAllNotification();
+    NotificationHelper().cancelAllNotification();
     appModel.notification = false;
   }
 
@@ -37,7 +42,7 @@ class NotificationCommand extends BaseCommand {
     // ios'da maksimum 62 adet bildirim planlanabiliyor.
     int limit = 62;
     // kaç dakikada bir bildirim gönderileceği bilgisi.
-    int interval = 90;
+    int interval = 1;
     // Uyandıktan sonra ilk bildirim için geçmesi gereken süre
     int afterMinute = 15;
     // Yatmadan önce son bildirim için geçmesi gereken süre
