@@ -139,6 +139,7 @@ class NotificationCommand extends BaseCommand {
       // Bildirimi planla
       notifyService.schedule(notify);
     }
+    notifyService.clearOldRecord();
   }
 
   Future<void> clearAndCalculateNotifications() async {

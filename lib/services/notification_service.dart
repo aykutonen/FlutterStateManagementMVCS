@@ -89,4 +89,16 @@ class NotificationService {
     }
     return notify;
   }
+
+  Future<void> clearOldRecord() async {
+    var db = await BaseDbHelper().db;
+
+    var lastTime =
+        DateTime.now().add(Duration(hours: -1)).millisecondsSinceEpoch;
+    await db.delete(
+      'notify',
+      where: 'sendDateUnix < ?',
+      whereArgs: [lastTime],
+    );
+  }
 }
