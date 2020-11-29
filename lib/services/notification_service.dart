@@ -47,6 +47,7 @@ class NotificationService {
     return Preferences.getBool("notify", false);
   }
 
+  /// Cihazda bekleyen bildirimlerin db'deki karşılıklarını verir
   Future<List<NotifyModel>> getPendingNotifications() async {
     List<NotifyModel> result = List<NotifyModel>();
 
@@ -71,6 +72,7 @@ class NotificationService {
     return result;
   }
 
+  /// Bildirim gönderini db'ye ve service kaydeder.
   Future<NotifyModel> schedule(NotifyModel notify) async {
     var db = await BaseDbHelper().db;
     notify.id = await db.insert('notify', notify.toMap());
