@@ -65,7 +65,7 @@ class NotificationCommand extends BaseCommand {
     // ios'da maksimum 62 adet bildirim planlanabiliyor.
     int limit = 62;
     // kaç dakikada bir bildirim gönderileceği bilgisi.
-    int interval = 1;
+    int interval = 90;
     // Uyandıktan sonra ilk bildirim için geçmesi gereken süre
     int afterMinute = 15;
     // Yatmadan önce son bildirim için geçmesi gereken süre
