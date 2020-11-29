@@ -1,4 +1,5 @@
 import 'package:StateManagementMVCS/commands/base_command.dart';
+import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/models/drunk_model.dart';
 
@@ -42,7 +43,10 @@ class UserCommand extends BaseCommand {
         trackDate: trackDate);
 
     var result = await userService.addDrunk(model);
-    if (result) userModel.dailyDrunks = [model, ...userModel.dailyDrunks];
+    if (result) {
+      userModel.dailyDrunks = [model, ...userModel.dailyDrunks];
+      NotificationCommand().clearAndCalculateNotifications();
+    }
     ReportCommand().load();
     return result;
   }
