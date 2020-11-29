@@ -1,6 +1,8 @@
 import 'package:StateManagementMVCS/commands/base_command.dart';
 import 'package:StateManagementMVCS/models/notify_model.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/date_time_patterns.dart';
 
 import 'package:supercharged/supercharged.dart';
 
@@ -35,12 +37,13 @@ class NotificationCommand extends BaseCommand {
 
   Future<void> calculateNextNofications() async {
     // ios'da maksimum 62 adet bildirim planlanabiliyor.
-    int interval = 2;
+    int limit = 62;
+    // kaç dakikada bir bildirim gönderileceği bilgisi.
+    int interval = 90;
     // Uyandıktan sonra ilk bildirim için geçmesi gereken süre
     int afterMinute = 15;
     // Yatmadan önce son bildirim için geçmesi gereken süre
     int beforeMinute = -1 * afterMinute;
-    int limit = 62;
     DateTime sendTime = DateTime.now();
     // Önceden planlanmış ve gönderilmemiş bildirimleri db'den al
     List<NotifyModel> pending = await notifyService.getPendingNotifications();
@@ -55,30 +58,47 @@ class NotificationCommand extends BaseCommand {
       sendTime = lastPending.sendDate;
     }
 
-    // Limit kadar dön ve 2 saatte bir bildirim planla.
     for (var i = 0; i < limit; i++) {
-      // Gönderi zamanını öncekine göre 2 saat sonraya ayarla.
+      // gönderi zamanını son gönderiye göre interval kadar sonrası için ayarla.
       sendTime = sendTime.add(Duration(minutes: interval));
 
-      // Gönderi tarihine göre kullanıcının yatma ve kalkma tarihlerni hesapla
-      DateTime wakeup = DateTime(sendTime.year, sendTime.month, sendTime.day,
+      // Uyanma tarihini gönderi tarihine göre ayarla ve 15 dakika ileri al
+      var wakeup = DateTime(sendTime.year, sendTime.month, sendTime.day,
               appModel.wakingUp.hour, appModel.wakingUp.minute)
           .add(Duration(minutes: afterMinute));
-      DateTime sleep = DateTime(sendTime.year, sendTime.month, sendTime.day,
+
+      // 15 dakika ileri alınca gün dönebilir, tekrar gönderi tarihine geri çek.
+      wakeup = DateTime(sendTime.year, sendTime.month, sendTime.day,
+          wakeup.hour, wakeup.minute);
+
+      // Yatma tarihini gönderi tarihine göre ayarla ve 15 dakika geri al
+      var sleep = DateTime(sendTime.year, sendTime.month, sendTime.day,
               appModel.sleeping.hour, appModel.sleeping.minute)
           .add(Duration(minutes: beforeMinute));
 
-      // Yatma saati kalkma saatinden önceyse yatma saatini sonraki güne ayarla (gün devri var demektir).
-      if (sleep.isBefore(wakeup)) sleep.add(Duration(days: 1));
+      // 15 dakika geri alınca gün dönümü olabilir, tekrar gönderi tarihine geri çek.
+      sleep = DateTime(sendTime.year, sendTime.month, sendTime.day, sleep.hour,
+          sleep.minute);
 
-      // Bildirim gönderi zamanına göre yatma ve kalkma saatilerini karşılaştır.
-      // Gönderi zamanı kullanıcının uyuduğu zaman aralığındaysa; uyandıktan afterMinute değeri kadar dakika sonra gönderilsin.
-      if (!sendTime.isBetween(wakeup, sleep)) {
-        sendTime = DateTime(sendTime.year, sendTime.month, sendTime.day,
-            wakeup.hour, wakeup.minute);
+      // Yatma saati kalkma saatinden küçükse (gece 12'den sonra yatıyorsa, sabah 8'de kalkıyor gibi)
+      if (sleep.isBefore(wakeup)) {
+        if (sendTime.isBetween(sleep, wakeup)) {
+          // Sonraki wakeup zamanında gönder.
+          sendTime = wakeup;
+        }
+      }
+      // yatma saati kalkma saatinden büyükse (Gece 12'den önce yatıyorsa, sabah 8'de kalkıyor gibi)
+      else {
+        // Kalkma saatiyle yatma saati arasında değilse
+        if (!sendTime.isBetween(wakeup, sleep)) {
+          // Sonraki wakeup zamanında gönder
+          if (wakeup.isAfter(sendTime))
+            sendTime = wakeup;
+          else
+            sendTime = wakeup.add(Duration(days: 1));
+        }
       }
 
-      // bildirim kaydını db'ye kaydet ve cihazda oluştur.
       NotifyModel notify = NotifyModel(
         title: 'title',
         body: 'body',
@@ -88,6 +108,5 @@ class NotificationCommand extends BaseCommand {
 
       await notifyService.schedule(notify);
     }
-    // Planlanan bildirimleri db'ye kaydet, bildirim kaydı için id gerekli ve sonrasında hangi bildirimler planlandı, gönderildi durumları için db'de tutmak gerekli.
   }
 }

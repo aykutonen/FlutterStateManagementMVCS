@@ -40,44 +40,6 @@ class MainPage extends StatelessWidget {
             const Seperator(),
             const SubTitle(title: 'Add Drunk Water'),
             const Seperator(height: 20.0),
-            // CupertinoButton(
-            //     child: Text('Notify Permission Request'),
-            //     onPressed: () async {
-            //       // Bu isten sadece bir kere kullanıcıya gösteriliyor :\
-            //       // Bu sebeple uygulama ilk açıldığında ya da onboarding'de ilgili sayfada yetki istendiğinde ekstra bir işlem yapmaya gerek yok.
-            //       // Sonradan Settings sayfasından açmak isterse yetkiyi kontrol edip,
-            //       // uyarı vermemiz gerekli; Telefonun ayarlarından bildirim iznini açman gerekli diye.
-            //       // var result = await NotificationHelper().requestPermission();
-            //       await NotificationCommand().requestPermission();
-            //     }),
-            // CupertinoButton(
-            //     child: Text('Get Notification Permission Status'),
-            //     onPressed: () async {
-            //       await NotificationCommand().getAndSetPermission();
-            //     }),
-            // CupertinoButton(
-            //   child: Text('Notify my'),
-            //   onPressed: () async {
-            //     // await NotificationHelper.showNotification();
-            //     // await NotificationHelper.repeatNotification();
-            //     // await NotificationHelper.cancelAllNotification();
-            //     var status = NotificationCommand().getPermissionFromLocal();
-            //     if (status) {
-            //       await NotificationHelper()
-            //           .schedule(DateTime.now().add(Duration(seconds: 5)));
-            //       // await NotificationHelper()
-            //       //     .schedule(DateTime.now().add(Duration(seconds: 7)));
-            //       // await NotificationHelper()
-            //       //     .schedule(DateTime.now().add(Duration(seconds: 9)));
-
-            //       var count =
-            //           await NotificationHelper().getPendingNotificationCount();
-            //       debugPrint(count.toString());
-            //     } else {
-            //       debugPrint('Bildirim ayarları kapalı.');
-            //     }
-            //   },
-            // ),
             CupertinoButton(
                 child: Text('Clear notifs'),
                 onPressed: () async {
@@ -86,9 +48,8 @@ class MainPage extends StatelessWidget {
                 }),
             CupertinoButton(
                 child: Text('Calculate notifs'),
-                onPressed: () async {
-                  await NotificationCommand().calculateNextNofications();
-                  debugPrint('calculated.');
+                onPressed: () {
+                  NotificationCommand().calculateNextNofications();
                 }),
             CupertinoButton(
                 child: Text('Bildirimleri kontrol et'),
