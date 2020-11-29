@@ -1,3 +1,4 @@
+import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
@@ -69,6 +70,7 @@ class AppCommand extends BaseCommand {
     if (result) {
       appModel.wakingUp = hm;
       userModel.dailyDrunks = await UserCommand().getDailyDrunks();
+      NotificationCommand().clearAndCalculateNotifications();
     }
 
     return result;
@@ -79,7 +81,10 @@ class AppCommand extends BaseCommand {
     bool result = await appService.saveSleeping(hm);
 
     // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.sleeping = hm;
+    if (result) {
+      appModel.sleeping = hm;
+      NotificationCommand().clearAndCalculateNotifications();
+    }
 
     return result;
   }
