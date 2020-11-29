@@ -57,17 +57,20 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    appInit();
+    // Uygulama durumunu takip edebilmek için gerekli.
+    // Ayrıca Class'a "with WidgetsBindingObserver" eklenmeli.
+    // Durum değişikliğine göre işlem yapmak için de "didChangeAppLifecycleState" fonksiyonu kullanılıyor.
     WidgetsBinding.instance.addObserver(this);
+    appInit();
     super.initState();
   }
 
+  /// App durumu değişikliklerini dinleyen arkadaş
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    // Uygulama durumu devam olarak işaretlenmişse bildirim onayını kontrol et ve güncelle
-    if (state == AppLifecycleState.resumed) {
-      await NotificationCommand().getAndSetPermission();
-    }
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed)
+      NotificationCommand().getAndSetPermissionAndCalculateOrCleanNotifcation();
+
     super.didChangeAppLifecycleState(state);
   }
 
@@ -88,6 +91,9 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
     } else {
       await UserCommand().load();
       await ReportCommand().load();
+      // Uygulama normal açıldığında mevcut bildirim yetkisini kontrol et
+      // ve bildirimleri temizle ya da yenilerini hesapla
+      NotificationCommand().getAndSetPermissionAndCalculateOrCleanNotifcation();
     }
     setState(() => _isLoadData = true);
   }
