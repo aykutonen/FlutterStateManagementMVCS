@@ -4,7 +4,7 @@ import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_w
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_target_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_unit_select.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_sleep_input.dart';
-import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_switch.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_notification_switch.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_name_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_wakeup_input.dart';
 import 'package:StateManagementMVCS/views/home/widgets/big_title.dart';
@@ -38,7 +38,7 @@ class SettingsPage extends StatelessWidget {
             const Divider(),
             SettingsTargetInput(),
             const Divider(),
-            SettingsSwitch(),
+            SettingsNotificationSwitch(),
             const Divider(),
             const Seperator(),
             SettingsUnitSelect(),

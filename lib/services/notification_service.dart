@@ -47,6 +47,14 @@ class NotificationService {
     return Preferences.getBool("notify", false);
   }
 
+  Future<bool> saveRequestStatus(bool req) async {
+    return await Preferences.setBool("notifyRequest", req);
+  }
+
+  bool getRequestStatus() {
+    return Preferences.getBool("notifyRequest", true);
+  }
+
   /// Cihazda bekleyen bildirimlerin db'deki karşılıklarını verir
   Future<List<NotifyModel>> getPendingNotifications() async {
     List<NotifyModel> result = List<NotifyModel>();

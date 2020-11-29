@@ -5,7 +5,7 @@ import 'package:StateManagementMVCS/views/home/widgets/switch_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-class SettingsSwitch extends StatelessWidget {
+class SettingsNotificationSwitch extends StatelessWidget {
   void _changeHandler(bool notify) async {
     if (notify) {
       await NotificationCommand().requestPermission();

@@ -6,25 +6,48 @@ import 'package:supercharged/supercharged.dart';
 
 class NotificationCommand extends BaseCommand {
   Future<bool> getAndSetPermissionAndCalculateOrCleanNotifcation() async {
-    var status = await notifyService.getPermissionStatus();
-    await notifyService.savePermissionToLocal(status);
-    appModel.notification = status;
-    if (status)
+    bool reqStatus = notifyService.getRequestStatus();
+    bool isAllow = await notifyService.getPermissionStatus();
+
+    // Bildirim talebi yapılmışsa bildirim iznini local'e kaydet
+    if (reqStatus) {
+      // bildirim talebi kaydını kapat
+      await notifyService.saveRequestStatus(false);
+      await notifyService.savePermissionToLocal(isAllow);
+      appModel.notification = isAllow;
+    }
+    // Bildirim talebi yapılmamışsa
+    else {
+      // İzin verilmiş ama bizde izinli değilse izin yokmuş gibi akışa devam et.
+      if (isAllow && !appModel.notification) {
+        isAllow = appModel.notification;
+      }
+      // Cihazda izin kapalı ama bizde açıksa bizdeki ayarı kapat.
+      else if (!isAllow && appModel.notification) {
+        await notifyService.savePermissionToLocal(isAllow);
+        appModel.notification = isAllow;
+      }
+    }
+
+    if (isAllow)
       calculateNextNofications();
     else
       NotificationHelper().cancelAllNotification();
 
-    return status;
+    return isAllow;
   }
 
   Future<bool> requestPermission() async {
+    await notifyService.saveRequestStatus(true);
     var status = await notifyService.requestPermission();
     await notifyService.savePermissionToLocal(status);
     appModel.notification = status;
+    if (status) calculateNextNofications();
     return status;
   }
 
   Future<void> removePermission() async {
+    await notifyService.saveRequestStatus(false);
     await notifyService.savePermissionToLocal(false);
     NotificationHelper().cancelAllNotification();
     appModel.notification = false;
@@ -116,5 +139,10 @@ class NotificationCommand extends BaseCommand {
       // Bildirimi planla
       notifyService.schedule(notify);
     }
+  }
+
+  Future<void> clearAndCalculateNotifications() async {
+    await NotificationHelper().cancelAllNotification();
+    if (appModel.notification) await calculateNextNofications();
   }
 }
