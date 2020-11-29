@@ -40,27 +40,6 @@ class MainPage extends StatelessWidget {
             const Seperator(),
             const SubTitle(title: 'Add Drunk Water'),
             const Seperator(height: 20.0),
-            CupertinoButton(
-                child: Text('Clear notifs'),
-                onPressed: () async {
-                  await NotificationHelper().cancelAllNotification();
-                  debugPrint('cleared.');
-                }),
-            CupertinoButton(
-                child: Text('Calculate notifs'),
-                onPressed: () {
-                  NotificationCommand().calculateNextNofications();
-                }),
-            CupertinoButton(
-                child: Text('Bildirimleri kontrol et'),
-                onPressed: () async {
-                  var list =
-                      await NotificationService().getPendingNotifications();
-                  for (var item in list) {
-                    debugPrint(item.sendDate.toString());
-                  }
-                  debugPrint(list.length.toString());
-                }),
             AddDrunkWater(),
           ],
         ),
