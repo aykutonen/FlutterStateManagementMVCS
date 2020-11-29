@@ -1,8 +1,6 @@
 import 'package:StateManagementMVCS/commands/base_command.dart';
 import 'package:StateManagementMVCS/models/notify_model.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/date_time_patterns.dart';
 
 import 'package:supercharged/supercharged.dart';
 
@@ -44,7 +42,9 @@ class NotificationCommand extends BaseCommand {
     int afterMinute = 15;
     // Yatmadan önce son bildirim için geçmesi gereken süre
     int beforeMinute = -1 * afterMinute;
+    // İlk gönderi zamanını ata
     DateTime sendTime = DateTime.now();
+
     // Önceden planlanmış ve gönderilmemiş bildirimleri db'den al
     List<NotifyModel> pending = await notifyService.getPendingNotifications();
     if (pending.length > 0) {
@@ -54,12 +54,13 @@ class NotificationCommand extends BaseCommand {
       // Son gönderilecek olan kaydı al.
       var lastPending =
           pending.sortedByNum((e) => e.sendDateUnix).reversed.first;
+
       // Son gönderilecek kayıttan interval değeri kadar saat sonraya ilk gönderiyi planla.
       sendTime = lastPending.sendDate;
     }
 
     for (var i = 0; i < limit; i++) {
-      // gönderi zamanını son gönderiye göre interval kadar sonrası için ayarla.
+      // gönderi zamanını son gönderiye göre interval kadar dakika sonrası için ayarla.
       sendTime = sendTime.add(Duration(minutes: interval));
 
       // Uyanma tarihini gönderi tarihine göre ayarla ve 15 dakika ileri al
@@ -99,6 +100,7 @@ class NotificationCommand extends BaseCommand {
         }
       }
 
+      // Bildirim modelini hazırla
       NotifyModel notify = NotifyModel(
         title: 'title',
         body: 'body',
@@ -106,7 +108,8 @@ class NotificationCommand extends BaseCommand {
         sendDate: sendTime,
       );
 
-      await notifyService.schedule(notify);
+      // Bildirimi planla
+      notifyService.schedule(notify);
     }
   }
 }
