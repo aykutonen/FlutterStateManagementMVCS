@@ -2,7 +2,6 @@ import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
 import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
-import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:international_system_of_units/international_system_of_units.dart';
 
@@ -17,7 +16,6 @@ class AppCommand extends BaseCommand {
     appModel.unit = appService.getUnit();
     appModel.targetAmount = appService.getTargetAmount();
     appModel.weight = appService.getWeight();
-    appModel.language = appService.getLanguage();
     appModel.gender = appService.getGender();
     appModel.notification = notifyService.getPermissionFromLocal();
   }
@@ -38,16 +36,6 @@ class AppCommand extends BaseCommand {
 
     // Service işlemi başarılıysa model'i güncelle
     if (result) appModel.isFirstTime = isFirstTime;
-
-    return result;
-  }
-
-  Future<bool> setLanguage(Language lang) async {
-    // Service üzerinden local storage'de Language değerini güncelle.
-    bool result = await appService.saveLangugage(lang);
-
-    // Service işlemi başarılıysa model'i güncelle
-    if (result) appModel.language = lang;
 
     return result;
   }

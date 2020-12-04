@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
-import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/utils/shared_preferences_util.dart';
 
@@ -21,16 +20,6 @@ class AppService {
 
   bool getIsFirstTime() {
     return Preferences.getBool("IsFirstTime") ?? true;
-  }
-
-  Future<bool> saveLangugage(Language lang) async {
-    return await Preferences.setInt("lang", lang.index);
-  }
-
-  Language getLanguage() {
-    var _index = Preferences.getInt("lang");
-    if (_index != null) return Language.values[_index];
-    return null;
   }
 
   Future<bool> saveUnit(Unit unit) async {

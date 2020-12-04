@@ -3,7 +3,6 @@ import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/commands/notification_command.dart';
 import 'package:StateManagementMVCS/commands/report_command.dart';
 import 'package:StateManagementMVCS/commands/user_command.dart';
-import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/models/view_model/settings_model.dart';
@@ -92,10 +91,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
     await ReportCommand().init();
 
     setState(() => _isFirst = context.read<AppModel>().isFirstTime);
-    if (_isFirst) {
-      AppCommand().setLanguage(Language.English);
-      // TODO: uygulama ilk açılışta cihaz varsayılanını ata.
-    } else {
+    if (!_isFirst) {
       await UserCommand().load();
       await ReportCommand().load();
       // Uygulama normal açıldığında mevcut bildirim yetkisini kontrol et

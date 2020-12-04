@@ -1,6 +1,5 @@
 import 'package:StateManagementMVCS/models/gender_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
-import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:international_system_of_units/international_system_of_units.dart';
 
@@ -24,15 +23,6 @@ class AppModel extends ChangeNotifier {
 
   set isFirstTime(bool isFirstTime) {
     _isFirstTime = isFirstTime;
-    notifyListeners();
-  }
-
-  // Kullanıcının seçtiği dil.
-  Language _language = Language.English;
-  Language get language => _language;
-
-  set language(Language lang) {
-    _language = lang;
     notifyListeners();
   }
 

@@ -1,6 +1,4 @@
-import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
-import 'package:StateManagementMVCS/models/language_model.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/name/name.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/sleep/sleep.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/targetamount/targetamount.dart';
@@ -23,7 +21,6 @@ class _OnboardingState extends State<Onboarding> {
   @override
   void initState() {
     super.initState();
-    AppCommand().setLanguage(Language.English);
   }
 
   Widget _getPage() {
