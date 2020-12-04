@@ -1,5 +1,6 @@
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_error.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_gender_select.dart';
+import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_language_select.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_weight_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_target_input.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/widgets/settings_unit_select.dart';
@@ -46,6 +47,9 @@ class SettingsPage extends StatelessWidget {
             const Divider(),
             const Seperator(),
             SettingsGenderSelect(),
+            const Divider(),
+            const Seperator(),
+            SettingsLanguageSelect(),
           ],
         ),
       ),

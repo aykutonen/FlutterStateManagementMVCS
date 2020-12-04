@@ -32,7 +32,7 @@ class SettingsGenderSelect extends StatelessWidget {
           label: Gender.m.name.tr(),
           onTap: () => _handleSelect(Gender.m),
         ),
-        Divider(),
+        const Divider(),
         SelectInputWidget(
           isSelected: gender == Gender.f,
           label: Gender.f.name.tr(),

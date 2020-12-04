@@ -36,5 +36,8 @@
   "kg": "Kg",
   "enter_invalid_weight": "Geçersiz bir değer girildi",
   "next": "Sonraki",
-  "previous": "Önceki"
+  "previous": "Önceki",
+  "en": "English",
+  "tr": "Türkçe",
+  "language": "Dil"
 }

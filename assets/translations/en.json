@@ -36,5 +36,8 @@
   "kg": "Kg",
   "enter_invalid_weight": "Enter the invalid value",
   "next": "Next",
-  "previous": "Previous"
+  "previous": "Previous",
+  "en": "English",
+  "tr": "Türkçe",
+  "language": "Language"
 }
