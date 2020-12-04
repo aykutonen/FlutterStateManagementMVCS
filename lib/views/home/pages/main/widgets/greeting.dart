@@ -1,6 +1,8 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Greeting extends StatelessWidget {
   @override
@@ -12,18 +14,18 @@ class Greeting extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hi, $user',
+          'hi_user',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 30.0,
           ),
-        ),
+        ).tr(args: [user]),
         const Text(
-          'Have a nice day!',
+          'greeating',
           style: TextStyle(
             fontSize: 22.0,
           ),
-        ),
+        ).tr(),
       ],
     );
   }

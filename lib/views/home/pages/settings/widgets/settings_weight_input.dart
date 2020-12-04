@@ -5,6 +5,7 @@ import 'package:StateManagementMVCS/views/home/widgets/double_input_widget.dart'
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsWeightInput extends StatefulWidget {
   @override
@@ -26,12 +27,12 @@ class _SettingsWeightInputState extends State<SettingsWeightInput> {
     if (_focusNode.hasFocus) return;
 
     if (_inputController.text.isEmpty) {
-      SettingsCommand().setError("Ağırlık zorunlu");
+      SettingsCommand().setError("weight_required".tr());
       _focusNode.requestFocus();
     } else {
       var weight = double.tryParse(_inputController.text.replaceAll(',', '.'));
       if (weight == null || weight == 0) {
-        SettingsCommand().setError("Geçersiz bir mikrar girildi");
+        SettingsCommand().setError("enter_invalid_weight".tr());
         _focusNode.requestFocus();
       } else {
         await AppCommand().setWeight(weight);
@@ -49,9 +50,9 @@ class _SettingsWeightInputState extends State<SettingsWeightInput> {
 
     return DoubleInputwidget(
       focusNode: _focusNode,
-      infoLabel: 'Kg',
+      infoLabel: 'kg'.tr(),
       inputController: _inputController,
-      label: 'Weight',
+      label: 'weight'.tr(),
       saveHandle: _handleSaveButton,
     );
   }

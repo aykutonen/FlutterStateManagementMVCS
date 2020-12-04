@@ -7,6 +7,7 @@ import 'package:StateManagementMVCS/views/home/widgets/seperator.dart';
 import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -31,12 +32,26 @@ class MainPage extends StatelessWidget {
               ],
             ),
             const Seperator(),
-            const SubTitle(title: 'Daily Logs'),
+            SubTitle(title: 'daily_logs'.tr()),
             const Seperator(height: 20.0),
             DailyDrunkList(),
             const Seperator(),
-            const SubTitle(title: 'Add Drunk Water'),
+            SubTitle(title: 'add_drunk_water'.tr()),
             const Seperator(height: 20.0),
+            Row(
+              children: [
+                CupertinoButton(
+                    child: Text('TR'),
+                    onPressed: () {
+                      context.locale = Locale('tr', '');
+                    }),
+                CupertinoButton(
+                    child: Text('EN'),
+                    onPressed: () {
+                      context.locale = Locale('en', '');
+                    }),
+              ],
+            ),
             AddDrunkWater(),
           ],
         ),

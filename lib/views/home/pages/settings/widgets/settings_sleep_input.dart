@@ -2,8 +2,10 @@ import 'package:StateManagementMVCS/commands/app_command.dart';
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/hour_minute_model.dart';
 import 'package:StateManagementMVCS/views/home/widgets/time_input_widget.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 typedef changeHandleCallBack = void Function(Duration duration);
 
@@ -38,12 +40,12 @@ class _SettingsSleepInputState extends State<SettingsSleepInput> {
     var sleep = context.select<AppModel, HourMinute>((c) => c.sleeping);
 
     return TimeInputWidget(
-      label: 'Sleep',
+      label: 'sleep'.tr(),
       changeHandle: _handlePicker,
       date: sleep.toDisplayString,
       initialDuration: _sleep,
       saveHandle: _handleSave,
-      title: 'Select Sleeping Time',
+      title: 'select_sleeping_time'.tr(),
     );
   }
 }

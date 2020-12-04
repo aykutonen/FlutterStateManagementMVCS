@@ -4,6 +4,7 @@ import 'package:StateManagementMVCS/views/home/widgets/switch_widget.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsNotificationSwitch extends StatelessWidget {
   void _changeHandler(bool notify) async {
@@ -20,7 +21,7 @@ class SettingsNotificationSwitch extends StatelessWidget {
 
     return SwitchWidget(
       data: notify,
-      label: 'Notification',
+      label: 'notification'.tr(),
       onChangeHandler: _changeHandler,
     );
   }

@@ -9,6 +9,7 @@ import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsGenderSelect extends StatelessWidget {
   void _handleSelect(Gender gender) async {
@@ -24,17 +25,17 @@ class SettingsGenderSelect extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SubTitle(title: 'Gender'),
+        SubTitle(title: 'gender'.tr()),
         const Seperator(height: 10.0),
         SelectInputWidget(
           isSelected: gender == Gender.m,
-          label: Gender.m.name,
+          label: Gender.m.name.tr(),
           onTap: () => _handleSelect(Gender.m),
         ),
         Divider(),
         SelectInputWidget(
           isSelected: gender == Gender.f,
-          label: Gender.f.name,
+          label: Gender.f.name.tr(),
           onTap: () => _handleSelect(Gender.f),
         ),
       ],

@@ -3,6 +3,7 @@ import 'package:StateManagementMVCS/views/home/pages/report/report.dart';
 import 'package:StateManagementMVCS/views/home/pages/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -11,18 +12,18 @@ class HomePage extends StatelessWidget {
       tabBar: CupertinoTabBar(
         activeColor: CupertinoColors.activeBlue,
         currentIndex: 1,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.info),
-            label: 'Report',
+            label: 'report'.tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
-            label: 'Home',
+            label: 'home'.tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.settings),
-            label: 'Settings',
+            label: 'settings'.tr(),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 typedef PickerChangeCallback = void Function(Duration duration);
 
@@ -28,11 +29,11 @@ class ShowTimePickerDialog {
           title: Text(title),
           actions: [
             CupertinoDialogAction(
-              child: Text('Vazgeç'),
+              child: Text('cancel').tr(),
               onPressed: cancel,
             ),
             CupertinoDialogAction(
-              child: Text('Kaydet'),
+              child: Text('save').tr(),
               isDefaultAction: true,
               onPressed: save,
             ),

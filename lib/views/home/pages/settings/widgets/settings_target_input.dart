@@ -6,6 +6,7 @@ import 'package:StateManagementMVCS/views/home/widgets/number_input_widget.dart'
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsTargetInput extends StatefulWidget {
   @override
@@ -27,14 +28,14 @@ class _SettingsTargetInputState extends State<SettingsTargetInput> {
     if (_focusNode.hasFocus) return;
 
     if (_inputController.text.isEmpty) {
-      SettingsCommand().setError("Target zorunlu");
+      SettingsCommand().setError("target_required".tr());
       _focusNode.requestFocus();
     } else {
       SettingsCommand().setError("");
 
       var amount = int.tryParse(_inputController.text);
       if (amount == null || amount == 0) {
-        SettingsCommand().setError("Geçersiz bir miktar girildi");
+        SettingsCommand().setError("enter_invalid_target".tr());
         _focusNode.requestFocus();
       } else {
         await AppCommand().setTargetAmount(amount);
@@ -54,7 +55,7 @@ class _SettingsTargetInputState extends State<SettingsTargetInput> {
       focusNode: _focusNode,
       infoLabel: unit.name,
       inputController: _inputController,
-      label: 'Target',
+      label: 'target'.tr(),
       saveHandle: _handleSaveButton,
     );
   }

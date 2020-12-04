@@ -8,6 +8,7 @@ import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ReportPage extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class ReportPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const BigTitle(title: 'Report'),
+          BigTitle(title: 'report'.tr()),
           const Seperator(height: 25.0),
           DateChanger(),
           Divider(),
@@ -35,7 +36,7 @@ class ReportPage extends StatelessWidget {
           const Seperator(height: 20.0),
           Divider(),
           const Seperator(height: 15.0),
-          const SubTitle(title: 'Daily Logs'),
+          SubTitle(title: 'daily_logs'.tr()),
           const Seperator(height: 10.0),
           CurrentDrunkList(),
         ],

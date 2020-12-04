@@ -9,6 +9,7 @@ import 'package:StateManagementMVCS/views/home/widgets/sub_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsUnitSelect extends StatelessWidget {
   void _handleSelect(Unit unit) async {
@@ -24,17 +25,17 @@ class SettingsUnitSelect extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SubTitle(title: 'Unit'),
+        SubTitle(title: 'unit'.tr()),
         const Seperator(height: 10.0),
         SelectInputWidget(
           isSelected: unit == Unit.ml,
-          label: Unit.ml.name.toUpperCase(),
+          label: Unit.ml.name.tr().toUpperCase(),
           onTap: () => _handleSelect(Unit.ml),
         ),
         Divider(),
         SelectInputWidget(
           isSelected: unit == Unit.oz,
-          label: Unit.oz.name.toUpperCase(),
+          label: Unit.oz.name.tr().toUpperCase(),
           onTap: () => _handleSelect(Unit.oz),
         ),
       ],

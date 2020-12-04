@@ -5,6 +5,7 @@ import 'package:StateManagementMVCS/views/home/widgets/text_input_widget.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingsNameInput extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _SettingsNameInputState extends State<SettingsNameInput> {
     if (_nameFocusNode.hasFocus) return;
 
     if (_nameInputController.text.isEmpty) {
-      SettingsCommand().setError("İsim zorunlu");
+      SettingsCommand().setError("name_required".tr());
       _nameFocusNode.requestFocus();
     } else {
       SettingsCommand().setError("");
@@ -44,7 +45,7 @@ class _SettingsNameInputState extends State<SettingsNameInput> {
     return TextInputWidget(
       focusNode: _nameFocusNode,
       inputController: _nameInputController,
-      label: 'Name',
+      label: 'name'.tr(),
     );
   }
 }

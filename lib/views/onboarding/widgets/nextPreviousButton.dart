@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NextPreviousButton extends StatelessWidget {
   final String nextButtonText;
@@ -8,8 +9,8 @@ class NextPreviousButton extends StatelessWidget {
   final VoidCallback onPrevioustPressed;
 
   const NextPreviousButton({
-    this.nextButtonText = "Next",
-    this.previousButtonText = "Previous",
+    this.nextButtonText = "next",
+    this.previousButtonText = "previous",
     this.showPreviousButton = true,
     this.onNextPressed,
     this.onPrevioustPressed,
@@ -22,12 +23,12 @@ class NextPreviousButton extends StatelessWidget {
       children: [
         showPreviousButton
             ? CupertinoButton(
-                child: Text(previousButtonText),
+                child: Text(previousButtonText).tr(),
                 onPressed: () => onPrevioustPressed(),
               )
             : Container(),
         CupertinoButton(
-          child: Text(nextButtonText),
+          child: Text(nextButtonText).tr(),
           onPressed: () => onNextPressed(),
         ),
       ],

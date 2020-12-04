@@ -1,7 +1,9 @@
 import 'package:StateManagementMVCS/commands/user_command.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddDrunkWater extends StatefulWidget {
   @override
@@ -16,12 +18,12 @@ class _AddDrunkWaterState extends State<AddDrunkWater> {
   void _handleSaveButton() async {
     setState(() => _isLoading = true);
     if (_inputController.value.text.isEmpty) {
-      setState(() => _error = "Tüketim miktarı girmedin.");
+      setState(() => _error = "do_not_enter_amount".tr());
     } else {
       setState(() => _error = "");
       var amount = int.tryParse(_inputController.value.text);
       if (amount == null || amount == 0) {
-        setState(() => _error = "Geçersiz bir miktar girildi.");
+        setState(() => _error = "enter_invalid_amount".tr());
       } else {
         FocusScope.of(context).unfocus();
         await UserCommand().addDrunk(amount);
@@ -46,7 +48,7 @@ class _AddDrunkWaterState extends State<AddDrunkWater> {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                placeholder: 'Drunk water',
+                placeholder: 'drunk_water'.tr(),
                 placeholderStyle: TextStyle(
                   fontSize: 30,
                   color: CupertinoColors.lightBackgroundGray,
@@ -62,7 +64,7 @@ class _AddDrunkWaterState extends State<AddDrunkWater> {
               ),
             ),
             CupertinoButton(
-              child: Text('Kaydet'),
+              child: Text('save').tr(),
               onPressed: _handleSaveButton,
             ),
           ],

@@ -1,9 +1,11 @@
 import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/info_box.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LeastWaterBox extends StatelessWidget {
   final int totalAmount;
@@ -21,7 +23,7 @@ class LeastWaterBox extends StatelessWidget {
     var unit = context.select<AppModel, Unit>((e) => e.unit);
 
     return InfoBox(
-      title: 'Günlük Hedef',
+      title: 'daily_target'.tr(),
       marginLeft: 10.0,
       children: [
         Column(

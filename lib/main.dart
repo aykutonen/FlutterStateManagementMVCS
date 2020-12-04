@@ -20,6 +20,7 @@ import 'package:StateManagementMVCS/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 Future<void> main() async {
   // Avoid errors caused by flutter upgrade.
@@ -42,7 +43,12 @@ Future<void> main() async {
 
       Provider<BuildContext>(create: (c) => c),
     ],
-    child: MainApp(),
+    child: EasyLocalization(
+      supportedLocales: [Locale('en', ''), Locale('tr', '')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en', ''),
+      child: MainApp(),
+    ),
   ));
 }
 
@@ -88,6 +94,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
     setState(() => _isFirst = context.read<AppModel>().isFirstTime);
     if (_isFirst) {
       AppCommand().setLanguage(Language.English);
+      // TODO: uygulama ilk açılışta cihaz varsayılanını ata.
     } else {
       await UserCommand().load();
       await ReportCommand().load();
@@ -111,8 +118,11 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
       );
 
     return CupertinoApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
-      title: 'Water Reminder',
+      title: 'app_name'.tr(),
       onGenerateRoute: generateRoute,
       initialRoute: _isFirst ? RegisterPageRoute : HomePageRoute,
     );

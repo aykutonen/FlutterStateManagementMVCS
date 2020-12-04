@@ -4,6 +4,7 @@ import 'package:StateManagementMVCS/models/unit_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DrunkList extends StatelessWidget {
   final double height;
@@ -15,7 +16,7 @@ class DrunkList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return drunks == null || drunks.isEmpty
-        ? Center(child: Text('no records'))
+        ? Center(child: Text('no_records').tr())
         : Material(
             color: Colors.transparent,
             child: ListView.builder(

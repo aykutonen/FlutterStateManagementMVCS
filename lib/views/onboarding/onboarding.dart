@@ -6,8 +6,10 @@ import 'package:StateManagementMVCS/views/onboarding/pages/sleep/sleep.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/targetamount/targetamount.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/unit/unit.dart';
 import 'package:StateManagementMVCS/views/onboarding/pages/wakeup/wakeup.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -71,7 +73,7 @@ class _OnboardingState extends State<Onboarding> {
       child: SafeArea(
         child: Column(
           children: [
-            if (name != null) Text('Hi $name'),
+            if (name != null) Text('hi_user').tr(args: [name]),
             Expanded(child: _getPage()),
           ],
         ),

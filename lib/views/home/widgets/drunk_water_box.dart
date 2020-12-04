@@ -4,6 +4,7 @@ import 'package:StateManagementMVCS/views/home/pages/main/widgets/info_box.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DrunkWaterBox extends StatelessWidget {
   final int totalAmount;
@@ -15,7 +16,7 @@ class DrunkWaterBox extends StatelessWidget {
     var unit = context.select<AppModel, Unit>((e) => e.unit);
 
     return InfoBox(
-      title: 'Bugün İçilen',
+      title: 'today_drunk'.tr(),
       children: [
         FittedBox(
           fit: BoxFit.fitWidth,
