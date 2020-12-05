@@ -1,5 +1,3 @@
-import 'package:StateManagementMVCS/commands/app_command.dart';
-import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/add_drunk_water.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/daily_drunks_list.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/greeting.dart';
