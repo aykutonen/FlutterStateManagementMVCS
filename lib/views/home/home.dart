@@ -10,7 +10,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        activeColor: CupertinoColors.activeBlue,
         currentIndex: 1,
         items: [
           BottomNavigationBarItem(

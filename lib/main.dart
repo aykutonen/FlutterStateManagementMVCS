@@ -7,6 +7,7 @@ import 'package:StateManagementMVCS/models/register_model.dart';
 import 'package:StateManagementMVCS/models/report_model.dart';
 import 'package:StateManagementMVCS/models/view_model/settings_model.dart';
 import 'package:StateManagementMVCS/services/notification_service.dart';
+import 'package:StateManagementMVCS/utils/app_theme.dart';
 import 'package:StateManagementMVCS/utils/notification_helper.dart';
 import 'package:StateManagementMVCS/utils/router/router.dart';
 import 'package:StateManagementMVCS/services/app_service.dart';
@@ -26,29 +27,31 @@ Future<void> main() async {
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MultiProvider(
-    providers: [
-      // Models
-      ChangeNotifierProvider(create: (c) => AppModel()),
-      ChangeNotifierProvider(create: (c) => UserModel()),
-      ChangeNotifierProvider(create: (c) => ReportModel()),
-      ChangeNotifierProvider(create: (c) => RegisterModel()),
-      ChangeNotifierProvider(create: (c) => SettingsModel()),
+  runApp(
+    MultiProvider(
+      providers: [
+        // Models
+        ChangeNotifierProvider(create: (c) => AppModel()),
+        ChangeNotifierProvider(create: (c) => UserModel()),
+        ChangeNotifierProvider(create: (c) => ReportModel()),
+        ChangeNotifierProvider(create: (c) => RegisterModel()),
+        ChangeNotifierProvider(create: (c) => SettingsModel()),
 
-      // Services
-      Provider(create: (c) => UserService()),
-      Provider(create: (c) => AppService()),
-      Provider(create: (c) => NotificationService()),
+        // Services
+        Provider(create: (c) => UserService()),
+        Provider(create: (c) => AppService()),
+        Provider(create: (c) => NotificationService()),
 
-      Provider<BuildContext>(create: (c) => c),
-    ],
-    child: EasyLocalization(
-      supportedLocales: [Locale('en', ''), Locale('tr', '')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('en', ''),
-      child: MainApp(),
+        Provider<BuildContext>(create: (c) => c),
+      ],
+      child: EasyLocalization(
+        supportedLocales: [Locale('en', ''), Locale('tr', '')],
+        path: 'assets/translations',
+        fallbackLocale: Locale('en', ''),
+        child: MainApp(),
+      ),
     ),
-  ));
+  );
 }
 
 class MainApp extends StatefulWidget {
@@ -109,11 +112,15 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     if (!_isLoadData)
       return Container(
-        color: CupertinoColors.white,
+        color: CupertinoColors.darkBackgroundGray,
         child: CupertinoActivityIndicator(),
       );
 
+    bool isDark = context.select<AppModel, bool>((c) => c.isDark);
+
     return CupertinoApp(
+      color: CupertinoColors.darkBackgroundGray,
+      theme: AppTheme(isDark: isDark).themeData,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

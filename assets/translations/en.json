@@ -39,5 +39,6 @@
   "previous": "Previous",
   "en": "English",
   "tr": "Türkçe",
-  "language": "Language"
+  "language": "Language",
+  "theme_is_dark": "Dark Theme"
 }

@@ -39,5 +39,6 @@
   "previous": "Önceki",
   "en": "English",
   "tr": "Türkçe",
-  "language": "Dil"
+  "language": "Dil",
+  "theme_is_dark": "Karanlık Tema"
 }

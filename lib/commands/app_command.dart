@@ -100,4 +100,8 @@ class AppCommand extends BaseCommand {
     if (result) appModel.gender = gender;
     return result;
   }
+
+  void setTheme(bool isDark) {
+    appModel.isDark = isDark;
+  }
 }

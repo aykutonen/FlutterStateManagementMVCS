@@ -1,3 +1,5 @@
+import 'package:StateManagementMVCS/commands/app_command.dart';
+import 'package:StateManagementMVCS/models/app_model.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/add_drunk_water.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/daily_drunks_list.dart';
 import 'package:StateManagementMVCS/views/home/pages/main/widgets/greeting.dart';
@@ -38,20 +40,6 @@ class MainPage extends StatelessWidget {
             const Seperator(),
             SubTitle(title: 'add_drunk_water'.tr()),
             const Seperator(height: 20.0),
-            Row(
-              children: [
-                CupertinoButton(
-                    child: Text('TR'),
-                    onPressed: () {
-                      context.locale = Locale('tr', '');
-                    }),
-                CupertinoButton(
-                    child: Text('EN'),
-                    onPressed: () {
-                      context.locale = Locale('en', '');
-                    }),
-              ],
-            ),
             AddDrunkWater(),
           ],
         ),

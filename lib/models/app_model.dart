@@ -87,5 +87,11 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isDark = false;
+  bool get isDark => _isDark;
+  set isDark(bool isDark) {
+    _isDark = isDark;
+    notifyListeners();
+  }
   // Eventually other stuff would go here, appSettings, premiumUser flags, currentTheme, etc...
 }
